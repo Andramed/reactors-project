@@ -7,6 +7,14 @@ export default function Home() {
 			<h1 className=' text-3xl '>
 				Hello reactors team
 			</h1>
+			<div className=' w-[200px] bg-cyan-200'>
+				<h3>
+					ready ? click start an download repository wit starter code 
+					an install loacal this project, 
+					all instructions in github.
+				</h3>
+			</div>
+			<a className=' hover:bg-white' href="https://github.com/Andramed/reactors-project" target='blank'>click to acces repository</a>
 		</div>
     </main>
   )
