@@ -6,8 +6,10 @@ import ClassicPhones from './components/ClassicPhones'
 import NewProducts from './components/NewProducts'
 import CaseDesigner from './components/CaseDesigner'
 
+
 export default function Home() {
-  return (
+
+	return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24 bg-grey">
 		<Header/>
 		<OurBrands />
