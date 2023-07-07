@@ -1,12 +1,19 @@
+"use client"
 import Image from 'next/image'
-import Swiper from './components/Swiper'
 import Header from './components/Header'
+import OurBrands from './components/OurBrands'
+import ClassicPhones from './components/ClassicPhones'
+import NewProducts from './components/NewProducts'
+import CaseDesigner from './components/CaseDesigner'
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className="flex min-h-screen flex-col items-center justify-between p-24 bg-grey">
 		<Header/>
-		<Swiper />
+		<OurBrands />
+		<ClassicPhones />
+		<NewProducts />
+		<CaseDesigner />
 		<div className='  bg-cyan-400  rounded-3xl shadow-2xl p-20'>
 		
 			<h1 className=' text-3xl '>
