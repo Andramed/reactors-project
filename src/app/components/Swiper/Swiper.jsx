@@ -2,16 +2,23 @@ import { useEffect, useState } from 'react';
 import { register } from 'swiper/element/bundle';
 
 export default function Swiper({tabel}) {
-    useEffect(() => {
+ 
+      useEffect(() => {
         register();
-      },[]);
+      },[]);  
+
+      // const [data, setData] = useState([]);
+
+      // useEffect(() => {
+      //   setData(tabel);
+      // },[tabel]);
 
       const swiperArray =
       tabel.map((brand) => {   
              return <swiper-slide key={brand.model}>
                       <img src={brand.img} />
                       <p>{brand.model}</p>
-                    </swiper-slide> ;})
+                    </swiper-slide> ;});
       
   
       return (<div style={{background: '#F9F6F2', width: '500px'}}>
