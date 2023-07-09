@@ -2,7 +2,7 @@ import Language from "../Language";
 
 export const Header = () => {
     return (
-        <div className=" flex w-[1920px] h-[60px] bg-header-bg text-white items-center gap-48">
+        <div className=" flex w-[1440px] h-16 bg-header-bg text-white items-center gap-48">
             <div className="flex justify-start  pl-10 gap-8 ">
                 <div className=" flex gap-1">
                     <img src="/imgHeader/email.svg" alt="email" />

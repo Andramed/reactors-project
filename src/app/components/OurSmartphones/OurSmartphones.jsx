@@ -3,7 +3,6 @@ import BtnDiscover from "../Buttons1"
 export default function OurSmartphones (){
     return(
         <div>
-            <div className=' bg-black w-full h-[47px]'></div>
 		<div className=' bg-white flex '>
 			<div className=' w-[518px] h-[279px] flex flex-col flex-grow justify-center items-start p-14 pt-64 gap-8 ' >
 				<h1 className=' text-6xl'>Our Smartphones</h1>
