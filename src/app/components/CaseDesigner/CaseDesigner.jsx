@@ -1,9 +1,7 @@
-// import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Swiper from 'src/app/components/Swiper';
 
 export default function CaseDesigner() {
-
-    // const [tabel, setTabel] = useState([]);
 
     const brands = [
     { brand: 'Nokia', Nokia: [{"model": '123'},{"model": '789'},{"model": '963'},
@@ -34,30 +32,22 @@ export default function CaseDesigner() {
       },
     ]}];
 
-    // useEffect( 
-    //     () => {setTabel(
-    const tabel =  brands[2].Xiaomi;
-    // )},[]);
+    // const [tabel, setTabel] =  useState(brands[2].Xiaomi);
+    const tabel = brands[2].Xiaomi;
+    // useEffect(()=>{
+    //     setTabel(brands[2].Xiaomi);
+    // },[]);
 
-    // const onClickHandle = (event) => {
-
-    //     const found = brands.find(element => element.brand == event.target.innerHTML);
-
-    //     setTabel(found[event.target.innerHTML])
-    //     console.log(tabel);
-    // }
-
- 
 
     return ( 
     <div className='w-full py-14 px-16 flex justify-center items-center flex-col gap-5 bg-white'>
         <h2 className='flex justify-center font-bold'>Case Designer</h2>
-        {/* <div className='flex text-xs gap-2 justify-center underline'>
-            <div onClick={onClickHandle}>Nokia</div>
-            <div onClick={onClickHandle}>Samsung</div>
-            <div onClick={onClickHandle}>Xiaomi</div>
-        </div> */}
-        <Swiper tabel={tabel} />
+        <Swiper tabel={tabel}
+            slidesPerView={3}
+            breakpoints={{ 768: {slidesPerView: 3 },
+                           500: {slidesPerView: 2 },   
+                           280: {slidesPerView: 1 },
+                             0: {slidesPerView: 1 }}}></Swiper>
         <div>
             <button className='bg-[#FFFFFF] px-8 py-2 text-xs border-gray-900 border'>See all Products</button>
         </div>

@@ -40,13 +40,14 @@ export default function OurBrands() {
 
 
     const [tabel, setTabel] = useState(brands[2].Xiaomi);
+    const [brand, setBrand] = useState('Xiaomi');
 
     const onClickHandle = (event) => {
 
         const found = brands.find(element => element.brand == event.target.innerHTML);
 
         setTabel(found[event.target.innerHTML]);
-        console.log(found);
+        setBrand(event.target.innerHTML);
     }
 
     return ( 
@@ -57,6 +58,31 @@ export default function OurBrands() {
             <div className='cursor-pointer' onClick={onClickHandle}>Samsung</div>
             <div className='cursor-pointer' onClick={onClickHandle}>Xiaomi</div>
         </div>
-        <Swiper tabel={tabel} />
+     	    {(brand === 'Nokia')? 
+            <Swiper tabel={tabel}
+            slidesPerView={3}
+            breakpoints={{ 768: {slidesPerView: 3 },
+                           500: {slidesPerView: 2 },   
+                           280: {slidesPerView: 1 },
+                             0: {slidesPerView: 1 }}}></Swiper>            
+            : null}
+
+            {(brand === 'Samsung')? 
+            <Swiper tabel={tabel}
+            slidesPerView={3}
+            breakpoints={{ 768: {slidesPerView: 3 },
+                           500: {slidesPerView: 2 },   
+                           280: {slidesPerView: 1 },
+                             0: {slidesPerView: 1 }}}></Swiper>
+            : null}
+
+            {(brand === 'Xiaomi')? 
+            <Swiper tabel={tabel}
+            slidesPerView={3}
+            breakpoints={{ 768: {slidesPerView: 3 },
+                           500: {slidesPerView: 2 },   
+                           280: {slidesPerView: 1 },
+                             0: {slidesPerView: 1 }}}></Swiper>
+            : null}
     </div>);
 }
