@@ -1,3 +1,4 @@
 {
   "extends": "next/core-web-vitals"
+//   "config": "folosim peste tot  double quote, dupa fiecar ;" 
 }
