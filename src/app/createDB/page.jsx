@@ -79,6 +79,17 @@ export default function Page() {
             placeholder='Xiaomi/iphone or other'
           />
         </div>
+		<div>
+          <label>memory phone</label>
+          <br />
+          <input
+            onChange={handleChange}
+            className='border'
+            name='phone_memory'
+            type='text'
+            placeholder='Xiaomi/iphone or other'
+          />
+        </div>
         <button type='submit'>Submit</button>
       </form>
     </div>
