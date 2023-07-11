@@ -1,8 +1,8 @@
 import { client, connectToDatabase } from './useConectDB';
 
-export const useDataBase = (dbName, colectionName, object) => {
+export const useCreateDocument = (dbName, colectionName, object) => {
 	const reviesCollection = client.db(dbName).collection(colectionName) // cream referinta la baza de date dorita daca ea nu va exista va fi creata//
-	const main = async () => {
+	const main = async (method) => {
 	  try {
 		await connectToDatabase();
 		// TODO: Run the method on the accounts collection and assign it to a variable,`result` 💡
