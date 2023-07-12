@@ -8,12 +8,14 @@ import OurBenefits from './components/OurBenefits'
 import OurSmartphones from './components/OurSmartphones'
 import Cases from './components/Cases'
 import Reviews from './components/Reviews'
+import Newsletter from './components/Newsletter'
+import Articles from './components/Articles'
 
 export default function Home() {
 
 	return (
 	<>
-		<main className=" w-[1204px] flex justify-center ml-28 min-h-screen flex-col items-center  p-4 bg-grey">
+		<main className=" w-5/6 flex justify-center m-auto min-h-screen flex-col items-center  p-4 bg-grey">
 			<OurSmartphones/>
 			<OurBrands />
 			<ClassicPhones />
@@ -22,6 +24,8 @@ export default function Home() {
 			<CaseDesigner />
 			<Reviews/>
 			<OurBenefits />
+			<Articles/>
+			<Newsletter/>
 		</main>
 	</>
   )

@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export const NavBar = () => {
     return(
-        <div className=" w-[1440px] h-28 bg-white flex gap-44 items-center">
+        <div className=" w-full h-28 bg-white flex gap-44 items-center">
             <div className=" pl-14">
                 <h2>Top Phone</h2>
             </div>

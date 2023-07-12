@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google'
 import NavBar from './components/NavBar'
 import Link from 'next/link'
 import BlackLine from './components/BlackLine'
+import Footer from './components/Footer'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -21,6 +22,7 @@ export default function RootLayout({ children }) {
         <BlackLine/>
         <Link href={"/"}/>
         {children}
+        <Footer/>
       </body>
     </html>
   )
