@@ -11,8 +11,8 @@ import Links from "./Links";
 
 export default function Footer (){
     return(
-        <div className=" flex bg-header-bg text-white">
-            <div className=" flex">
+        <div className=" flex bg-header-bg text-white justify-center items-center">
+            <div className=" flex ">
                    <div className=" flex flex-col gap-4">
                     <div> TOP_PHONE</div>
                         <Adress/>
