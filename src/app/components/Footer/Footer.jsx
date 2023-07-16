@@ -1,10 +1,10 @@
 import FollowUs from "./FollowUs";
 import PayWith from "./PayWith";
 import Adress from "./Adress";
-import { Neonderthaw } from "next/font/google";
+// import { Neonderthaw } from "next/font/google";
 import SubscriebNewsletter from "./SubscribeNewsletter";
 import Buy from "./Buy";
-import CustomerService from "./CustomerService";
+// import CustomerService from "./CustomerService";
 import Account from "./Account";
 import Links from "./Links";
 
@@ -24,7 +24,7 @@ export default function Footer (){
                         <SubscriebNewsletter/>
                         <div className=" flex gap-4">
                             <Buy/>
-                            <CustomerService/>
+                            {/* <CustomerService/> */}
                             <Account/>
                             <Links/>
                         </div>
