@@ -3,8 +3,8 @@ import Benefit from "./Benefit";
 export default function OurBenefits () {
 
     return (
-       <div className=" w-[1204px] h-[621px] bg-header-bg items-center text-white p-10">
-         <h1 className=" flex justify-center text-5xl pt-20 pb-16">Our benefits !</h1>
+       <div className="  bg-header-bg items-center text-white">
+         <h1 className=" flex justify-center text-5xl ">Our benefits !</h1>
         <div className=''>
             <div className=' flex justify-around '>
                 <Benefit img ={'/imgBenefits/hour.svg'} />
