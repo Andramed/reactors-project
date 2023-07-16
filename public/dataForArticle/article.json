@@ -1,0 +1,26 @@
+ [
+	{
+		"id": 1,
+		"img": "https://media.nature.com/lw767/magazine-assets/d44151-023-00061-9/d44151-023-00061-9_25417204.jpg?as=webp",
+		"information": "The smartphone is a great example of technology leapfrog in countries like India, where a vast majority of phone users never had a landline.",
+		"dataCreation": "07.07.2023",
+		"articleTitle": "Title",
+		"author": "John Doe"
+	},
+	{
+		"id": 2,
+		"img": "https://media.nature.com/lw767/magazine-assets/d44151-023-00061-9/d44151-023-00061-9_25417204.jpg?as=webp",
+		"information": "The smartphone is a great example of technology leapfrog in countries like India, where a vast majority of phone users never had a landline.",
+		"dataCreation": "07.07.2023",
+		"articleTitle": "Title",
+		"author": "John Doe"
+	},
+	{
+		"id": 3,
+		"img": "https://media.nature.com/lw767/magazine-assets/d44151-023-00061-9/d44151-023-00061-9_25417204.jpg?as=webp",
+		"information": "The smartphone is a great example of technology leapfrog in countries like India, where a vast majority of phone users never had a landline.",
+		"dataCreation": "07.07.2023",
+		"articleTitle": "Title",
+		"author": "John Doe"
+	}
+]
