@@ -1,11 +1,15 @@
 
 
-export  function CardArticle({article}) {
-	// console.log(article);
-	const {img, information, datacreation, articleTitle} = article
-  return (
-	<div>CardArticle
-		<img src={img} alt="" />
+export  function CardArticle(props) {
+	console.log();
+	const blackImage = props.article.color_image.silver
+	return (
+	<div className=''>CardArticle
+		{
+			blackImage.map((image) => {
+				return <img src={image} alt="phone" key={image} />
+			})
+		}
 	</div>
 	
   )

@@ -1,17 +1,24 @@
 
 'use client'
-import dataArticle from '../../public/dataForArticle/article';
-import Article from './components/article';
 
 
-export default function Home() {
-	console.log(dataArticle);
-  return (
-  
+import OperatoriConditionali from './components/test/OperatoriConditionali';
+
+
+
+
+
+export default  function Home() {
+		// const phones = useGetAllProducts();
+		// console.log(phones.Phones);
+	return (
 		<>
-			{ dataArticle.map((article) => 
-				 <Article article={article} key={article.id} />
-			)}
+			allproducts
+			
+			
+			{/* { phones.map((phone) => 
+				 <Article article={phone} key={phone._id} />
+			)} */}
 		</>
   
   )
