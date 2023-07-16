@@ -174,7 +174,7 @@ export default function Page() {
             onChange={handleChange}
             className='border'
             name='resolution'
-            type='datetime-local'
+            type='date'
           />
         </div>
 		<div>

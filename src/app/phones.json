@@ -1,0 +1,46 @@
+[
+    {
+      "id": 1,
+      "brand": "Samsung",
+      "name": "Samsung Galaxy S21",
+      "price": 999,
+      "ram": 4
+    },
+    {
+      "id": 2,
+      "brand": "Apple",
+      "name": "iPhone 12 Pro",
+      "price": 1099,
+      "ram": 4
+    },
+    {
+      "id": 3,
+      "brand": "Google",
+      "name": "Google Pixel 5",
+      "price": 699,
+      "ram": 4
+    },
+    
+    {
+        "id": 4,
+        "brand": "Samsung",
+        "name": "Samsung Galaxy S20",
+        "price": 1000,
+        "ram": 6
+    },
+      {
+        "id": 5,
+        "brand": "Apple",
+        "name": "iPhone 13 Pro Max",
+        "price": 1099,
+        "ram": 8
+    },
+      {
+        "id": 6,
+        "brand": "Google",
+        "name": "Google Pixel 5",
+        "price": 799,
+        "ram": 6
+    }
+    
+  ]
