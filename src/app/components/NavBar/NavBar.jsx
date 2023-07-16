@@ -14,7 +14,7 @@ export const NavBar = () => {
                 <Link href={"/about"}>About Us</Link>
                 <Link href={"/blog"}>Blog</Link>
                 <Link href={"/FAQ"}>FAQ</Link>
-                <Link href={"/contact"}>Contact</Link>
+                <Link href={"/contact"}>Contact</Link> 
                 <select value="categories"> 
                     <option value="phone">All Categories</option>
                     <option value="smartphone">Smart Phone</option>
