@@ -12,14 +12,15 @@ module.exports = {
         'btn-color' : '#fbc851',
         'page-bg' : '#F9F6F2'
       },
-      screens: {
-        xxs: '281px'
-      },
+	  screens: {
+      xxs: '281px',
+      xs: '425px'
+	  },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-      },
+      }    
     },
   },
   plugins: [],
