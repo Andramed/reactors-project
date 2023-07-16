@@ -12,6 +12,9 @@ module.exports = {
         'btn-color' : '#fbc851',
         'page-bg' : '#F9F6F2'
       },
+      screens: {
+        xxs: '281px'
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
