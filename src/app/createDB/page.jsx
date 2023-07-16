@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import Search from './Search';
 import GetData from './GetData';
-import CreateArticleDB from './createArticleDB';
+import CreateArticleDB from './CreateArticleDB';
 function transformDriveLink(value) {
 	const fileId = value.match(/\/d\/(.+?)\//)[1];
 	return `https://drive.google.com/uc?export=view&id=${fileId}`;
