@@ -2,3 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+	.link-navbar{
+		@apply hover:px-2  hover:py-1 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-[#F3D503] duration-300 
+	}
+	.selected {
+		@apply px-2  py-1   bg-[#F3D503] 
+
+	}
+}
