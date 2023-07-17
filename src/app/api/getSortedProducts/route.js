@@ -49,5 +49,9 @@ export  async function GET(req, res) {
 		});
 	}  catch (error) {
 		console.error(`Error finding document: ${error}`)
+	} finally {
+		client.close();
+		console.log('db closed');
 	}
+
 }
