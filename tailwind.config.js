@@ -9,7 +9,7 @@ module.exports = {
     extend: {
       colors: {
         'header-bg': '#143642',
-        'btn-color' : '#fbc851',
+        'btn-color' : '#F3D503',
         'page-bg' : '#F9F6F2'
       },
 	  screens: {
