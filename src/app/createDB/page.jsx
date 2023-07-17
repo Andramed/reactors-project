@@ -4,8 +4,9 @@ import Search from './Search';
 import GetData from './GetData';
 import CreateArticleDB from './CreateArticleDB';
 function transformDriveLink(value) {
-	const fileId = value.match(/\/d\/(.+?)\//)[1];
-	return `https://drive.google.com/uc?export=view&id=${fileId}`;
+	// const fileId = value.match(/\/d\/(.+?)\//)[1];
+	// return `https://drive.google.com/uc?export=view&id=${fileId}`;
+	return value
   }
 
 export default function Page() {
@@ -65,7 +66,7 @@ export default function Page() {
   };
  
   return (
-    <div className=' flex'>
+    <div className=' flex pl-10'>
       <form onSubmit={onSubmit}>
         <div>
           <label>name of Data Base</label>
@@ -97,7 +98,7 @@ export default function Page() {
             onChange={handleChange}
             className='border'
             type='text'
-            name='typeOfPhone'
+            name='type'
             id='type'
             placeholder='smart/classic'
           />
@@ -108,7 +109,7 @@ export default function Page() {
           <input
             onChange={handleChange}
             className='border'
-            name='phone_brand'
+            name='brand'
             type='text'
             placeholder='Xiaomi/iphone or other'
           />
@@ -130,7 +131,7 @@ export default function Page() {
           <input
             onChange={handleChange}
             className='border'
-            name='phone_memory'
+            name='memory'
             type='text'
 			placeholder='introdu prin virgula daca sun mai multe'
           />
@@ -173,7 +174,7 @@ export default function Page() {
           <input
             onChange={handleChange}
             className='border'
-            name='resolution'
+            name='date'
             type='date'
           />
         </div>
@@ -187,6 +188,58 @@ export default function Page() {
             type='text'
           />
         </div>
+		<div>
+          <label>anul productie</label>
+          <br />
+          <input
+            onChange={handleChange}
+            className='border'
+            name='year_production'
+            type='text'
+          />
+        </div>
+		<div>
+          <label>model procesor</label>
+          <br />
+          <input
+            onChange={handleChange}
+            className='border'
+            name='model_procesor'
+            type='text'
+          />
+        </div>
+		<div>
+          <label>capacitate acumalator</label>
+          <br />
+          <input
+            onChange={handleChange}
+            className='border'
+            name='acumulator'
+            type='text'
+          />
+        </div>
+		<div>
+          <label>sistem de operare</label>
+          <br />
+          <input
+            onChange={handleChange}
+            className='border'
+            name='operating_system'
+            type='text'
+          />
+        </div>
+		<div>
+          <label>retea</label>
+          <br />
+          <input
+            onChange={handleChange}
+            className='border'
+            name='network'
+            type='text'
+			placeholder='4G, 5G'
+          />
+        </div>
+
         <button type='submit'>Submit</button>
       </form>
 	  <Search />
