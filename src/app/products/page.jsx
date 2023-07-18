@@ -1,6 +1,6 @@
 'use client'
 import React, {useState, useMemo, useEffect } from 'react';
-import Pagination from 'src/app/components/Pagination';
+// import Pagination from 'src/app/components/Pagination';
 import 'src/app/components/Pagination/pagination.scss';
 
 import useGetAllBrands from 'src/app/hooks/useGetAllBrands.js';
@@ -8,7 +8,7 @@ import { useGetAllProducts } from 'src/app/hooks/useGetAllProducts';
 import { useProductContext } from '../hooks/useContext';
 
 
-let PageSize = 3;
+// let PageSize = 20;
 
 // const data_sort =
 // data.sort((a, b) => (a.price > b.price) ? 1 : (a.price === b.price) ? ((a.first_name > b.first_name) ? 1 : -1) : -1 );
@@ -27,12 +27,12 @@ const Page = () => {
   const list = phones.Phones;
 
     // const [sortType, setSortType] = useState('');
-    const [currentPage, setCurrentPage] = useState(1);
-    const currentTableData = useMemo(() => {
-      const firstPageIndex = (currentPage - 1) * PageSize;
-      const lastPageIndex = firstPageIndex + PageSize;
-      return (list != undefined)? list.slice(firstPageIndex, lastPageIndex): null;
-    }, [currentPage]);
+    // const [currentPage, setCurrentPage] = useState(1);
+    // const currentTableData = useMemo(() => {
+    //   const firstPageIndex = (currentPage - 1) * PageSize;
+    //   const lastPageIndex = firstPageIndex + PageSize;
+    //   return (list != undefined)? list.slice(firstPageIndex, lastPageIndex): null;
+    // }, [currentPage]);
 
 
     const handleChangeBrand = () => {
@@ -84,8 +84,8 @@ const Page = () => {
                     </div>
                   </div>  
                   <div className='py-8 flex justify-start flex-wrap gap-3'>
-                  { (currentTableData != null) ?
-                    currentTableData.map(item => {
+                  { (list != null) ?
+                    list.map(item => {
                       return (
                           <div className='border  hover:bg-white hover:border-yellow-300 odd:bg-green-100 drop-shadow-[0.1rem_0.1rem_0.12rem_rgba(0,0,0,0.25)] rounded-[0.75rem] flex flex-col lg:w-48 lg:h-68 md:w-32 md:h-42 sm:w-32 sm:h-42 xxs:w-32 xxs:h-42 gap-1 bg-yellow-100 p-2' key={item._id}>
                               <div className=' flex justify-center'>
@@ -102,7 +102,7 @@ const Page = () => {
                     } 
                       
                   </div>
-                  <div className='flex justify-center'>
+                  {/* <div className='flex justify-center'>
                     {(list != undefined) ? (
                     <Pagination
                             className="pagination-bar"
@@ -110,7 +110,7 @@ const Page = () => {
                             totalCount={list.length}
                             pageSize={PageSize}
                             onPageChange={page => setCurrentPage(page)}/>  ) : null }
-                  </div>
+                  </div> */}
                 </div>
 		    </div>
         </div>

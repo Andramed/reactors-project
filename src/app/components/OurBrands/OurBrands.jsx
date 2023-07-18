@@ -10,18 +10,21 @@ export default function OurBrands() {
     const { products, handleClickBrand } = useGetByBrand();
 
     const [tabel, setTabel] = useState();
-    const [brand, setBrand] = useState(brandsss[0]);
+    const [brand, setBrand] = useState('Nokia'); //or the first from brandsss - but it is slow
 
     const onClickHandle = (event) => {
-        // const found = brandsss.find(element => element.brand == event.target.innerHTML);
         handleClickBrand(event.target.innerHTML);
         setBrand(event.target.innerHTML);
-        setTabel(products.collectionData);
     }
 
     useEffect(() => {
-    }, [products]);
+      handleClickBrand(brand);
+    }, []);
 
+    useEffect(() => {
+      setTabel(products.collectionData);
+    }, [products, brand]);
+     
     return ( 
     <div className='w-full py-14 px-16 flex justify-center items-center flex-col gap-5 bg-white'>
         <h2 className='flex justify-center font-bold'>Discover our Brands</h2>
@@ -30,34 +33,16 @@ export default function OurBrands() {
             return (<div className='cursor-pointer' value={brand} onClick={onClickHandle}>{brand}</div>);
           })}
         </div>
-     	    
-           {
-            <Swiper tabel={tabel}
-            slidesPerView={3}
-            breakpoints={{ 768: {slidesPerView: 3 },
-                           500: {slidesPerView: 2 },   
-                           280: {slidesPerView: 1 },
-                             0: {slidesPerView: 1 }}}></Swiper>            
-            
-           }
-            {/*
-            {(brand === 'Samsung')? setTabel(products.collectionData);
-            <Swiper tabel={tabel}
-            slidesPerView={3}
-            breakpoints={{ 768: {slidesPerView: 3 },
-                           500: {slidesPerView: 2 },   
-                           280: {slidesPerView: 1 },
-                             0: {slidesPerView: 1 }}}></Swiper>
-            : null}
+     	     
+        <Swiper 
+        key={brand}
+        tabel={tabel}
+        slidesPerView={3}
+        breakpoints={{ 768: {slidesPerView: 3 },
+                       640: {slidesPerView: 2 }, 
+                       425: {slidesPerView: 2 },   
+                       281: {slidesPerView: 1 },
+                         0: {slidesPerView: 1 }}}></Swiper> 
 
-            {(brand === 'Xiaomi')? 
-            <Swiper tabel={tabel}
-            slidesPerView={3}
-            breakpoints={{ 768: {slidesPerView: 3 },
-                           500: {slidesPerView: 2 },   
-                           280: {slidesPerView: 1 },
-                             0: {slidesPerView: 1 }}}></Swiper>
-            : null} */
-          }
     </div>);
 }

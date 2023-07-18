@@ -15,16 +15,15 @@ const useGetByBrand = () => {
   const { brand } = formData;
  
   useEffect(() => {
-
     const getByBrand = async () => {
-		console.log(formData);
+		// console.log(formData);
       try {
         const response = await axios.get('http://localhost:3000/api/getByBrand', {
           params: {
             param: {...formData},
           },
           headers: {
-            'Cache-Control': 'no-store',
+            'Cache-Control': 'store',
           },
         });
         setProducts(response.data);
