@@ -7,7 +7,7 @@ import { ItemCart } from './ItemCart';
 import useGetProduct from '../hooks/useGetProduct';
 
 
-export default function page() {
+export default function Page() {
 	
 	
 	const products = useGetAllProducts()

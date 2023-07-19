@@ -4,7 +4,7 @@ import { ItemCart } from '../test/ItemCart'
 import { useAddItemToCart } from '../hooks/useAddItemToCart'
 
 
-export default function page() {
+export default function Page() {
 	const [product, setProduct] = useState()
 	useEffect(() => {
 		const itemLocal = localStorage.getItem('item');
