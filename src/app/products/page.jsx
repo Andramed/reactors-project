@@ -1,9 +1,6 @@
 'use client'
 import React, {useState } from 'react';
 import useGetAllBrands from 'src/app/hooks/useGetAllBrands.js';
-// import { useProductContext } from '../hooks/useContext';
-// import axios from 'axios';
-// import useSWR from 'swr';
 import Products from './Products';
 
 
@@ -12,19 +9,10 @@ import Products from './Products';
 
 const Page = () => {
   const [count, setCount ] = useState(8);
-     
-  // const fetcher = async (url) => await axios.get(url).then((res) => res.data);
-  // const { data, error } = useSWR(`http://localhost:3000/api/getAllProdPag?results=${count}`, fetcher);
-  
-
 
   const handleChangeBrand = () => {};
-
   const brands = useGetAllBrands();
-  // const phones = data;
-  // const list = phones;
 
-  
     return (
         <div className='w-full flex justify-center items-center flex-col bg-white'>
             <div className='w-full pl-36 py-3 bg-gray-500 text-white font-bold text-xs'>
@@ -38,10 +26,9 @@ const Page = () => {
                   <p>Filters: </p>
                   <div className='flex flex-col text-xs gap-1'>
                     <p>Brands</p>
-                    {brands.map((brand) => (
-                      <label><input
+                    {brands.map((brand,index) => (
+                      <label key={index}><input
                         type="checkbox"
-                        key={brand}
                         label={brand}
                         onChange={handleChangeBrand}
                       /> {brand}</label>
