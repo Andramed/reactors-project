@@ -18,7 +18,7 @@ export const useAddItemToCart = () => {
 		const getSortedProducts = async () => {
 			
 		  try {
-			const response = await axios.get('http://localhost:3000/api/getSortedProducts', {
+			const response = await axios.get('/api/getSortedProducts', {
 			  params: {
 				param: {_id: idItem},
 			  },
