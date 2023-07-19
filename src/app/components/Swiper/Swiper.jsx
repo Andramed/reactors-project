@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState} from 'react';
 import { register } from 'swiper/element/bundle';
+import Product from '../Product';
 
 register();
 
@@ -9,9 +10,9 @@ export default function Swiper(props) {
   const { tabel, ...rest } = props;
 
   const swiperArray = (tabel !== undefined) ?
-  tabel.map((brand,index) => {   
+  tabel.map((item,index) => {   
          return <swiper-slide key={index}>
-                  <div className='flex flex-col justify-center text-sm px-3 py-2'>
+                  {/* <div className='flex flex-col justify-center text-sm px-3 py-2'>
                     <img src={brand.url} />
                     <div className=''>{brand.brand}{brand.model}</div>
                     <div className='flex justify-between px-8'>
@@ -22,7 +23,8 @@ export default function Swiper(props) {
                         </svg>
                       </button>
                     </div>
-                  </div>
+                  </div> */}
+                  <Product item={item} />
                 </swiper-slide> ;}) : [] ;
 
   useEffect(() => {
@@ -44,8 +46,8 @@ export default function Swiper(props) {
 	      nextEl: ".swiper-button-next",
 	    }}
 	    style={{
-	      "--swiper-navigation-color": "#974619",
-	      "--swiper-navigation-size": "10px"
+	      "--swiper-navigation-color": "yellow",
+	      "--swiper-navigation-size": "20px",
 	    }}  
 	    
 	    ref={swiperRef}>

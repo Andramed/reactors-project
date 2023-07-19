@@ -18,8 +18,8 @@ export default function Home() {
 			<OurSmartphones/>
 			<OurBrands />
 			<ClassicPhones />
-			<Cases/>
 			<NewProducts />
+			<Cases/>
 			<CaseDesigner />
 			<Reviews/>
 			<OurBenefits />

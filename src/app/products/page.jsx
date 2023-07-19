@@ -15,9 +15,9 @@ const Page = () => {
 
     return (
         <div className='w-full flex justify-center items-center flex-col bg-white'>
-            <div className='w-full pl-36 py-3 bg-gray-500 text-white font-bold text-xs'>
+            {/* <div className='w-full pl-36 py-3 bg-gray-500 text-white font-bold text-xs'>
               BreadCrumbs - if possible
-            </div>
+            </div> */}
             <div className='w-full  xxs:pl-4 lg:pl-36 md:pl-36 sm:pl-16 pt-12 pb-6 font-bold bg-gray-300'>
               Products
             </div>
