@@ -25,7 +25,7 @@ export const Header = () => {
                 </div>
                 <div className=" gap-1 xxs:gap-2 flex ml-2 xxs:ml-4 ">
                     <img src="/imgHeader/shop.svg" alt="shop" />
-                    <p>Cart</p>
+                    <a href="/cart">Cart</a>
                 </div>
                 <div className=" hidden xs:flex ml-2 xs:ml-4">
                     <Language/>
