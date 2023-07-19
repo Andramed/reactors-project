@@ -10,7 +10,9 @@ export  async function GET(req, res) {
             const collection = client.db('Top_Phone').collection('Phones');
 
             let data = await collection.find({}).limit(limit_entries).toArray();
+            // let numberOfDocuments = collection.count();
 
+            // return NextResponse.json({data: data, nrDoc: numberOfDocuments});
             return NextResponse.json(data);
 
         }  catch (error) {

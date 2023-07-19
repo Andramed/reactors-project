@@ -20,7 +20,7 @@ export default function Home() {
 			<ClassicPhones />
 			<NewProducts />
 			<Cases/>
-			<CaseDesigner />
+			{/* <CaseDesigner /> */}
 			<Reviews/>
 			<OurBenefits />
 			<Articles/>

@@ -10,7 +10,7 @@ export default function OurBrands() {
     const { products, handleClickBrand } = useGetByBrand();
 
     const [tabel, setTabel] = useState();
-    const [brand, setBrand] = useState('Nokia'); //or the first from brandsss - but it is slow
+    const [brand, setBrand] = useState('nokia'); //or the first from brandsss - but it is slow
 
     const onClickHandle = (event) => {
         handleClickBrand(event.target.innerHTML);
@@ -29,11 +29,12 @@ export default function OurBrands() {
     <div className='w-full py-14 px-16 flex justify-center items-center flex-col gap-5 bg-white'>
         <h2 className='flex justify-center text-lg font-bold'>Discover our Brands</h2>
         <div className='flex text-xs gap-2 justify-center underline'>
-          {brandsss.map((brand)=>{
+          {(brandsss) ? brandsss.map((brand)=>{
             return (<div key={brand} className='cursor-pointer' value={brand} onClick={onClickHandle}>{brand}</div>);
-          })}
+          }) : null}
         </div>
-     	     
+
+        {(tabel)?   
         <Swiper 
         key={brand}
         tabel={tabel}
@@ -43,7 +44,7 @@ export default function OurBrands() {
                        425: {slidesPerView: 2 },   
                        281: {slidesPerView: 1 },
                          0: {slidesPerView: 1 }}}>
-        </Swiper> 
-
+        </Swiper> : null
+        }
     </div>);
 }

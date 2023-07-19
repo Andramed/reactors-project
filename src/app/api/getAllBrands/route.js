@@ -5,7 +5,7 @@ export async function GET() {
 		await connectToDatabase();
 		const collection = client.db('Top_Phone').collection('Phones');
 
-		let collectionData = await collection.distinct('brand');
+		let collectionData = await collection.distinct('brand', {}, { collation: { locale: "en", strength: 2 } });
 		return NextResponse.json(collectionData);
 	} catch (error) {
 		console.error(`Error finding document: ${error}`)

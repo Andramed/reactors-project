@@ -14,7 +14,7 @@ const Page = () => {
   const brands = useGetAllBrands();
 
     return (
-        <div className='w-full flex justify-center items-center flex-col bg-white'>
+        <div className='pb-8 w-full flex justify-center items-center flex-col bg-white'>
             {/* <div className='w-full pl-36 py-3 bg-gray-500 text-white font-bold text-xs'>
               BreadCrumbs - if possible
             </div> */}
@@ -28,19 +28,12 @@ const Page = () => {
                     <p>Brands</p>
                     {brands.map((brand,index) => (
                       <label key={index}><input
-                        type="checkbox"
+                        type="radio"
+                        name="allBrands"
                         label={brand}
                         onChange={handleChangeBrand}
                       /> {brand}</label>
                     ))}                    
-                  </div>
-                  <div className='flex flex-col text-xs gap-1'>
-                    <p>Colors</p>
-                    <label><input type="checkbox" /> black</label>
-                    <label><input type="checkbox" /> blue</label>
-                    <label><input type="checkbox" /> pink</label>
-                    <label><input type="checkbox" /> red</label>
-                    <label><input type="checkbox" /> white</label>
                   </div>
                 </div>
 
@@ -56,15 +49,16 @@ const Page = () => {
                       </select>    
                     </div>
                   </div>   */}
-                  <div className='py-8 flex justify-start flex-wrap gap-3'>
-                  
-                  <Products limit={count}/>
-                  <div style={{ display: 'none' }}><Products limit={count + 4}/></div>
-                      
+                  <div className='py-2 flex justify-start flex-wrap gap-3'>
+                    <Products limit={count}/>
+                    <div style={{ display: 'none' }}><Products limit={count + 4}/></div>
                   </div>
                   <footer>
-                    <div>
-                      <button className='bg-yellow-300' onClick={() => setCount(count + 4)}>Load More Products</button>
+
+                    <div className='pt-8'>
+                      <button className='bg-btn-color w-9.5 h-3.2 px-8 py-2 text-sm rounded ' onClick={() => setCount(count + 4)}>
+                        more products...
+                      </button>
                     </div>
                   </footer>
                 </div>
