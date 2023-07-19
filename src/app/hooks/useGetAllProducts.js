@@ -18,5 +18,6 @@ export const useGetAllProducts = () => {
 			  };
 			 getDocuments()
 		}, []);
+		// console.log(products);
 		return products;
 }

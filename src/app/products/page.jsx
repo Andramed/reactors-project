@@ -124,7 +124,7 @@ const Page = () => {
                   </div>
                 </div>
 
-                <div className='w-full flex-col w-3/4'>
+                <div className='w-full flex-col'>
                   <div className='flex justify-between'>
                     <div>{data.length} items</div>
                     <div className=''>
