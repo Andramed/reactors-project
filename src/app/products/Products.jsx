@@ -3,7 +3,7 @@ import useSWR from 'swr';
 
 export default function Products ({ limit }) {
   const fetcher = async (url) => await axios.get(url).then((res) => res.data);
-  const { data, error } = useSWR(`http://localhost:3000/api/getAllProdPag?results=${limit}`, fetcher);   
+  const { data, error } = useSWR(`/api/getAllProdPag?results=${limit}`, fetcher);   
 
     return ( <>
      { (data)?

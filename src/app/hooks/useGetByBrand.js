@@ -18,7 +18,7 @@ const useGetByBrand = () => {
     const getByBrand = async () => {
 		// console.log(formData);
       try {
-        const response = await axios.get('http://localhost:3000/api/getByBrand', {
+        const response = await axios.get('/api/getByBrand', {
           params: {
             param: {...formData},
           },

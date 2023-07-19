@@ -27,7 +27,7 @@ const useSortedProducts = () => {
     const getSortedProducts = async () => {
 		console.log(formData);
       try {
-        const response = await axios.get('http://localhost:3000/api/getSortedProducts', {
+        const response = await axios.get('/api/getSortedProducts', {
           params: {
             param: {...formData},
           },

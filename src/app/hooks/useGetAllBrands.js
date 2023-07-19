@@ -8,7 +8,7 @@ const useGetAllBrands = () => {
   useEffect(() => {
      const getAllBrands = async () => {
       try {
-        const res = await axios.get('http://localhost:3000/api/getAllBrands', {});          
+        const res = await axios.get('/api/getAllBrands', {});          
 
         const allBrands = await res.data;       
         setBrands(allBrands);
