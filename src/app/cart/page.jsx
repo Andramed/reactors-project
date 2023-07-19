@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useAddItemToCart } from '../hooks/useAddItemToCart'
 import { ItemCart } from '../test/ItemCart';
 
-export default function page() {
+export default function Page() {
 	let [product, setProduct] = useState();
 	useEffect(() => {
 		const getLocalVar = () => {
