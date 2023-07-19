@@ -30,7 +30,7 @@ export default function OurBrands() {
         <h2 className='flex justify-center font-bold'>Discover our Brands</h2>
         <div className='flex text-xs gap-2 justify-center underline'>
           {brandsss.map((brand)=>{
-            return (<div className='cursor-pointer' value={brand} onClick={onClickHandle}>{brand}</div>);
+            return (<div key={brand} className='cursor-pointer' value={brand} onClick={onClickHandle}>{brand}</div>);
           })}
         </div>
      	     
