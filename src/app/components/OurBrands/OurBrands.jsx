@@ -26,7 +26,7 @@ export default function OurBrands() {
     }, [products, brand]);
      
     return ( 
-    <div className='w-full py-14 px-16 flex justify-center items-center flex-col gap-5 bg-white'>
+    <div className='w-full py-12 px-6 flex justify-center items-center flex-col gap-5 bg-white'>
         <h2 className='flex justify-center text-lg font-bold'>Discover our Brands</h2>
         <div className='flex text-xs gap-2 justify-center underline'>
           {(brandsss) ? brandsss.map((brand)=>{
@@ -39,6 +39,7 @@ export default function OurBrands() {
         key={brand}
         tabel={tabel}
         slidesPerView={3}
+        spaceBetween={10}
         breakpoints={{ 768: {slidesPerView: 3 },
                        640: {slidesPerView: 2 }, 
                        425: {slidesPerView: 2 },   

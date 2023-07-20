@@ -20,13 +20,13 @@ export default function Product({item}) {
         </div>
     </div> */}
   
-    <div id={item._id} ref={parentRef} className='border hover:border-yellow-300 drop-shadow-[0rem_0.1rem_0rem_rgba(0,0,0,0.25)] rounded-[0.75rem] flex flex-col lg:w-48 lg:h-68 md:w-32 md:h-42 sm:w-32 sm:h-42 xxs:w-32 xxs:h-42 gap-1 p-2'>
+    <div id={item._id} ref={parentRef} className='border hover:border-yellow-300 drop-shadow-[0rem_0.1rem_0rem_rgba(0,0,0,0.25)] rounded-[0.75rem] flex flex-col gap-1 p-2'>
         <div className=' flex justify-center'>
           <img className='w-40 hover:w-50' src={imageUrl}/>
         </div>
         <div className='flex flex-col content-end gap-3'>
           <div className='flex justify-center text-xs'>
-            {item.brand}{item.model} | {item.ram}
+            {item.brand}{item.model}
           </div>
           <div className='flex justify-evenly px-5 text-sm'>
             <div>{item.price} lei </div>
