@@ -49,7 +49,7 @@ export default function CaseDesigner() {
                            280: {slidesPerView: 1 },
                              0: {slidesPerView: 1 }}}></Swiper>
         <div>
-            <button className='bg-[#FFFFFF] px-8 py-2 text-xs border-gray-900 border'>See all Products</button>
+            <button className='bg-[#FFFFFF] px-8 py-2 text-xs rounded border-gray-900 border'>See all Products</button>
         </div>
     </div>);
 }

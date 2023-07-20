@@ -1,4 +1,6 @@
-import Language from "../Language";
+import Cart from "./components/Cart";
+import WishList from "./components/WishList";
+import Language from "./components/Language";
 
 export const Header = () => {
     return (
@@ -19,16 +21,10 @@ export const Header = () => {
         </div>
         <div className=" w-full flex justify-between xs:w-max items-center md:flex">
             <div className="flex w-full justify-between xs:w-auto  gap-2">
-                <div className="  gap-1 xxs:gap-2 flex ml-auto ">
-                    <img src="/imgHeader/heart.svg" alt="heart" />
-                    <p>Wishlist</p>
-                </div>
-                <div className=" gap-1 xxs:gap-2 flex ml-2 xxs:ml-4 ">
-                    <img src="/imgHeader/shop.svg" alt="shop" />
-                    <p>Cart</p>
-                </div>
+                <WishList/>
+                <Cart/>
                 <div className=" hidden xs:flex ml-2 xs:ml-4">
-                    <Language/>
+                <Language/>
                 </div>
             </div>
         </div>

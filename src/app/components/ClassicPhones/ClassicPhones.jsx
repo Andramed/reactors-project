@@ -1,3 +1,5 @@
+import BtnDiscover from "../Discover";
+
 export default function ClassicPhones() {
     return ( 
     <div className='w-full bg-white flex'>
@@ -9,7 +11,7 @@ export default function ClassicPhones() {
                 Classic Phones
             </h2>
             <p> - yes, they are still out there</p>
-            <button className='bg-[#EFAF65] px-8 py-2 text-xs'>Discover</button>
+            <BtnDiscover/>
         </div>        
     </div>);
 }

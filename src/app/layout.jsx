@@ -22,7 +22,7 @@ export default function RootLayout({ children }) {
         <BlackLine/>
         <Link href={"/"}/>
         {children}
-        <Footer/>
+        {/* <Footer/> */}
       </body>
     </html>
   )

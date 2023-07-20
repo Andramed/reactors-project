@@ -4,8 +4,9 @@ import Search from './Search';
 import GetData from './GetData';
 import CreateArticleDB from './CreateArticleDB';
 function transformDriveLink(value) {
-	const fileId = value.match(/\/d\/(.+?)\//)[1];
-	return `https://drive.google.com/uc?export=view&id=${fileId}`;
+	// const fileId = value.match(/\/d\/(.+?)\//)[1];
+	// return `https://drive.google.com/uc?export=view&id=${fileId}`;
+  return value
   }
 
 export default function Page() {

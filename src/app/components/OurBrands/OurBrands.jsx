@@ -51,7 +51,7 @@ export default function OurBrands() {
     }
 
     return ( 
-    <div className='w-full py-14 px-16 flex justify-center items-center flex-col gap-5 bg-white'>
+    <div className='w-full py-14 px-16 flex justify-center text-center items-center flex-col gap-5 bg-white'>
         <h2 className='flex justify-center font-bold'>Discover our Brands</h2>
         <div className='flex text-xs gap-2 justify-center underline'>
             <div className='cursor-pointer' onClick={onClickHandle}>Nokia</div>
