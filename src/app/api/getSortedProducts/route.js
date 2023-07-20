@@ -1,4 +1,5 @@
 import { connectToDatabase, client } from '@/app/hooks/useConectDB';
+import { ObjectId } from 'mongodb';
 import { NextResponse } from 'next/server';
 import { parse } from 'url';
 
@@ -37,7 +38,10 @@ export  async function GET(req, res) {
 					  } else {
 						collectionData = await colection.find({}).sort({ price: -1 }).toArray();
 					  }
-			
+				case '_id':
+					const idObject = new ObjectId(value);
+					collectionData = await colection.find({_id:idObject}).toArray();
+					console.log(collectionData,'from server');
 				default:
 					break;
 			}
