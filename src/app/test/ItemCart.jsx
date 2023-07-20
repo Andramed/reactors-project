@@ -5,7 +5,7 @@ import { useAddItemToCart } from '../hooks/useAddItemToCart';
 export const ItemCart = (props) => {
 	
 	const {product,  getProduct, onClick} = props;
-	console.log(product.type);
+	
 	
 	const parentRef = useRef(0);
   return (

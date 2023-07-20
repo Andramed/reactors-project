@@ -7,7 +7,7 @@ import { useAddItemToCart } from '../hooks/useAddItemToCart'
 export default function Page() {
 	const [product, setProduct] = useState()
 	useEffect(() => {
-		const itemLocal = localStorage.getItem('item');
+		const itemLocal = sessionStorage.getItem('item');
 		setProduct(JSON.parse(itemLocal));
 	}, [])
 	console.log(product);

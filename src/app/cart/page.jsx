@@ -7,7 +7,8 @@ export default function Page() {
 	let [product, setProduct] = useState();
 	useEffect(() => {
 		const getLocalVar = () => {
-			const item = localStorage.getItem('item')
+			const item = localStorage.getItem('item');
+			
 			setProduct(JSON.parse(item));
 		};
 		getLocalVar()
@@ -15,7 +16,9 @@ export default function Page() {
 		
 	return(
 		<>
-			{(product)? <ItemCart product= {product.collectionData[0]}/>: <h1>loading</h1>}
+			{(product)? product.map((product) =>{
+				return <ItemCart key={product._id}  product= {product}/>
+			}): <h1>loading</h1>}
 		</>
 	)
 

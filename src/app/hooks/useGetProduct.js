@@ -8,8 +8,10 @@ const useGetProduct =  () => {
 	const getProduct = (product) => {
 		setItem(product)
 	}
-	useEffect(() => {		
-			localStorage.setItem('item', JSON.stringify(item))
+	useEffect(() => {	
+			console.log('sa executat');	
+			sessionStorage.setItem('item', JSON.stringify(item))
+			
 	}, [item])
 
 	useEffect(() => {

@@ -1,7 +1,5 @@
 const { useState, useEffect } = require('react');
 
-useState
-
 export const useGetAllProducts = () => {
 	const [products, setProducts] = useState([]);
 		useEffect(() => {
