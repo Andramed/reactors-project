@@ -1,4 +1,4 @@
-"use client"
+'use client'
 import Header from './components/Header'
 import OurBrands from './components/OurBrands'
 import ClassicPhones from './components/ClassicPhones'
@@ -12,16 +12,15 @@ import Newsletter from './components/Newsletter'
 import Articles from './components/Articles'
 
 export default function Home() {
-
 	return (
 	<>
 		<main className=" w-5/6 flex justify-center m-auto min-h-screen flex-col items-center  p-4 bg-grey">
 			<OurSmartphones/>
 			<OurBrands />
 			<ClassicPhones />
-			<Cases/>
 			<NewProducts />
-			<CaseDesigner />
+			<Cases/>
+			{/* <CaseDesigner /> */}
 			<Reviews/>
 			<OurBenefits />
 			<Articles/>
