@@ -1,23 +1,43 @@
+'use client'
+
 import Link from "next/link";
+import { useState } from 'react';
 
 export const NavBar = () => {
+	
+	const [selectedLink, setSelectedLink] = useState(null);
+
+	const getClickedLink = (e) => {
+	  // Eliminăm clasa de la elementele anterioare
+	  const previousSelected = document.querySelector('.selected');
+	  if (previousSelected) {
+		previousSelected.classList.remove('selected');
+	  }
+  
+	  // Adăugăm clasa la elementul curent
+	  const currentElement = e.target;
+	  currentElement.classList.add('selected');
+  
+	  // Actualizăm starea componentei cu elementul selectat
+	  setSelectedLink(currentElement.textContent);
+	};
     return(
-        <div className=" m-auto w-full h-28 bg-white flex justify-between items-center px-10 gap-2 xs:gap-2 md:justify-around">
+        <div className=" m-auto w-full h-28 bg-white flex justify-between items-center px-10  xs:gap-7 md:justify-around">
            
 			<img className=' w-[4.8rem]  lg:w-28' src="/logo/logo.jpg" alt="logo"/>
 
-            <div className=" gap-3 justify-between text-sm lg:text-base lg:gap-4 items-center  hidden md:flex ">
-                <Link href={"/"}>Home</Link>
-                <Link href={"/products"}>Products</Link>
-                <Link href={"/brands"}>Brands</Link>
-                <Link href={"/promotions"}>Promotions</Link>
-                <Link className='hidden w-max lg:flex' href={"/about"}>About Us</Link>
-                <Link className='hidden lg:flex' href={"/blog"}>Blog</Link>
-                <Link className='hidden lg:flex' href={"/FAQ"}>FAQ</Link>
-                <Link  className='hidden lg:flex' href={"/contact"}>Contact</Link>
+            <div onClick={getClickedLink} className={`  gap-3 justify-between text-sm lg:text-base lg:gap-4 items-center  hidden md:flex `}>
+                <Link className=' selected link-navbar' href={"/"}>Home</Link>
+                <Link className=' link-navbar' href={"/products"}>Products</Link>
+                <Link className=' link-navbar' href={"/brands"}>Brands</Link>
+                <Link  className=' link-navbar'href={"/promotions"}>Promotions</Link>
+                <Link className='hidden w-max lg:flex link-navbar ' href={"/about"}>About Us</Link>
+                <Link className='hidden lg:flex link-navbar' href={"/blog"}>Blog</Link>
+                <Link className='hidden lg:flex link-navbar' href={"/FAQ"}>FAQ</Link>
+                <Link  className='hidden lg:flex link-navbar' href={"/contact"}>Contact</Link>
                 
             </div>
-			<select  className=' text-sm hidden xs:flex lg:text-base '> 
+			<select  className=' link-navbar text-sm hidden xs:flex lg:text-base '> 
                     <option value="phone">All Categories</option>
                     <option value="smartphone">Smart Phone</option>
                     <option value="classicphone">Classic Phone</option>

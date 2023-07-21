@@ -5,6 +5,7 @@ import NavBar from './components/NavBar'
 import Link from 'next/link'
 import BlackLine from './components/BlackLine'
 import Footer from './components/Footer'
+import { ProductProvider } from './hooks/useContext'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -21,8 +22,10 @@ export default function RootLayout({ children }) {
 		    <NavBar/>
         <BlackLine/>
         <Link href={"/"}/>
-        {children}
-        {/* <Footer/> */}
+        <ProductProvider>
+          {children}
+        </ProductProvider>
+        <Footer/>
       </body>
     </html>
   )

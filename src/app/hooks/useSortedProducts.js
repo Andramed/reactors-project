@@ -16,18 +16,13 @@ const useSortedProducts = () => {
 		[e.target.name]: e.target.value,
 	}))
   }
- 
   const { brand, price, operator, newPhone } = formData;
- 
   useEffect(() => {
-    // const { brand, price, operator, newPhone } = formData;
 	console.log(newPhone);
-
-
     const getSortedProducts = async () => {
 		console.log(formData);
       try {
-        const response = await axios.get('http://localhost:3000/api/getSortedProducts', {
+        const response = await axios.get('/api/getSortedProducts', {
           params: {
             param: {...formData},
           },
