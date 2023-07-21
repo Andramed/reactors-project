@@ -42,7 +42,7 @@ export default function CaseDesigner() {
     return ( 
     <div className='w-full py-14 px-16 flex justify-center items-center flex-col gap-5 bg-white'>
         <h2 className='flex justify-center font-bold'>Case Designer</h2>
-        <Swiper tabel={tabel}
+        <Swiper key="CaseDesigner" tabel={tabel}
             slidesPerView={3}
             breakpoints={{ 768: {slidesPerView: 3 },
                            500: {slidesPerView: 2 },   

@@ -1,3 +1,4 @@
+'use client'
 import Cart from "./components/Cart";
 import WishList from "./components/WishList";
 import Language from "./components/Language";
