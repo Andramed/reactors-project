@@ -16,7 +16,7 @@ const useGetProduct =  () => {
 
 	useEffect(() => {
 		if(item){
-			router.push('/product');
+			router.push('/productPage');
 		}
 	})
 	return {getProduct, item}
