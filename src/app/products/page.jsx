@@ -1,5 +1,6 @@
 'use client'
 import React, { useState, useRef } from 'react';
+import MultiRangeSlider from "multi-range-slider-react";
 import useGetAllBrands from 'src/app/hooks/useGetAllBrands.js';
 import Products from './Products';
 import styles  from 'src/app/products/range.module.css';
@@ -9,14 +10,20 @@ import styles  from 'src/app/products/range.module.css';
 // data.sort((a, b) => (a.price > b.price) ? 1 : (a.price === b.price) ? ((a.first_name > b.first_name) ? 1 : -1) : -1 );
 
 const Page = () => {
+  const [minPrice, setMinPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(50000);
+  const handleInput = (e) => {
+    console.log(e);
+    setMinPrice(e.minValue);
+    setMaxPrice(e.maxValue);
+};
   const [count, setCount ] = useState(8);
   const [brandsArray, setBrandsArray] = useState([]);
   const [typesArray, setTypesArray] = useState([]);
   
-  const [priceRange, setPriceRange] = useState(2000);
   const brandsCheck = useRef([]);
   const typesCheck = useRef([]);
-  const range = useRef(0);
+  // const range = useRef(0);
   
 
   const handleChangeBrand = (e) => {
@@ -45,10 +52,10 @@ const Page = () => {
     }
   };  
 
-  const onInputHandle = (e) => {
-    range.current = e.target.value;
-    setPriceRange(range.current);
-  }
+  // const onInputHandle = (e) => {
+  //   range.current = e.target.value;
+  //   setPriceRange(range.current);
+  // }
 
    
   const brands = useGetAllBrands();
@@ -92,10 +99,31 @@ const Page = () => {
                       /> Classic</label>
                   </div>
 
-                  <div className={styles.slidecontainer}>
+                  <div>
+                    <MultiRangeSlider
+                      min={0}
+                      max={50000}
+                      step={1}
+                      minValue={minPrice}
+                      maxValue={maxPrice}
+                      onInput={(e) => {
+                        handleInput(e);
+                      }}
+                      onChange={()=>{console.log(maxPrice)}}
+                      label={false}
+                      ruler={false}
+                      style={{ border: "none", boxShadow: "none", padding: "15px 10px" }}
+                      // barLeftColor="red"
+                      barInnerColor="white"
+                      // barRightColor="green"
+                      thumbLeftColor="yellow"
+                      thumbRightColor="yellow"
+                    / >
+                  </div>    
+                  {/* <div className={styles.slidecontainer}>
                     <input onInput={onInputHandle} type="range" min="1" max="50000" value={priceRange} className={styles.slider} id='myRange' />
                     <p>Value: <span id="demo">{priceRange}</span></p>
-                  </div>                  
+                  </div>                   */}
                 </div>
 
                 <div className='w-full flex-col w-3/4 border'>
@@ -111,9 +139,9 @@ const Page = () => {
                     </div>
                   </div>   */}
                   <div className='flex justify-center last-of-type:justify-start flex-wrap gap-4 pl-4 border'>
-                    <Products limit={count} brands={brandsArray} types={typesArray} priceRange={priceRange}/>
+                    <Products limit={count} brands={brandsArray} types={typesArray} minPrice={minPrice} maxPrice={maxPrice} aaa="aaa"/>
                     <div style={{ display: 'none' }}>
-                      <Products limit={count + 4} brands={brandsArray} types={typesArray} priceRange={priceRange}/>
+                      <Products limit={count + 4} brands={brandsArray} types={typesArray} minPrice={minPrice} maxPrice={maxPrice} aaa="aaa"/>
                     </div>
                   </div>
                   <footer>

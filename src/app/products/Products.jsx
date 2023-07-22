@@ -2,9 +2,9 @@ import axios from 'axios';
 import useSWR from 'swr';
 import Product from '../components/Product';
 
-export default function Products ({ limit , brands, types, priceRange}) {
+export default function Products ({ limit , brands, types, minPrice, maxPrice}) {
   const fetcher = async (url) => await axios.get(url).then((res) => res.data);
-  const { data, error } = useSWR(`/api/getAllProdPag?results=${limit}&brands=${brands}&types=${types}&priceRange=${priceRange}`, fetcher);   
+  const { data, error } = useSWR(`/api/getAllProdPag?results=${limit}&brands=${brands}&types=${types}&minPrice=${minPrice}&maxPrice=${maxPrice}`, fetcher);   
     
     // process error here  
 
