@@ -26,7 +26,7 @@ export default function Product({item}) {
         </div>
         <div className='flex flex-col content-end gap-3'>
           <div className='flex justify-center text-xs'>
-            {item.brand}{item.model}
+            {item.brand} {item.model}
           </div>
           <div className='flex justify-evenly px-5 text-sm'>
             <div>{item.price} lei </div>

@@ -98,7 +98,7 @@ const Page = () => {
                   </div>                  
                 </div>
 
-                <div className='w-full flex-col w-3/4'>
+                <div className='w-full flex-col w-3/4 border'>
                   {/* <div className='flex justify-between'>
                     <div>{(list != undefined) ? '' : 'loading '}items...</div>
                     <div className=''>
@@ -110,7 +110,7 @@ const Page = () => {
                       </select>    
                     </div>
                   </div>   */}
-                  <div className='flex justify-start flex-wrap gap-3'>
+                  <div className='flex justify-center last-of-type:justify-start flex-wrap gap-4 pl-4 border'>
                     <Products limit={count} brands={brandsArray} types={typesArray} priceRange={priceRange}/>
                     <div style={{ display: 'none' }}>
                       <Products limit={count + 4} brands={brandsArray} types={typesArray} priceRange={priceRange}/>
@@ -118,7 +118,7 @@ const Page = () => {
                   </div>
                   <footer>
 
-                    <div className='pt-8'>
+                    <div className='pt-8 flex justify-center'>
                       <button className='bg-btn-color w-9.5 h-3.2 px-8 py-2 text-sm rounded ' onClick={() => setCount(count + 4)}>
                         more products...
                       </button>
