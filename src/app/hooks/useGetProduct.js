@@ -9,7 +9,7 @@ const useGetProduct =  () => {
 		setItem(product)
 	}
 	useEffect(() => {	
-			console.log('sa executat');	
+			
 			sessionStorage.setItem('item', JSON.stringify(item))
 			
 	}, [item])
