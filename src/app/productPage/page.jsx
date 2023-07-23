@@ -11,7 +11,7 @@ function ProductPage() {
   const parentRef = useRef(0);
   const [product, setProduct] = useState()
 
-  const {getIdItem} = useAddItemToCart()// aici metoda de adaugare in cos
+  const {getIdItem} = useAddItemToCart()
 
   const [mainPicture, setMainPicture] = useState(0);
 
@@ -32,7 +32,7 @@ function ProductPage() {
 		
 		// componenta IMAGE, 
 		// component  Propreties
-      <div className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+      <div  className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8 product">
 		
         <span className="self-start ml-10">
             <button className="text-gray-300 hover:text-red-500">
@@ -167,12 +167,12 @@ function ProductPage() {
                     {/* optiunile de memorie */}
                   </select>
                 </div>
-                <div className="flex-1">
+                <div ref={parentRef} id={product._id} className="flex-1">
                   <button
 
                     type="button"
                     className="w-full py-2 px-4 inline-flex items-center justify-center rounded-md bg-yellow-500 text-base text-white font-semibold uppercase whitespace-nowrap hover:bg-yellow-600"
-                    onClick={() => getIdItem()}
+                    onClick={() => getIdItem(parentRef.current)}
                   >
                     <ShoppingBagIcon className="w-6 h-6 mr-2" />
                     Add to Cart
