@@ -1,2 +1,8 @@
+import CartProduct from "./components/CartProduct"
 
-export default Cart
+const Cart = () => {
+    return (
+        <CartProduct/>
+    )
+}
+export default Cart;

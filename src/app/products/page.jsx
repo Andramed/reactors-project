@@ -37,7 +37,7 @@ const Page = () => {
                   </div>
                 </div>
 
-                <div className='w-full flex-col w-3/4'>
+                <div className=' flex-col w-3/4'>
                   {/* <div className='flex justify-between'>
                     <div>{(list != undefined) ? '' : 'loading '}items...</div>
                     <div className=''>
