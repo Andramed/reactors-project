@@ -19,7 +19,10 @@ export  async function GET(req, res) {
             await connectToDatabase();
             const collection = client.db('Top_Phone').collection('Phones');
              
-            const value = {$and: [{"color_image.green" :{$exists:true}},{"color_image.red" :{$exists:true}}]};
+
+            // use map to create array of color condition based on user selection
+            const value ={ $or: [{"color_image.green" :{$exists:true} }, {"color_image.red" :{$exists:true}}] };
+            // const value ={ $or: [{"color_image.green" :{$exists:true} }] };
 
             data = await collection.find(value).limit(limit_entries).toArray();
             

@@ -1,32 +1,38 @@
 'use client'
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 // import { useAddItemToCart } from '../hooks/useAddItemToCart';
 
 export default function Product({item}) {
   // const {getIdItem, item} = useAddItemToCart();
   const parentRef = useRef(0);
-  
-  let imageUrl = '';
+  const [imageUrl, setImageUrl] = useState('');
+  const colorArray = [];
+
+  const handleClickImage = (e) => {
+    const newUrl = item.color_image[e.target.id][0];
+    setImageUrl(newUrl);
+  }
+
   for (const [key, value] of Object.entries(item.color_image)) {
-    imageUrl = value[0];
-    break;
+    if (imageUrl === '' ) setImageUrl(value[0]);
+
+    colorArray.push(key);
   }
 
   return ( <>
-    {/* <div className=' flex justify-center m-10'>
-        <div ref={parentRef} className=' w-[500px] h-10 bg-red-100 rounded-sm  flex flex-col items-center justify-center p-24' id='64ad3ab32d26c5b877875dd3'>
-            {item? item : 'loading'}
-            <button  onClick={()=>getIdItem(parentRef.current)} className=' p-3 bg-red-200 rounded-3xl'>add to cart</button>
-        </div>
-    </div> */}
-  
-    <div id={item._id} ref={parentRef} className='border hover:border-yellow-300 drop-shadow-[0rem_0.1rem_0rem_rgba(0,0,0,0.25)] rounded-[0.75rem] flex flex-col gap-1 p-2'>
+     <div id={item._id} ref={parentRef} className='border hover:border-yellow-300 drop-shadow-[0rem_0.1rem_0rem_rgba(0,0,0,0.25)] rounded-[0.75rem] flex flex-col gap-1 p-2'>
         <div className=' flex justify-center'>
           <img className='w-40 hover:w-50' src={imageUrl}/>
         </div>
         <div className='flex flex-col content-end gap-3'>
           <div className='flex justify-center text-xs'>
             {item.brand} {item.model}
+          </div>
+          <div className='flex justify-center gap-2'>
+            {
+              colorArray.map((color,index)=>{ 
+                return <div key={index} id={color} onClick={handleClickImage} style={{height: "1rem", width: "1rem", backgroundColor: color, borderRadius: "5rem", border: "1px solid grey"}}></div> })
+            }
           </div>
           <div className='flex justify-evenly px-5 text-sm'>
             <div>{item.price} lei </div>
