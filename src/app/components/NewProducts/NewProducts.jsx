@@ -9,7 +9,7 @@ export default function NewProducts() {
             <div>Product3</div>
         </div>
         <div>
-            <button className='  bg-btn-color w-9.5 h-3.2 px-8 py-2 my-2 text-sm rounded'>Shop</button>
+            <button className='bg-btn-color px-8 py-2 text-sm rounded w-9.5 h-3.2'>Shop</button>
         </div>
     </div>);
 }
