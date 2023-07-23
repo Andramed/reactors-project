@@ -23,7 +23,6 @@ const Page = () => {
   
   const brandsCheck = useRef([]);
   const typesCheck = useRef([]);
-  // const range = useRef(0);
   
 
   const handleChangeBrand = (e) => {
@@ -52,25 +51,17 @@ const Page = () => {
     }
   };  
 
-  // const onInputHandle = (e) => {
-  //   range.current = e.target.value;
-  //   setPriceRange(range.current);
-  // }
-
    
   const brands = useGetAllBrands();
     
 
     return (
         <div className='pb-8 w-full flex justify-center items-center flex-col bg-white'>
-            {/* <div className='w-full pl-36 py-3 bg-gray-500 text-white font-bold text-xs'>
-              BreadCrumbs - if possible
-            </div> */}
             <div className='w-full xxs:pl-4 lg:pl-36 md:pl-36 sm:pl-16 pt-12 pb-6 font-bold bg-gray-100'>
               Products
             </div>
             <div className='w-full lg:pl-36 lg:pr-24 md:pl-36 md:pr-24 sm:px-16 pt-12 flex item-start text-base '>
-                <div className='min-w-max border rounded xxs:pl-2 pr-2 w-1/4 font-small flex flex-col gap-3'>
+                <div className='min-w-max xxs:pl-2 pr-2 w-1/4 font-small flex flex-col gap-3'>
                   <p>Filters: </p>
                   <div className='border rounded px-2 py-2 flex flex-col text-xs gap-1'>
                     <p>Brands</p>
@@ -120,13 +111,9 @@ const Page = () => {
                       thumbRightColor="yellow"
                     / >
                   </div>    
-                  {/* <div className={styles.slidecontainer}>
-                    <input onInput={onInputHandle} type="range" min="1" max="50000" value={priceRange} className={styles.slider} id='myRange' />
-                    <p>Value: <span id="demo">{priceRange}</span></p>
-                  </div>                   */}
                 </div>
 
-                <div className='w-full flex-col w-3/4 border'>
+                <div className='w-full flex-col w-3/4'>
                   {/* <div className='flex justify-between'>
                     <div>{(list != undefined) ? '' : 'loading '}items...</div>
                     <div className=''>
@@ -138,7 +125,7 @@ const Page = () => {
                       </select>    
                     </div>
                   </div>   */}
-                  <div className='flex justify-center last-of-type:justify-start flex-wrap gap-4 pl-4 border'>
+                  <div className='flex justify-center last-of-type:justify-start flex-wrap gap-4 pl-4'>
                     <Products limit={count} brands={brandsArray} types={typesArray} minPrice={minPrice} maxPrice={maxPrice} aaa="aaa"/>
                     <div style={{ display: 'none' }}>
                       <Products limit={count + 4} brands={brandsArray} types={typesArray} minPrice={minPrice} maxPrice={maxPrice} aaa="aaa"/>
