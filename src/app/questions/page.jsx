@@ -42,7 +42,7 @@ const Page = () => {
               <p>
                 Ordering a phone from our online store is a simple process. Just
                 browse our website and search for the desired phone. Then, click
-                on the "Add to Cart" button for the selected product. Once you
+                on the {"Add to Cart"} button for the selected product. Once you
                 have added all the desired items to your cart, proceed to the
                 checkout page. Here, you will provide the delivery and payment
                 information to complete the ordering process.
@@ -73,7 +73,7 @@ const Page = () => {
               <p>
                 Ordering a phone from our online store is a simple process. Just
                 browse our website and search for the desired phone. Then, click
-                on the "Add to Cart" button for the selected product. Once you
+                on the {"Add to Cart"} button for the selected product. Once you
                 have added all the desired items to your cart, proceed to the
                 checkout page. Here, you will provide the delivery and payment
                 information to complete the ordering process.
