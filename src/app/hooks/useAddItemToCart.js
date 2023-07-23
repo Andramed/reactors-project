@@ -7,12 +7,27 @@ export const useAddItemToCart = () => {
 	
 	const [message, setMessage] = useState('product not added to cart');
 	const [idItem, setIdItem] = useState([]);
-	let [item, setItem] = useState([]);
-	const [previous, setPrevious] = useState([]);
+
+	let [itemCurent, setItemCurent] = useState([]);
+	const [itemPrevious, setItemPrevious] = useState([]);
+	
+	
+	
 
 	const getIdItem = (parentRef) => {
+		console.log(parentRef);
+		console.log('add to cart');
+		console.log(parentRef.id);
 		setIdItem((previousId) => [...previousId, parentRef.id] );
 	}
+	useEffect(() => {
+		const previousItem = JSON.parse(localStorage.getItem('item'));
+		if (previousItem) {
+		  setItemPrevious(previousItem);
+		}
+	  }, []);
+	console.log(itemPrevious);
+	
 	useEffect(() => {
 		const getSortedProducts = async () => {
 			
@@ -25,49 +40,42 @@ export const useAddItemToCart = () => {
 				'Cache-Control': 'no-store',
 			  },
 			});
-			setItem(response.data.collectionData)
+			// setItemCurent(response.data.collectionData);
+			setItemCurent((prevCurent) => [ ...response.data.collectionData]);
+			setItemCurent((prevCurent) => [...prevCurent, ...itemPrevious]);
+       		
+			
 		  } catch (error) {
 			console.log('Error loading documents: ', error);
 		  }
 		};
 		
-	idItem.length > 0? getSortedProducts() : null
+	idItem.length > 0 && getSortedProducts();
 	}, [idItem])
 	
-	useEffect(()=>{
-		const previousItem = localStorage.getItem('item');
-		
-		if (previousItem) {
-			console.log(JSON.parse(previousItem));
-			setPrevious((rest) => [...rest, JSON.parse(previousItem)])
-			console.log('previous o fost obtinut');
-		}
-		
-	}, []);
-	useEffect(() => {
-		const allItems = localStorage.getItem('allItem');
-		if (allItems) {
-			console.log(JSON.parse(allItems));
-			setPrevious((rest) => [...rest, JSON.parse(allItems)]);
-		}
-	}, [])
+	
+	
+	//add item curent care este compus din cel precedent + cel adaugat la click de user
 
-	// inca o cerere all items sa combin ce era in allItems + item (curent)
-	console.log(previous);
-	useEffect(()=> {
-		if (previous.length>0) {
-			localStorage.setItem('allItem', JSON.stringify(previous));
-			console.log('previous o fost salvat');
-		}
-	}, [previous])
 
+	
+	// useEffect(() => {
+	// 	if (itemPrevious.length > 0 && itemCurent.length > 0) {
+	// 		setItemCurent((prevElement) => [...prevElement, ...itemPrevious]);
+	// 	  console.log('item curent salvat cu previous');
+	// 	}
+	//   }, [itemCurent, itemPrevious, isLoaded]);
+
+	console.log(itemCurent);
 	useEffect(() => {
-		console.log(item.length);
 		
-		if (item.length>0) {
-			localStorage.setItem('item', JSON.stringify(item));
+		if (itemCurent.length>0) {
+			localStorage.setItem('item', JSON.stringify(itemCurent));
 			console.log('noul item sa salvat');
+			console.log('item curent total', itemCurent);
 		}
-	}, [item])
-	return {getIdItem, message, idItem, item}
+	}, [itemCurent])
+	return {getIdItem, message, idItem, itemCurent}
 }
+
+
