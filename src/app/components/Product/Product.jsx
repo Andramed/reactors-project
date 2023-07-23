@@ -1,23 +1,31 @@
 'use client'
-import React, { useRef, useState } from 'react'
-// import { useAddItemToCart } from '../hooks/useAddItemToCart';
+import React, { useEffect, useRef, useState } from 'react'
 
 export default function Product({item}) {
   // const {getIdItem, item} = useAddItemToCart();
   const parentRef = useRef(0);
   const [imageUrl, setImageUrl] = useState('');
-  const colorArray = [];
+  const colorArray = useRef([]);
+  let oneTime = 1;
 
   const handleClickImage = (e) => {
     const newUrl = item.color_image[e.target.id][0];
     setImageUrl(newUrl);
+    
   }
 
-  for (const [key, value] of Object.entries(item.color_image)) {
-    if (imageUrl === '' ) setImageUrl(value[0]);
+  useEffect(()=>{
 
-    colorArray.push(key);
-  }
+    colorArray.current = [];  
+
+    for (const [key, value] of Object.entries(item.color_image)) {
+      if (oneTime) {setImageUrl(value[0]); oneTime =0;}
+
+      colorArray.current.push(key);
+    }}
+  ,[item]);
+
+  console.log(colorArray);
 
   return ( <>
      <div id={item._id} ref={parentRef} className='border hover:border-yellow-300 drop-shadow-[0rem_0.1rem_0rem_rgba(0,0,0,0.25)] rounded-[0.75rem] flex flex-col gap-1 p-2'>
@@ -30,7 +38,7 @@ export default function Product({item}) {
           </div>
           <div className='flex justify-center gap-2'>
             {
-              colorArray.map((color,index)=>{ 
+              colorArray.current.map((color,index)=>{ 
                 return <div key={index} id={color} onClick={handleClickImage} style={{height: "1rem", width: "1rem", backgroundColor: color, borderRadius: "5rem", border: "1px solid grey"}}></div> })
             }
           </div>
@@ -46,5 +54,5 @@ export default function Product({item}) {
     </div>
 
 
-  </>)
+  </>);
 }
