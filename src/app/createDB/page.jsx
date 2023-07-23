@@ -119,7 +119,7 @@ export default function Page() {
             onChange={handleChange}
             className='border'
             name='price'
-            type='text'
+            type='number	'
           />
         </div>
 
