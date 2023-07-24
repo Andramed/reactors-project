@@ -25,6 +25,9 @@ function ProductPage() {
 
 		}
 		
+		if(product) {
+			console.log(Object.entries(product.color_image)[0][1]);
+		}
   if (!product ) { 
 	return <h1>Loading</h1>;
   } else {
@@ -45,7 +48,7 @@ function ProductPage() {
             
             <div className="w-auto h-56 sm:h-72 lg:h-96 overflow-hidden">
               <img
-                src={Object.entries(product.color_image)[0][mainPicture]} // aici trebui un filtru care se privesasca daca este array // sau obiect 
+                src={Object.entries(product.color_image)[0][1][mainPicture]} // aici trebui un filtru care se privesasca daca este array // sau obiect 
 				// sau string
 				// src={product.color_image.prima culoare[mainPicture]} metoda pentru iterare a obiectelor
                 className="object-contain w-full h-full"
@@ -54,8 +57,8 @@ function ProductPage() {
             </div>
             {/* galeria cu imagini */}
             <div className="mt-6 flex space-x-2">
-              {Object.entries(product.color_image)[0] // prima care o gaseste color_iamge  key, value
-                .slice(Object.entries(product.color_image)[0][0], Object.entries(product.color_image)[0].length) // slice(0, 4) 
+              {Object.entries(product.color_image)[0][1] // prima care o gaseste color_iamge  key, value
+                .slice(Object.entries(product.color_image)[0][1], Object.entries(product.color_image)[0][1].length) // slice(0, 4) 
 				// prima vlaoare la slice arr[0]
                 .map((color_image, index) => (
                   <button

@@ -3,7 +3,7 @@
 
 
 import { useGetAllProducts } from '../hooks/useGetAllProducts';
-import { ItemCart } from './ItemCart';
+import { ItemCart } from '../cart/components/ItemCart';
 import useGetProduct from '../hooks/useGetProduct';
 
 

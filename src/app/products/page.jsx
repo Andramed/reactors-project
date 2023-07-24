@@ -63,9 +63,7 @@ const Page = () => {
                   </footer>
                 </div>
 		    </div>
-			<button onClick={()=>{
-				localStorage.removeItem('item')
-			}}>delete local item</button>
+			
 			<button onClick={()=>{
 				localStorage.removeItem('allItem')
 			}}>delete allitems</button>

@@ -1,13 +1,15 @@
 'use client'
 import axios from 'axios';
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
+import { CartItemContext, useCart } from './CartItemContext';
 
 
 export const useAddItemToCart = () => {
 	
+	const {setNumCartItem} = useCart();
 	const [message, setMessage] = useState('product not added to cart');
 	const [idItem, setIdItem] = useState([]);
-
+	
 	let [itemCurent, setItemCurent] = useState([]);
 	const [itemPrevious, setItemPrevious] = useState([]);
 	
@@ -15,18 +17,20 @@ export const useAddItemToCart = () => {
 	
 
 	const getIdItem = (parentRef) => {
-		console.log(parentRef);
+		
 		console.log('add to cart');
 		console.log(parentRef.id);
+		
 		setIdItem((previousId) => [...previousId, parentRef.id] );
 	}
+	
 	useEffect(() => {
 		const previousItem = JSON.parse(localStorage.getItem('item'));
 		if (previousItem) {
 		  setItemPrevious(previousItem);
 		}
 	  }, []);
-	console.log(itemPrevious);
+	
 	
 	useEffect(() => {
 		const getSortedProducts = async () => {
@@ -53,29 +57,19 @@ export const useAddItemToCart = () => {
 	idItem.length > 0 && getSortedProducts();
 	}, [idItem])
 	
-	
-	
-	//add item curent care este compus din cel precedent + cel adaugat la click de user
-
 
 	
-	// useEffect(() => {
-	// 	if (itemPrevious.length > 0 && itemCurent.length > 0) {
-	// 		setItemCurent((prevElement) => [...prevElement, ...itemPrevious]);
-	// 	  console.log('item curent salvat cu previous');
-	// 	}
-	//   }, [itemCurent, itemPrevious, isLoaded]);
-
-	console.log(itemCurent);
 	useEffect(() => {
 		
 		if (itemCurent.length>0) {
 			localStorage.setItem('item', JSON.stringify(itemCurent));
 			console.log('noul item sa salvat');
-			console.log('item curent total', itemCurent);
+			setNumCartItem(itemCurent.length)
 		}
 	}, [itemCurent])
-	return {getIdItem, message, idItem, itemCurent}
+	
+	
+	return {getIdItem, message, idItem, itemCurent }
 }
 
 

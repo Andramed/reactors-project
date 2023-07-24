@@ -54,7 +54,7 @@ export default function Page() {
     e.preventDefault();
     console.log('submitted');
     console.log(formData);
-    let res = fetch('http://localhost:3000/api/insertDocument', {
+    let res = fetch('/api/insertDocument', {
       method: 'POST',
       body: JSON.stringify(formData),
 	  headers: {

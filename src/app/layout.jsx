@@ -1,3 +1,4 @@
+'use client'
 import Header from './components/Header'
 import './globals.css'
 import { Inter } from 'next/font/google'
@@ -5,7 +6,8 @@ import NavBar from './components/NavBar'
 import Link from 'next/link'
 import BlackLine from './components/BlackLine'
 import Footer from './components/Footer'
-import { ProductProvider } from './hooks/useContext'
+import { CartItemProvider } from './hooks/CartItemContext'
+
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,14 +20,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Header/>
-		    <NavBar/>
-        <BlackLine/>
-        <Link href={"/"}/>
-        <ProductProvider>
-          {children}
-        </ProductProvider>
-        <Footer/>
+       <CartItemProvider>
+			<Header/>
+			<NavBar/>
+			<BlackLine/>
+				{children}
+			<Footer/>
+	   </CartItemProvider>
       </body>
     </html>
   )
