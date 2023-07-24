@@ -1,20 +1,29 @@
-import BtnDiscover from '../components/Buttons1'
+'use client'
 
 
 
-export default function Cases (){
-    return(
-        <div>
-            <div className=' bg-white flex w-[1204] justify-between '>
-				<div className='  h-auto flex flex-col flex-grow justify-center items-start p-14 gap-8 ' >
-					<h1 className=' text-6xl'>Accessories for your phone</h1>
-					<h5 className=' text-2xl'> Donec sit amet libero eros. Vestibulum nec pharetra nibh. <br /> Etiam sit amet lectus vel ipsum placerat laoreet vel ut magna.</h5>
-					<BtnDiscover/>
-				</div>
-				<div >
-					<img className=' ' src="/imgPageHuse/cases.jpg" alt="cases" />
-				</div>
+import { useGetAllProducts } from '../hooks/useGetAllProducts';
+import { ItemCart } from './ItemCart';
+import useGetProduct from '../hooks/useGetProduct';
+
+
+export default function Page() {
+	
+	
+	const products = useGetAllProducts()
+	const {getProduct, item} = useGetProduct()
+		
+	console.log(item);
+	return (
+		<>
+			<div className='grid grid-cols-3  grid-rows-4'>
+			{ (products)?
+				products.map((product) =>  <ItemCart getProduct={getProduct}  key={product._id} product={product} />)
+				: <div>loading</div>
+			}
 			</div>
-        </div>
-    )
-}
+		</>
+	  )
+ }
+ 
+

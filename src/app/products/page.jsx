@@ -52,8 +52,7 @@ const Page = () => {
 
    
   const brands = useGetAllBrands();
-    
-
+  
     return (
         <div className='pb-8 w-full flex justify-center items-center flex-col bg-white'>
             {/* <div className='w-full pl-36 py-3 bg-gray-500 text-white font-bold text-xs'>
@@ -126,6 +125,12 @@ const Page = () => {
                   </footer>
                 </div>
 		    </div>
+			<button onClick={()=>{
+				localStorage.removeItem('item')
+			}}>delete local item</button>
+			<button onClick={()=>{
+				localStorage.removeItem('allItem')
+			}}>delete allitems</button>
         </div>
     )
 }

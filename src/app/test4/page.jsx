@@ -1,17 +1,17 @@
-import FollowUs from "./FollowUs";
-import PayWith from "./PayWith";
-import Adress from "./Adress";
-// import { Neonderthaw } from "next/font/google";
-import SubscriebNewsletter from "./SubscribeNewsletter";
-import Buy from "./Buy";
-import Account from "./Account";
-import Links from "./Links";
 
+'use client'
+import Adress from "../components/Footer/Adress"
+import FollowUs from "../components/Footer/FollowUs"
+import PayWith from "../components/Footer/PayWith"
+import SubscriebNewsletter from "../components/Footer/SubscribeNewsletter"
+import Buy from "../components/Footer/Buy"
+import Account from "../components/Footer/Account"
+import Links from "../components/Footer/Links"
 
-export default function Footer (){
+export default function Page (){
     return(
-        <div className=" flex justify-center sm:justify-start items-center sm:items-start text-center sm:text-left  px-10 pt-5 bg-header-bg text-white ">
-                    <div className=" flex flex-col ">
+            <div className=" sm:flex bg-header-bg text-white py-6 px-10 ">
+                    <div className=" flex flex-col">
                         <Adress/>
                         <FollowUs/>
                         <PayWith/>
@@ -30,5 +30,6 @@ export default function Footer (){
                         </div>
                     </div>
             </div>
-    )
+
+        )
 }

@@ -4,27 +4,27 @@ import Star from "./components/Star"
 
 export default function Reviews (){
     return (
-       <div className="">
-            <div className=" flex justify-center items-center">
-                <h1 className=" text-4xl font-bold">What clients say about us </h1>
-            </div>
-            <div className=" flex justify-around p-2">
-                <div className=" flex flex-col items-center drop-shadow-2xl gap-3">
-                    <h5 className=" font-bold">Excellent</h5>
-                    <div className=" pl-20">
+        <div className=" flex flex-col justify-center sm:justify-start items-center text-center sm:text-left px-10 pt-5"> 
+            <h1 className=" text-xl xs:text-2xl md:text-3xl lg:text-6xl font-bold py-4">What clients say about us </h1>
+            <div className=" sm:flex  gap-4 xxs:gap-4 xs:gap-6  ">
+                <div className=" lg:flex drop-shadow-2xl gap-4 sm:pt-6 lg:pt-0">
+                <div className=" flex flex-col">
+                    <h5 className=" py-2 font-bold">Excellent</h5>
                         <Star/>
-                    </div>
-                    <p>Based on 56 reviews</p>
-                    <div className=" flex ">
-                        <img src="/reviews/starMini.svg" alt="starMini" />
-                        <p className=" font-bold">Trustpilot</p>
-                    </div>
+                        <p className=" py-2 underline">Based on 56 reviews</p>
+                        <div className=" flex flex-col justify-center items-center text-center ">
+                            <img src="/reviews/starMini.svg" alt="starMini" />
+                            <p className=" font-bold">Trustpilot</p>
+                        </div>
                 </div>
-                <Review/>
-                <Review/>
-                <Review/>
+                    <Review/>
+                </div>
+                <div className=" lg:flex">
+                    <Review/>
+                    <Review/>
+                </div>
             </div>
             <BtnReviews/>
-       </div>
+        </div>
     )
 }

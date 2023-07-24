@@ -16,14 +16,9 @@ const useSortedProducts = () => {
 		[e.target.name]: e.target.value,
 	}))
   }
- 
   const { brand, price, operator, newPhone } = formData;
- 
   useEffect(() => {
-    // const { brand, price, operator, newPhone } = formData;
 	console.log(newPhone);
-
-
     const getSortedProducts = async () => {
 		console.log(formData);
       try {
