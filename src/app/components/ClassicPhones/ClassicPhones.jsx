@@ -15,5 +15,9 @@ export default function ClassicPhones() {
             <p> - yes, they are still out there</p>
             <BtnDiscover/>
         </div>        
-    </div>);
+    </div>
+    </div>
+    </div>
+
+    );
 }

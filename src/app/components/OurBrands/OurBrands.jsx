@@ -1,10 +1,8 @@
 import { useState, useEffect } from 'react';
-import { useState, useEffect } from 'react';
 import Swiper from 'src/app/components/Swiper';
 import useGetAllBrands from 'src/app/hooks/useGetAllBrands.js';
 import useGetByBrand from 'src/app/hooks/useGetByBrand';
-import useGetAllBrands from 'src/app/hooks/useGetAllBrands.js';
-import useGetByBrand from 'src/app/hooks/useGetByBrand';
+
 
 export default function OurBrands() {
 
@@ -12,8 +10,6 @@ export default function OurBrands() {
 
     const { products, handleClickBrand } = useGetByBrand();
 
-    const [tabel, setTabel] = useState();
-    const [brand, setBrand] = useState('nokia'); //or the first from brandsss - but it is slow
     const [tabel, setTabel] = useState();
     const [brand, setBrand] = useState('nokia'); //or the first from brandsss - but it is slow
 
