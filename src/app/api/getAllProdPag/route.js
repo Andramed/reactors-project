@@ -7,6 +7,7 @@ export  async function GET(req, res) {
 
         const limit_entries = 1 * req.nextUrl.searchParams.get("results");
         const brands = req.nextUrl.searchParams.get("brands");
+        const colors = req.nextUrl.searchParams.get("colors");
         const types = req.nextUrl.searchParams.get("types");
         const minPrice = 1 * req.nextUrl.searchParams.get("minPrice");
         const maxPrice = 1 * req.nextUrl.searchParams.get("maxPrice");
@@ -14,26 +15,40 @@ export  async function GET(req, res) {
 
         const brandsArray = brands.split(",");
         const typesArray = types.split(",");
+        const colorsArray = colors.split(",");
 
         try {
             await connectToDatabase();
             const collection = client.db('Top_Phone').collection('Phones');
              
+            const colorExistence = { $or: []};
+            if (colorsArray){
+                colorsArray.forEach((color,index)=>{
+                    const color_property = `color_image.${color}`;
+                    colorExistence["$or"].push({[color_property]:{"$exists":true}});
+                });
+            }
 
             // use map to create array of color condition based on user selection
-            // const value ={ $or: [{"color_image.green" :{$exists:true} }, {"color_image.red" :{$exists:true}}] };
-            // const value ={ $or: [{"color_image.green" :{$exists:true} }] };
+            // const value ={ $or: [{"color_image.green" :{$exists:true} }, {"color_image.red" :{$exists:true}} ] };
 
             // data = await collection.find(value).limit(limit_entries).toArray();
             
-            if (brands == '' && types == ''){
+            if (brands == '' && types == '' && colors == ''){
                 data = await collection.find({$and: [ { price: { $lte : maxPrice } }, { price : { $gte: minPrice } } ]}).limit(limit_entries).toArray();
-            } else if (brands != '' && types == '') {
+            } else if (brands != '' && types == '' && colors == '') {
                 data = await collection.find({price: {$gte: minPrice, $lte: maxPrice}, brand: { $in: brandsArray }}).collation({ locale: "en", strength: 2 }).limit(limit_entries).toArray();
-            } else if (brands == '' && types != '') {
+            } else if (brands == '' && types != '' && colors == '') {
                 data = await collection.find({price: {$gte: minPrice, $lte: maxPrice}, type: { $in: typesArray}}).collation({ locale: "en", strength: 2 }).limit(limit_entries).toArray();
-            } else{
-                data = await collection.find({price: {$gte: minPrice, $lte: maxPrice}, brand: { $in: brandsArray }, type: { $in: typesArray}}).collation({ locale: "en", strength: 2 }).limit(limit_entries).toArray();
+            } else if (brands == '' && types == '' && colors != '') {
+                data = await collection.find({$and: [ { price: { $lte : maxPrice } }, { price : { $gte: minPrice } }] , colorExistence}).limit(limit_entries).toArray();
+            } else if (brands != '' && types == '' && colors != '') {
+                data = await collection.find({$and: [ { price: { $lte : maxPrice } }, { price : { $gte: minPrice } } ], brand: { $in: brandsArray }, colorExistence}).collation({ locale: "en", strength: 2 }).limit(limit_entries).toArray();
+            } else if (brands == '' && types != '' && colors != '') {
+                data = await collection.find({$and: [ { price: { $lte : maxPrice } }, { price : { $gte: minPrice } } ], type: { $in: typesArray}, colorExistence }).collation({ locale: "en", strength: 2 }).limit(limit_entries).toArray();
+            }
+              else {
+                data = await collection.find({price: {$gte: minPrice, $lte: maxPrice}, colorExistence, brand: { $in: brandsArray }, type: { $in: typesArray}}).collation({ locale: "en", strength: 2 }).limit(limit_entries).toArray();
             }
             
             return NextResponse.json(data);

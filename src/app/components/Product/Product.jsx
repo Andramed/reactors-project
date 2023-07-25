@@ -15,7 +15,6 @@ export default function Product({item}) {
   }
 
   useEffect(()=>{
-
     colorArray.current = [];  
 
     for (const [key, value] of Object.entries(item.color_image)) {
@@ -24,8 +23,6 @@ export default function Product({item}) {
       colorArray.current.push(key);
     }}
   ,[item]);
-
-  console.log(colorArray);
 
   return ( <>
      <div id={item._id} ref={parentRef} className='border hover:border-yellow-300 drop-shadow-[0rem_0.1rem_0rem_rgba(0,0,0,0.25)] rounded-[0.75rem] flex flex-col gap-1 p-2'>

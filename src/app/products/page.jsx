@@ -2,8 +2,9 @@
 import React, { useState, useRef } from 'react';
 import MultiRangeSlider from "multi-range-slider-react";
 import useGetAllBrands from 'src/app/hooks/useGetAllBrands.js';
+import useGetAllColors from 'src/app/hooks/useGetAllColors.js';
 import Products from './Products';
-import styles  from 'src/app/products/range.module.css';
+// import styles  from 'src/app/products/range.module.css';
 
 
 // const data_sort =
@@ -12,18 +13,20 @@ import styles  from 'src/app/products/range.module.css';
 const Page = () => {
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(50000);
-  const handleInput = (e) => {
-    console.log(e);
-    setMinPrice(e.minValue);
-    setMaxPrice(e.maxValue);
-};
   const [count, setCount ] = useState(8);
   const [brandsArray, setBrandsArray] = useState([]);
+  const [colorsArray, setColorsArray] = useState([]);
   const [typesArray, setTypesArray] = useState([]);
   
   const brandsCheck = useRef([]);
+  const colorsCheck = useRef([]);
   const typesCheck = useRef([]);
-  
+
+
+  const handleInput = (e) => {
+    setMinPrice(e.minValue);
+    setMaxPrice(e.maxValue);
+};
 
   const handleChangeBrand = (e) => {
     if (e.target.checked === true){
@@ -33,10 +36,21 @@ const Page = () => {
 
       const index = brandsCheck.current.indexOf(e.target.id);      
       const newArray = brandsCheck.current.splice(index, 1);
-      console.log(newArray);
       setBrandsArray([...brandsCheck.current]);
     }
   };
+
+  const handleChangeColor = (e) => {
+    if (e.target.checked === true){
+      colorsCheck.current.push(e.target.id);
+      setColorsArray([...colorsCheck.current]);
+    } else {
+
+      const index = colorsCheck.current.indexOf(e.target.id);      
+      const newArray = colorsCheck.current.splice(index, 1);
+      setColorsArray([...colorsCheck.current]);
+    }
+  };  
 
   const handleChangeType = (e) => {
     if (e.target.checked === true){
@@ -46,13 +60,13 @@ const Page = () => {
 
       const index = typesCheck.current.indexOf(e.target.id);      
       const newArray = typesCheck.current.splice(index, 1);
-      console.log(newArray);
       setTypesArray([...typesCheck.current]);
     }
   };  
 
    
   const brands = useGetAllBrands();
+  const colors = useGetAllColors();
     
 
     return (
@@ -65,14 +79,15 @@ const Page = () => {
                   <p>Filters: </p>
                   <div className='border rounded px-2 py-2 flex flex-col text-xs gap-1'>
                     <p>Brands</p>
-                    {brands.map((brand,index) => (
+                    {
+                      brands.map((brand,index) => (
                       <label key={index}><input
                         type="checkbox"
                         id={brand}
                         label={brand}
                         onChange={handleChangeBrand}
                       /> {brand}</label>
-                    ))}                    
+                    ))}
                   </div>
                   <div className='border rounded px-2 py-2 flex flex-col text-xs gap-1'>
                     <p>Type</p>
@@ -100,7 +115,7 @@ const Page = () => {
                       onInput={(e) => {
                         handleInput(e);
                       }}
-                      onChange={()=>{console.log(maxPrice)}}
+                      // onChange={()=>{console.log(maxPrice)}}
                       label={false}
                       ruler={false}
                       style={{ border: "none", boxShadow: "none", padding: "15px 10px" }}
@@ -110,6 +125,17 @@ const Page = () => {
                       thumbLeftColor="yellow"
                       thumbRightColor="yellow"
                     / >
+                  </div>
+                  <div className='border rounded px-2 py-2 flex flex-col text-xs gap-1'>
+                    <p>Colors</p>
+                    {colors.map((color,index) => (
+                      <label key={index}><input
+                        type="checkbox"
+                        id={color}
+                        label={color}
+                        onChange={handleChangeColor}
+                      /> {color}</label>
+                    ))}                    
                   </div>    
                 </div>
 
@@ -126,9 +152,9 @@ const Page = () => {
                     </div>
                   </div>   */}
                   <div className='flex justify-center last-of-type:justify-start flex-wrap gap-4 pl-4'>
-                    <Products limit={count} brands={brandsArray} types={typesArray} minPrice={minPrice} maxPrice={maxPrice} aaa="aaa"/>
+                    <Products limit={count} brands={brandsArray} colors={colorsArray} types={typesArray} minPrice={minPrice} maxPrice={maxPrice} aaa="aaa"/>
                     <div style={{ display: 'none' }}>
-                      <Products limit={count + 4} brands={brandsArray} types={typesArray} minPrice={minPrice} maxPrice={maxPrice} aaa="aaa"/>
+                      <Products limit={count + 4} brands={brandsArray} colors={colorsArray} types={typesArray} minPrice={minPrice} maxPrice={maxPrice} aaa="aaa"/>
                     </div>
                   </div>
                   <footer>
