@@ -71,9 +71,7 @@ const Page = () => {
 
     return (
         <div className='pb-8 w-full flex justify-center items-center flex-col bg-white'>
-            <div className='w-full xxs:pl-4 lg:pl-36 md:pl-36 sm:pl-16 pt-12 pb-6 font-bold bg-gray-100'>
-              Products
-            </div>
+            <div className='w-full h-8 font-bold bg-gray-100'></div>
             <div className='w-full lg:pl-36 lg:pr-24 md:pl-36 md:pr-24 sm:px-16 pt-12 flex item-start text-base '>
                 <div className='min-w-max xxs:pl-2 pr-2 w-1/4 font-small flex flex-col gap-3'>
                   <p>Filters: </p>
@@ -105,7 +103,7 @@ const Page = () => {
                       /> Classic</label>
                   </div>
 
-                  <div>
+                  <div className='border rounded px-2 py-2 text-xs gap-1'>
                     <MultiRangeSlider
                       min={0}
                       max={50000}
@@ -125,6 +123,10 @@ const Page = () => {
                       thumbLeftColor="yellow"
                       thumbRightColor="yellow"
                     / >
+                      <div>
+                        <label> from <input className='w-12 border text-sm' type="text" id="minP" value={minPrice}/></label>
+                        <label> to <input className='w-12 border text-sm' type="text" id="maxP" value={maxPrice}/></label>
+                      </div>
                   </div>
                   <div className='border rounded px-2 py-2 flex flex-col text-xs gap-1'>
                     <p>Colors</p>
@@ -140,8 +142,7 @@ const Page = () => {
                 </div>
 
                 <div className='w-full flex-col w-3/4'>
-                  {/* <div className='flex justify-between'>
-                    <div>{(list != undefined) ? '' : 'loading '}items...</div>
+                  <div className='flex justify-end pb-3'>
                     <div className=''>
                       <div className='inline mr-2'>sort by Price: </div>
                       <select name="price_sort" id="price_sort">
@@ -150,8 +151,8 @@ const Page = () => {
                         <option value="high">from the Highest</option>
                       </select>    
                     </div>
-                  </div>   */}
-                  <div className='flex justify-center last-of-type:justify-start flex-wrap gap-4 pl-4'>
+                  </div>  
+                  <div className='flex justify-center last-of-type:justify-start flex-wrap gap-8 pl-4'>
                     <Products limit={count} brands={brandsArray} colors={colorsArray} types={typesArray} minPrice={minPrice} maxPrice={maxPrice} aaa="aaa"/>
                     <div style={{ display: 'none' }}>
                       <Products limit={count + 4} brands={brandsArray} colors={colorsArray} types={typesArray} minPrice={minPrice} maxPrice={maxPrice} aaa="aaa"/>
