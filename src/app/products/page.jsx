@@ -1,5 +1,5 @@
 'use client'
-import React, {useEffect, useState } from 'react';
+import React, {useEffect, useRef, useState } from 'react';
 import useGetAllBrands from 'src/app/hooks/useGetAllBrands.js';
 import Products from './Products';
 import { ToastContainer, toast } from 'react-toastify';
@@ -8,7 +8,7 @@ import axios from 'axios';
 import useSWR from 'swr';
 import { useNumOfProductInCart } from '../context/NumberOfProductInCartContext';
 
-// const data_sort =
+// const da	ta_sort =
 // data.sort((a, b) => (a.price > b.price) ? 1 : (a.price === b.price) ? ((a.first_name > b.first_name) ? 1 : -1) : -1 );
 
 const Page = () => {
@@ -93,10 +93,10 @@ const Page = () => {
                       /> Classic</label>
                   </div>
 
-                  <div className={styles.slidecontainer}>
+                  {/* <div className={styles.slidecontainer}>
                     <input onInput={onInputHandle} type="range" min="1" max="50000" value={priceRange} className={styles.slider} id='myRange' />
                     <p>Value: <span id="demo">{priceRange}</span></p>
-                  </div>                  
+                  </div>                   */}
                 </div>
 
                 <div className=' flex-col w-3/4'>
