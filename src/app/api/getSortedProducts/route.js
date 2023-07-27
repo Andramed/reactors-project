@@ -1,4 +1,5 @@
 import { connectToDatabase, client } from '@/app/hooks/useConectDB';
+
 import { ObjectId } from 'mongodb';
 import { NextURL } from 'next/dist/server/web/next-url';
 import { NextResponse } from 'next/server';
@@ -6,16 +7,17 @@ import { parse } from 'url';
 
 
 export  async function GET(req, res) {
-  const  {query}  =  parse(req.url, true);
-  const valueArr = Object.values(query);
-  const valueArrObjID = valueArr.map((val) => new ObjectId(val));
-  console.log(valueArrObjID);
-
-	const  entries = Object.entries(query);
-	let	[key, value] = entries[0];
-	let  operator = key.slice(key.indexOf('[') + 1, key.indexOf(']'));
-	console.log('Valoarea parametrului de query:', {valueArr, operator});
-	console.log(value, 'ss');
+	const  {query}  =  parse(req.url, true);
+	const valueArr = Object.values(query);
+	const valueArrObjID = valueArr.map((val) => new ObjectId(val));
+	console.log(valueArrObjID);
+  
+	  const  entries = Object.entries(query);
+	  let	[key, value] = entries[0];
+	  let  operator = key.slice(key.indexOf('[') + 1, key.indexOf(']'));
+	  console.log('Valoarea parametrului de query:', {valueArr, operator});
+	  console.log(value, 'ss');
+	
 
 	
 		try {

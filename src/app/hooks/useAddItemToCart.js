@@ -1,73 +1,43 @@
 'use client'
 import axios from 'axios';
-import { useEffect, useRef, useState } from 'react';
+import { useState,  } from 'react';
+
+
+
+import {  toast } from 'react-toastify';
+import { useSWRConfig } from 'swr';
+import { useNumOfProductInCart } from '../context/NumberOfProductInCartContext';
 
 
 export const useAddItemToCart = () => {
 	
-	const [message, setMessage] = useState('product not added to cart');
-	const [idItem, setIdItem] = useState([]);
-	let [item, setItem] = useState([]);
-	const [previous, setPrevious] = useState([]);
+	const {mutate} = useSWRConfig();
+	const {numOfProductInCart, setNumOfProductInCart} = useNumOfProductInCart();
+	const [product, setProduct] =useState({})
 
-	const getIdItem = (parentRef) => {
-		setIdItem((previousId) => [...previousId, parentRef.id] );
+	const getProductToCart = (product) => {
+		console.log(product);
+		const fetcher = async (url) => await axios.post(url, JSON.stringify(product), {
+			headers: {
+				"Content-type": "application/json"
+			}
+		}).then((res) => {
+			res.data.index == 0 ? toast.warning('this product present in cart'): 
+			(setProduct(res.data.data), setNumOfProductInCart(res.data.numberOfDocuments), toast.success('added to cart'));
+		});
+		mutate('api/cart_user_guest', fetcher('api/cart_user_guest'))
 	}
-	useEffect(() => {
-		const getSortedProducts = async () => {
-			
-		  try {
-			const response = await axios.get('/api/getSortedProducts', {
-			  params: {
-				param: {_id: idItem},
-			  },
-			  headers: {
-				'Cache-Control': 'no-store',
-			  },
-			});
-			setItem(response.data.collectionData)
-		  } catch (error) {
-			console.log('Error loading documents: ', error);
-		  }
-		};
-		
-	idItem.length > 0? getSortedProducts() : null
-	}, [idItem])
 	
-	useEffect(()=>{
-		const previousItem = localStorage.getItem('item');
-		
-		if (previousItem) {
-			console.log(JSON.parse(previousItem));
-			setPrevious((rest) => [...rest, JSON.parse(previousItem)])
-			console.log('previous o fost obtinut');
-		}
-		
-	}, []);
-	useEffect(() => {
-		const allItems = localStorage.getItem('allItem');
-		if (allItems) {
-			console.log(JSON.parse(allItems));
-			setPrevious((rest) => [...rest, JSON.parse(allItems)]);
-		}
-	}, [])
+	const deleteProductFromCart = (idItem) => {
+		const fetcher = async (url) => await axios.delete(url, idItem, {
+			headers: {
+				"Content-type": "application/json"
+			}
+		}).then((res) => res.data);
+		mutate('api/cart_user_guest', fetcher('api/cart_user_guest'))
+	}
 
-	// inca o cerere all items sa combin ce era in allItems + item (curent)
-	console.log(previous);
-	useEffect(()=> {
-		if (previous.length>0) {
-			localStorage.setItem('allItem', JSON.stringify(previous));
-			console.log('previous o fost salvat');
-		}
-	}, [previous])
-
-	useEffect(() => {
-		console.log(item.length);
-		
-		if (item.length>0) {
-			localStorage.setItem('item', JSON.stringify(item));
-			console.log('noul item sa salvat');
-		}
-	}, [item])
-	return {getIdItem, message, idItem, item}
+	return { getProductToCart, deleteProductFromCart, product, numOfProductInCart}
 }
+
+

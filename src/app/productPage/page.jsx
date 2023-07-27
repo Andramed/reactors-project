@@ -15,28 +15,32 @@ function ProductPage() {
   const [product, setProduct] = useState();
   const { getIdItem } = useAddItemToCart();
 
-  // console.log(product)
+ 
+
   const [mainPicture, setMainPicture] = useState(0);
 
-  useEffect(() => {
-    const itemLocal = sessionStorage.getItem("item");
-    setProduct(JSON.parse(itemLocal));
-  }, []);
-  
-   
-      const {state, handleCounter, handleMemory, handleRam} = useSetPrice(product)
-    
-  
-  
+		useEffect(() => {
+			const itemLocal = sessionStorage.getItem('item');
+			setProduct(JSON.parse(itemLocal));
+		}, [])
+		
+		if(product){
+			console.log(product, 'pageproduct');
 
-
-  if (!product) {
-    return
-   
-    <h1>Loading...</h1>;
+		}
+		
+		if(product) {
+			console.log(Object.entries(product.color_image)[0][1]);
+		}
+  if (!product ) { 
+	return <h1>Loading</h1>;
   } else {
     return (
-      <div className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+		
+		// componenta IMAGE, 
+		// component  Propreties
+      <div  className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8 product">
+		
         <span className="self-start ml-10">
           <button className="text-gray-300 hover:text-red-500">
             <HeartIcon className="w-8 h-8" />
@@ -46,17 +50,17 @@ function ProductPage() {
           <div className="md:w-1/2 lg:w-1/3 flex flex-col items-center mb-6">
             <div className="w-auto h-56 sm:h-72 lg:h-96 overflow-hidden">
               <img
-                src={Object.entries(product.color_image)[0][1][mainPicture]}
+                src={Object.entries(product.color_image)[0][1][mainPicture]} // aici trebui un filtru care se privesasca daca este array // sau obiect 
+				// sau string
+				// src={product.color_image.prima culoare[mainPicture]} metoda pentru iterare a obiectelor
                 className="object-contain w-full h-full"
                 alt="mainPicture"
               />
             </div>
             <div className="mt-6 flex space-x-2">
-              {Object.entries(product.color_image)[0][1]
-                .slice(
-                  Object.entries(product.color_image)[0][1],
-                  Object.entries(product.color_image)[0][1].length
-                )
+              {Object.entries(product.color_image)[0][1] // prima care o gaseste color_iamge  key, value
+                .slice(Object.entries(product.color_image)[0][1], Object.entries(product.color_image)[0][1].length) // slice(0, 4) 
+				// prima vlaoare la slice arr[0]
                 .map((color_image, index) => (
                   <button
                     key={index}
@@ -162,18 +166,22 @@ function ProductPage() {
                     ))}
                   </select>
                 </div>
+                <div ref={parentRef} id={product._id} className="flex-1">
+                  <button
+
+                    type="button"
+                    className="w-full py-2 px-4 inline-flex items-center justify-center rounded-md bg-yellow-500 text-base text-white font-semibold uppercase whitespace-nowrap hover:bg-yellow-600"
+                    onClick={() => getIdItem(parentRef.current)}
+                  >
+                    <ShoppingBagIcon className="w-6 h-6 mr-2" />
+                    Add to Cart
+                  </button>
+                </div>
               </div>
-              <span className="text-3xl font-bold">{product.price} lei</span>
-              <div className="flex-1">
-                <button
-                  type="button"
-                  className="w-25% py-2 px-4 inline-flex items-center justify-center rounded-md bg-yellow-500 text-base text-white font-semibold uppercase whitespace-nowrap hover:bg-yellow-600"
-                  onClick={() => getIdItem()}
-                >
-                  <ShoppingBagIcon className="w-6 h-6 mr-2" />
-                  Add to cart
-                </button>
-              </div>
+              {/* pret */}
+              <span className="text-3xl font-bold">
+                {product.price} lei
+              </span>
             </div>
           </div>
         </div>

@@ -2,28 +2,18 @@ import {  useEffect, useReducer, useRef, useState } from 'react';
 
 const useSetPrice = (product) => {
     
-  console.log(product)
+  
     const previousSelectedRefMemory = useRef(null);
     const previousSelectedRefRam = useRef(null)
-    let initialState 
-    // if (product) {
-         initialState = {
-            price: 0,
-            selectedMemory: 0,
-            selectedRam: 0, 
-            counter: 1,
-            
-        // } else {
-            //  initialState = {
-            //     price: 0,
-            //     selectedMemory: 100,
-            //     selectedRam: 100, 
-            //     counter: 1,
-                
-            // }
-        // }
+
+    const initialState = {
+        price: product.price,
+        selectedMemory: product.memory[0],
+        selectedRam: product.ram[0], 
+        counter: 1,
+		
     }
-console.log(product)
+
     const handleMemory = (e) => { //trebuie returnata
 			
             dispatch({
@@ -49,8 +39,7 @@ console.log(product)
     }
 
     const handleCounter = (e) => { //trebuie returnata
-        // console.log('ai apasat pe minus');
-    console.log(e.currentTarget.value);
+    
         dispatch({
             type: 'count',
             value: e.currentTarget.dataset.value
@@ -144,9 +133,9 @@ console.log(product)
                     console.log('primul if ram');
                     let newPrice
                         if (previousSelectedRefRam.current != updatedSelectedRam) {
-                             newPrice = (price - (price - product.price * counter))  ; 
+                             newPrice = (price - (price - product.price * counter))  ;  // aflu diferenta
                             console.log(newPrice);
-                            newPrice = newPrice + Number(action.id) * 500 * counter
+                            newPrice = newPrice + Number(action.id)  * 500 * counter
                         } else {
                             let dif = price - product.price * counter ; console.log(dif);
                             newPrice = (price - (price - product.price * counter)) + dif ; 

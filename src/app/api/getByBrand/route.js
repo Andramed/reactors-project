@@ -20,7 +20,7 @@ export  async function GET(req, res) {
 			let collectionData = await colection.find({}).toArray();
 			switch (operator) {
 				case 'brand':
-					collectionData = await colection.find({[operator]: value}).collation({ locale: "en", strength: 2 }).toArray();
+					collectionData = await colection.find({[operator]: value }).collation({ locale: "en", strength: 2 }).toArray();
 					break;
 				case 'price':
 					if (value != Number) {
