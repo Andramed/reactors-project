@@ -1,14 +1,11 @@
 'use client'
 import React, { useState, useRef } from 'react';
 import MultiRangeSlider from "multi-range-slider-react";
-import useGetAllBrands from 'src/app/hooks/useGetAllBrands.js';
 import useGetAllColors from 'src/app/hooks/useGetAllColors.js';
-import Products from './Products';
-// import styles  from 'src/app/products/range.module.css';
+import Products from 'src/app/products/Products.jsx';
 
-
-// const data_sort =
-// data.sort((a, b) => (a.price > b.price) ? 1 : (a.price === b.price) ? ((a.first_name > b.first_name) ? 1 : -1) : -1 );
+import axios from 'axios';
+import useSWR from 'swr';
 
 const Page = () => {
   const [minPrice, setMinPrice] = useState(0);
@@ -16,12 +13,10 @@ const Page = () => {
   const [count, setCount ] = useState(8);
   const [brandsArray, setBrandsArray] = useState([]);
   const [colorsArray, setColorsArray] = useState([]);
-  const [typesArray, setTypesArray] = useState([]);
   const [sortPrice, setSortPrice] = useState('');
   
   const brandsCheck = useRef([]);
   const colorsCheck = useRef([]);
-  const typesCheck = useRef([]);
 
 
   const handleInput = (e) => {
@@ -60,21 +55,14 @@ const Page = () => {
     }
   };  
 
-  const handleChangeType = (e) => {
-    if (e.target.checked === true){
-      typesCheck.current.push(e.target.id);
-      setTypesArray([...typesCheck.current]);
-    } else {
 
-      const index = typesCheck.current.indexOf(e.target.id);      
-      const newArray = typesCheck.current.splice(index, 1);
-      setTypesArray([...typesCheck.current]);
-    }
-  };  
+  const fetcher = async (url) => await axios.get(url).then((res) => res.data);
+  const { data, error } = useSWR(`/api/getAllBrands?type=classic`, fetcher);     
 
-   
-  const brands = useGetAllBrands();
+  const brands = data;//useGetAllBrands();
   const colors = useGetAllColors();
+
+  // console.log(window.location.href); // get last value after / 
     
 
     return (
@@ -85,7 +73,7 @@ const Page = () => {
                   <p>Filters: </p>
                   <div className='border rounded px-2 py-2 flex flex-col text-xs gap-1'>
                     <p>Brands</p>
-                    {
+                    { (brands)?
                       brands.map((brand,index) => (
                       <label key={index}><input
                         type="checkbox"
@@ -93,24 +81,10 @@ const Page = () => {
                         label={brand}
                         onChange={handleChangeBrand}
                       /> {brand}</label>
-                    ))}
+                    )) : null
+                  }
                   </div>
-                  <div className='border rounded px-2 py-2 flex flex-col text-xs gap-1'>
-                    <p>Type</p>
-                      <label><input
-                        type="checkbox"
-                        id="smart"
-                        label="smart"
-                        onChange={handleChangeType}
-                      /> Smart</label>
-                      <label><input
-                        type="checkbox"
-                        id="classic"
-                        label="classic"
-                        onChange={handleChangeType}
-                      /> Classic</label>
-                  </div>
-
+                  
                   <div className='border rounded px-2 py-2 text-xs gap-1'>
                     <MultiRangeSlider
                       min={0}
@@ -161,9 +135,9 @@ const Page = () => {
                     </div>
                   </div>  
                   <div className='flex justify-center last-of-type:justify-start flex-wrap gap-8 pl-4'>
-                    <Products limit={count} brands={brandsArray} colors={colorsArray} types={typesArray} minPrice={minPrice} maxPrice={maxPrice} sortPrice={sortPrice}/>
+                    <Products limit={count} brands={brandsArray} colors={colorsArray} types='classic' minPrice={minPrice} maxPrice={maxPrice} sortPrice={sortPrice}/>
                     <div style={{ display: 'none' }}>
-                      <Products limit={count + 4} brands={brandsArray} colors={colorsArray} types={typesArray} minPrice={minPrice} maxPrice={maxPrice} sortPrice={sortPrice}/>
+                      <Products limit={count + 4} brands={brandsArray} colors={colorsArray} types='classic' minPrice={minPrice} maxPrice={maxPrice} sortPrice={sortPrice}/>
                     </div>
                   </div>
                   <footer>

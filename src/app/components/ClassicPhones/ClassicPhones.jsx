@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function ClassicPhones() {
     return ( 
     <div className='w-full bg-white flex'>
@@ -9,7 +11,9 @@ export default function ClassicPhones() {
                 Classic Phones
             </h2>
             <p> - yes, they are still out there</p>
-            <button className='bg-btn-color px-8 py-2 text-sm rounded w-9.5 h-3.2'>Discover</button>
+            <Link href={"/classicPhones"}>
+                <button className='bg-btn-color px-8 py-2 text-sm rounded w-9.5 h-3.2'>Discover</button>
+            </Link>
         </div>        
     </div>);
 }

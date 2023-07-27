@@ -11,11 +11,14 @@ export  async function GET(req, res) {
         const types = req.nextUrl.searchParams.get("types");
         const minPrice = 1 * req.nextUrl.searchParams.get("minPrice");
         const maxPrice = 1 * req.nextUrl.searchParams.get("maxPrice");
+        const sortPrice = 1 * req.nextUrl.searchParams.get("sortPrice");
         
 
         const brandsArray = brands.split(",");
         const typesArray = types.split(",");
         const colorsArray = colors.split(",");
+        const sortObject = {};
+        if (sortPrice) {sortObject.price = sortPrice};
 
         try {
             await connectToDatabase();
@@ -40,35 +43,35 @@ export  async function GET(req, res) {
 
             if (brands == '' && types == '' && colors == ''){
              
-                data = await collection.find({$and: [ { price: { $lte : maxPrice } }, { price : { $gte: minPrice } } ]}).limit(limit_entries).toArray();
+                data = await collection.find({$and: [ { price: { $lte : maxPrice } }, { price : { $gte: minPrice } } ]}).limit(limit_entries).sort(sortObject).toArray();
 
             } else if (brands != '' && types == '' && colors == '') {
              
-                data = await collection.find({price: {$gte: minPrice, $lte: maxPrice}, brand: { $in: brandsArray }}).collation({ locale: "en", strength: 2 }).limit(limit_entries).toArray();
+                data = await collection.find({price: {$gte: minPrice, $lte: maxPrice}, brand: { $in: brandsArray }}).collation({ locale: "en", strength: 2 }).sort(sortObject).limit(limit_entries).toArray();
 
             } else if (brands == '' && types != '' && colors == '') {
              
-                data = await collection.find({$and: [ { price: { $lte : maxPrice } }, { price : { $gte: minPrice } } ], type: { $in: typesArray}}).collation({ locale: "en", strength: 2 }).limit(limit_entries).toArray();
+                data = await collection.find({$and: [ { price: { $lte : maxPrice } }, { price : { $gte: minPrice } } ], type: { $in: typesArray}}).collation({ locale: "en", strength: 2 }).limit(limit_entries).sort(sortObject).toArray();
 
             } else if (brands != '' && types != '' && colors == '') {
              
-                data = await collection.find({price: {$gte: minPrice, $lte: maxPrice}, brand: { $in: brandsArray }, type: { $in: typesArray}}).collation({ locale: "en", strength: 2 }).limit(limit_entries).toArray();
+                data = await collection.find({price: {$gte: minPrice, $lte: maxPrice}, brand: { $in: brandsArray }, type: { $in: typesArray}}).collation({ locale: "en", strength: 2 }).limit(limit_entries).sort(sortObject).toArray();
 
             }else if (brands == '' && types == '' && colors != '') {
              
-                data = await collection.find({$or: colorExistence, $and: [ { price: { $lte : maxPrice } }, { price : { $gte: minPrice } }]}).limit(limit_entries).toArray();
+                data = await collection.find({$or: colorExistence, $and: [ { price: { $lte : maxPrice } }, { price : { $gte: minPrice } }]}).limit(limit_entries).sort(sortObject).toArray();
 
             } else if (brands != '' && types == '' && colors != '') {
              
-                data = await collection.find({$or: colorExistence, $and: [ { price: { $lte : maxPrice } }, { price : { $gte: minPrice } } ], brand: { $in: brandsArray }}).collation({ locale: "en", strength: 2 }).limit(limit_entries).toArray();
+                data = await collection.find({$or: colorExistence, $and: [ { price: { $lte : maxPrice } }, { price : { $gte: minPrice } } ], brand: { $in: brandsArray }}).collation({ locale: "en", strength: 2 }).limit(limit_entries).sort(sortObject).toArray();
 
             } else if (brands == '' && types != '' && colors != '') {
              
-                data = await collection.find({$or: colorExistence, $and: [ { price: { $lte : maxPrice } }, { price : { $gte: minPrice } } ], type: { $in: typesArray}}).collation({ locale: "en", strength: 2 }).limit(limit_entries).toArray();
+                data = await collection.find({$or: colorExistence, $and: [ { price: { $lte : maxPrice } }, { price : { $gte: minPrice } } ], type: { $in: typesArray}}).collation({ locale: "en", strength: 2 }).limit(limit_entries).sort(sortObject).toArray();
                 
             } else if (brands != '' && types != '' && colors != '') {
         
-                data = await collection.find({$or: colorExistence,  $and: [ { price: { $lte : maxPrice } }, { price : { $gte: minPrice } } ], brand: { $in: brandsArray }, type: { $in: typesArray} }).collation({ locale: "en", strength: 2 }).limit(limit_entries).toArray();
+                data = await collection.find({$or: colorExistence,  $and: [ { price: { $lte : maxPrice } }, { price : { $gte: minPrice } } ], brand: { $in: brandsArray }, type: { $in: typesArray} }).collation({ locale: "en", strength: 2 }).limit(limit_entries).sort(sortObject).toArray();
 
             }
             
