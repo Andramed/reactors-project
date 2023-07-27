@@ -6,22 +6,22 @@ const useSetPrice = (product) => {
     const previousSelectedRefMemory = useRef(null);
     const previousSelectedRefRam = useRef(null)
     let initialState 
-    if (product) {
+    // if (product) {
          initialState = {
-            price: product.price,
-            selectedMemory: product.memory,
-            selectedRam: product.ram, 
+            price: 0,
+            selectedMemory: 0,
+            selectedRam: 0, 
             counter: 1,
             
-        } else {
-             initialState = {
-                price: 0,
-                selectedMemory: 100,
-                selectedRam: 100, 
-                counter: 1,
+        // } else {
+            //  initialState = {
+            //     price: 0,
+            //     selectedMemory: 100,
+            //     selectedRam: 100, 
+            //     counter: 1,
                 
-            }
-        }
+            // }
+        // }
     }
 console.log(product)
     const handleMemory = (e) => { //trebuie returnata
