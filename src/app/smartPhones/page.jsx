@@ -72,7 +72,7 @@ const Page = () => {
   (data)? data.forEach((item)=>{colors.push(item)}): null;
   }
 
-  console.log(window.location.href); // get last value after / 
+  // console.log(window.location.href); // get last value after / 
     
 
     return (
