@@ -10,7 +10,7 @@ export default function Products ({ limit ,colors , brands, types, minPrice, max
 
     return ( <>
      { (data)? data.map((item,index) => {
-                return ( <Product key={index} item={item} />)}) 
+                return ( <Product key={index} item={item} showElements={1}/>)}) 
               :"Loading products..."
         } </> )
   }

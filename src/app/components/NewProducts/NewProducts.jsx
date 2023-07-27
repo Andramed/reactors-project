@@ -20,7 +20,7 @@ export default function NewProducts() {
             {   
                 (data) ?
                 data.map((item,index)=>{
-                    return <Product key={index} item={item} />
+                    return <Product key={index} item={item} showElements={1}/>
                 }) : null
             }            
             </div>
