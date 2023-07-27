@@ -1,12 +1,23 @@
 import { connectToDatabase, client } from '@/app/hooks/useConectDB';
 import { NextResponse } from 'next/server';
-export async function GET() {
+export async function GET(req,res) {
+
+	const query = {};
+    const type = req.nextUrl.searchParams.get("type");
+
+	if (type == "classic") {
+		query.type = "classic"}
+	else if (type == "smart") {
+		query.type = "smart"};
+
+
 	try {
 		await connectToDatabase();
 		const collection = client.db('Top_Phone').collection('Phones');
 
 		let collectionData = 
         await collection.aggregate([
+			{$match:query},
             {$project: { result: { $objectToArray: "$color_image"} }},
             {$unwind: "$result"},
             {$group: {_id:'$result.k'}}]).toArray();

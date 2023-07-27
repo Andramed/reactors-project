@@ -8,8 +8,6 @@ export async function GET(req, res) {
 	if (type == "classic") {query.type = "classic"}
 	else if (type == "smart") {query.type = "smart"};
 
-	console.log(query);
-
 	try {
 		await connectToDatabase();
 		const collection = client.db('Top_Phone').collection('Phones');

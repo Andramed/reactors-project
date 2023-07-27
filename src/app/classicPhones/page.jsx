@@ -55,12 +55,22 @@ const Page = () => {
     }
   };  
 
-
+  let brands = [];
+  {
+    const fetcher = async (url) => await axios.get(url).then((res) => res.data);
+    const { data, error } = useSWR(`/api/getAllBrands?type=classic`, fetcher);     
+    
+    (data)? data.forEach((item)=>{brands.push(item)}): null;
+  }
+  
+  let colors = [];
+  {
   const fetcher = async (url) => await axios.get(url).then((res) => res.data);
-  const { data, error } = useSWR(`/api/getAllBrands?type=classic`, fetcher);     
-
-  const brands = data;//useGetAllBrands();
-  const colors = useGetAllColors();
+  const { data, errorColors } = useSWR(`/api/getAllColors?type=classic`, fetcher);       
+  
+  (data)? data.forEach((item)=>{colors.push(item)}): null;
+  }
+  
 
   // console.log(window.location.href); // get last value after / 
     
@@ -112,14 +122,15 @@ const Page = () => {
                   </div>
                   <div className='border rounded px-2 py-2 flex flex-col text-xs gap-1'>
                     <p>Colors</p>
-                    {colors.map((color,index) => (
+                    { (colors)? 
+                      colors.map((color,index) => (
                       <label key={index}><input
                         type="checkbox"
-                        id={color}
-                        label={color}
+                        id={color["_id"]}
+                        label={color["_id"]}
                         onChange={handleChangeColor}
-                      /> {color}</label>
-                    ))}                    
+                      /> {color["_id"]}</label>
+                    )) : null}                    
                   </div>    
                 </div>
 
