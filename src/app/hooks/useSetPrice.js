@@ -39,8 +39,7 @@ const useSetPrice = (product) => {
     }
 
     const handleCounter = (e) => { //trebuie returnata
-        // console.log('ai apasat pe minus');
-    // console.log(e.currentTarget.dataset.value);
+    
         dispatch({
             type: 'count',
             value: e.currentTarget.dataset.value
@@ -134,9 +133,9 @@ const useSetPrice = (product) => {
                     console.log('primul if ram');
                     let newPrice
                         if (previousSelectedRefRam.current != updatedSelectedRam) {
-                             newPrice = (price - (price - product.price * counter))  ; 
+                             newPrice = (price - (price - product.price * counter))  ;  // aflu diferenta
                             console.log(newPrice);
-                            newPrice = newPrice + Number(action.id) * 500 * counter
+                            newPrice = newPrice + Number(action.id)  * 500 * counter
                         } else {
                             let dif = price - product.price * counter ; console.log(dif);
                             newPrice = (price - (price - product.price * counter)) + dif ; 

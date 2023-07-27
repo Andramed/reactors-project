@@ -2,15 +2,22 @@
 import { useAddItemToCart } from '@/app/hooks/useAddItemToCart';
 import Language from "../SignIn";
 import { useEffect, useState } from 'react';
-import { CartItemProvider, useCart } from '@/app/hooks/CartItemContext';
-
+import { CartItemProvider, useCart } from '@/app/hooks/useCartItemContext';
+import useSWR from 'swr'
+import { useNumOfProductInCart } from '@/app/context/NumberOfProductInCartContext';
+import axios from 'axios';
 
 
 export const Header = () => {
-	const {numCartItem} = useCart()
+	
+	
+	const {numOfProductInCart} = useNumOfProductInCart()
+ 	console.log(numOfProductInCart);
+	console.log('redeseneaza');
+
     return (
 		
-		<CartItemProvider>
+	
 
 				<div className="  flex w-full h-16 text-xs xxs:text-base md:text-sm lg:text-base gap-48 max-[1248px]:gap-0 px-5 lg:px-10 bg-header-bg text-white  justify-between items-center  ">
 							<div className=" lg:flex items-center gap-2 md:gap-4 md:w-[35%]">
@@ -33,11 +40,13 @@ export const Header = () => {
 										<img src="/imgHeader/heart.svg" alt="heart" />
 										<p>Wishlist</p>
 									</div>
-									<div className=" gap-1 xxs:gap-2 flex ml-2 xxs:ml-4 items-center ">
-										<img src="/imgHeader/shop.svg" alt="shop" />
-										<span>{numCartItem}</span>
-										<a href="/cart">Cart</a>
-									</div>
+									
+										<div className=" gap-1 xxs:gap-2 flex ml-2 xxs:ml-4 items-center ">
+											<img src="/imgHeader/shop.svg" alt="shop" />
+											<span>{numOfProductInCart}</span>
+											<a href="/cart">Cart</a>
+										</div>
+									
 									<div className=" hidden xs:flex ml-2 xs:ml-4">
 										<Language/>
 									</div>
@@ -46,7 +55,7 @@ export const Header = () => {
 						</div>
 
 
-		</CartItemProvider>
+		
 		
     )
 }

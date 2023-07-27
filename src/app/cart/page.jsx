@@ -2,9 +2,28 @@
 import React, { useEffect, useState } from 'react'
 
 import { ItemCart } from './components/ItemCart';
-import PayWith from '../components/Footer/PayWith';
+
+import useSWR from 'swr'
+import axios from 'axios';
+import { useNumOfProductInCart } from '../context/NumberOfProductInCartContext';
+import { useAddItemToCart } from '../hooks/useAddItemToCart';
+const fetcher = async (url) => await axios.get(url).then((res)=> res.data)
 
 export default function Page() {
+	const [product, setProduct] = useState();
+	// const [numOfProductInCart, setNumOfProductInCart] = useState(0)
+	const {data, error} = useSWR('api/cart_user_guest', fetcher);
+	const {numOfProductInCart, setNumOfProductInCart} = useNumOfProductInCart()
+ 	useEffect(() => {
+		if (data) {
+			setNumOfProductInCart(data.numberOfDocuments);
+			setProduct(data.product)
+		}
+	}, [data])
+	const {deleteProductFromCart} = useAddItemToCart()
+		
+
+	
 	const [promocod, setPromocod] = useState(false);
 	const addPromocod = () => {
 		if (!promocod) {
@@ -13,20 +32,11 @@ export default function Page() {
 			setPromocod(false);
 		}
 	}
-	let [product, setProduct] = useState();
-	useEffect(() => {
-		const getLocalVar = () => {
-			const item = localStorage.getItem('item');
-			setProduct(JSON.parse(item));
-		};
-		getLocalVar()
-	}, []);
-		
-	// const day = Math.floor(Math.random() * 20)
 
 	return(
 		<>
-			<div className='flex justify-between px-20 gap-4 '>
+			{data ? (
+				<div className='flex justify-between px-20 gap-4 '>
 				<div className=' w-[70%] flex flex-col'>
 					<div className='flex'>
 						<div className=' w-[61%]'>Products</div>
@@ -34,21 +44,22 @@ export default function Page() {
 							<div>
 								<h3>Price</h3>
 							</div>
-
+	
 							<div>
 								<h3>Quantity</h3>
 							</div>
-
+	
 							<div>
 								<h3>Total</h3>
 							</div>
-
+	
 						</div>
 					</div>
 					{(product)? product.map((product) =>{
 						return <ItemCart 
 							key={product._id}  
-							product= {product}						
+							product= {product}
+							deleteProductFromCart={deleteProductFromCart}						
 							/>
 					}): <h1>loading</h1>}
 				</div>
@@ -57,7 +68,7 @@ export default function Page() {
 						<div className=' w-full p-2 bg-white'>
 						<ul className='flex w-full justify-between'>
 								<li>Total order to buy:</li>
-								<li>3</li> 
+								<li>{numOfProductInCart}</li> 
 							</ul>
 							<ul className='flex w-full justify-between'>
 								<li>Total price:</li>
@@ -87,7 +98,7 @@ export default function Page() {
 							</ul>
 							<button className=' bg-btn-color w-full p-2 my-3'>Continue to payment</button>
 						</div>
-
+	
 					
 					<div className='w-full p-5'>
 						<h4 className=' text-justify'>Order now and get your products</h4>
@@ -105,12 +116,13 @@ export default function Page() {
 							<div className='hover:bg-slate-400 p-4 flex justify-center items-center'><img className='h-10'  src="/imgFooter/Visa.svg" alt="visa" /></div>
 							<div className='hover:bg-slate-400 p-4 flex justify-center items-center'><img className='h-10' src="/imgFooter/Mastercard.svg" alt="masterCars" /></div>
 						</div>
-      				 </div>
+					   </div>
 				</div>
 			</div>
-			<button className=' bg-red-500 p-10' onClick={()=>{
-				localStorage.removeItem('item')
-			}}>delete local item</button>
+			): (<h1>loading</h1>)}
+			
+			
+			
 		</>
 	)
 

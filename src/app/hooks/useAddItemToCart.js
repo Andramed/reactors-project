@@ -1,75 +1,43 @@
 'use client'
 import axios from 'axios';
-import { useContext, useEffect, useRef, useState } from 'react';
-import { CartItemContext, useCart } from './CartItemContext';
+import { useState,  } from 'react';
+
+
+
+import {  toast } from 'react-toastify';
+import { useSWRConfig } from 'swr';
+import { useNumOfProductInCart } from '../context/NumberOfProductInCartContext';
 
 
 export const useAddItemToCart = () => {
 	
-	const {setNumCartItem} = useCart();
-	const [message, setMessage] = useState('product not added to cart');
-	const [idItem, setIdItem] = useState([]);
-	
-	let [itemCurent, setItemCurent] = useState([]);
-	const [itemPrevious, setItemPrevious] = useState([]);
-	
-	
-	
+	const {mutate} = useSWRConfig();
+	const {numOfProductInCart, setNumOfProductInCart} = useNumOfProductInCart();
+	const [product, setProduct] =useState({})
 
-	const getIdItem = (parentRef) => {
-		
-		console.log('add to cart');
-		console.log(parentRef.id);
-		
-		setIdItem((previousId) => [...previousId, parentRef.id] );
+	const getProductToCart = (product) => {
+		console.log(product);
+		const fetcher = async (url) => await axios.post(url, JSON.stringify(product), {
+			headers: {
+				"Content-type": "application/json"
+			}
+		}).then((res) => {
+			res.data.index == 0 ? toast.warning('this product present in cart'): 
+			(setProduct(res.data.data), setNumOfProductInCart(res.data.numberOfDocuments), toast.success('added to cart'));
+		});
+		mutate('api/cart_user_guest', fetcher('api/cart_user_guest'))
 	}
 	
-	useEffect(() => {
-		const previousItem = JSON.parse(localStorage.getItem('item'));
-		if (previousItem) {
-		  setItemPrevious(previousItem);
-		}
-	  }, []);
-	
-	
-	useEffect(() => {
-		const getSortedProducts = async () => {
-			
-		  try {
-			const response = await axios.get('/api/getSortedProducts', {
-			  params: {
-				param: {_id: idItem},
-			  },
-			  headers: {
-				'Cache-Control': 'no-store',
-			  },
-			});
-			// setItemCurent(response.data.collectionData);
-			setItemCurent((prevCurent) => [ ...response.data.collectionData]);
-			setItemCurent((prevCurent) => [...prevCurent, ...itemPrevious]);
-       		
-			
-		  } catch (error) {
-			console.log('Error loading documents: ', error);
-		  }
-		};
-		
-	idItem.length > 0 && getSortedProducts();
-	}, [idItem])
-	
+	const deleteProductFromCart = (idItem) => {
+		const fetcher = async (url) => await axios.delete(url, idItem, {
+			headers: {
+				"Content-type": "application/json"
+			}
+		}).then((res) => res.data);
+		mutate('api/cart_user_guest', fetcher('api/cart_user_guest'))
+	}
 
-	
-	useEffect(() => {
-		
-		if (itemCurent.length>0) {
-			localStorage.setItem('item', JSON.stringify(itemCurent));
-			console.log('noul item sa salvat');
-			setNumCartItem(itemCurent.length)
-		}
-	}, [itemCurent])
-	
-	
-	return {getIdItem, message, idItem, itemCurent }
+	return { getProductToCart, deleteProductFromCart, product, numOfProductInCart}
 }
 
 

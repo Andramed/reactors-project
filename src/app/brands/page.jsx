@@ -7,7 +7,7 @@ const Page = () => {
    
 
     
-    console.log(cartItem + 'from page Brands');
+  
 
     return (
         <div>
