@@ -1,37 +1,45 @@
-import { useEffect, useState, useRef} from 'react';
+import { useEffect, useRef, useState} from 'react';
 import { register } from 'swiper/element/bundle';
+import Product from '../Product';
 
 register();
 
 export default function Swiper(props) {
-
+ 
   const swiperRef = useRef(null);
-  const {
-    tabel,
-    ...rest
-  } = props;
+  const { tabel, ...rest } = props;
 
-  const swiperArray =
-  tabel.map((brand) => {   
-         return <swiper-slide key={brand.model}>
-                  <img src={brand.img} />
-                  <p>{brand.model}</p>
-                </swiper-slide> ;});
+  const swiperArray = (tabel !== undefined) ?
+  tabel.map((item,index) => {   
+         return <swiper-slide key={index}>
+                  {/* <div className='flex flex-col justify-center text-sm px-3 py-2'>
+                     <img src={brand.url} /> 
+                    <div className=''>{item.brand}{item.model}</div>
+                    <div className='flex justify-between px-8'>
+                      <p className='flex space-between'>{item.price} lei</p>
+                      <button className='bg-yellow-300 px-1 py-1 '>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+                        </svg>
+                      </button>
+                    </div>
+                  </div> */}
+                  
+                  <Product item={item} />
 
+                </swiper-slide> ;}) : [] ;
 
   useEffect(() => {
-    const params = {     
-      ...rest
-    };
+    const params = { ...rest };
     Object.assign(swiperRef.current, params);
     swiperRef.current.initialize();
   }, []);
+
 
   return ( 
   	<div className='w-3/4'>
 	    <swiper-container 
 	    init="false" 
-
 	    autoplay = "true"
 	    loop = "true"
 	  
@@ -40,8 +48,8 @@ export default function Swiper(props) {
 	      nextEl: ".swiper-button-next",
 	    }}
 	    style={{
-	      "--swiper-navigation-color": "#974619",
-	      "--swiper-navigation-size": "10px"
+	      "--swiper-navigation-color": "yellow",
+	      "--swiper-navigation-size": "20px",
 	    }}  
 	    
 	    ref={swiperRef}>

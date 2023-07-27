@@ -23,8 +23,6 @@ export default function Page() {
 			[name]: valueArr,
 		  }));
 	} else if(value.includes(':h')) {
-		
-				
 				const getImageColorLink = () => {
 					let colorLinks = {}
 					const valueColorLink = value.split(',');
