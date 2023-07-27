@@ -37,3 +37,4 @@ export default function Product({item, getProductToCart, getProduct}) {
 
   </>)
 }
+
