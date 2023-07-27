@@ -1,4 +1,5 @@
-import BtnDiscover from "../Buttons1"
+import BtnDiscover from "../Buttons1";
+import Link from "next/link";
 
 export default function OurSmartphones (){
     return(
@@ -8,7 +9,9 @@ export default function OurSmartphones (){
 				<h1 className=' text-6xl'>Our Smartphones</h1>
 				<h5 className=' text-2xl'> Designed by Charles and Ray Eames, the plastic <br />
 				Eames chairs are true design icons of the 1950s.</h5>
-				<BtnDiscover/>
+				<Link href={"/smartPhones"}>
+					<BtnDiscover/>
+				</Link>
 			</div>
 			<div className="">
 				<img className='' src="/imgPage1/phone.jpg" alt="smart" />
