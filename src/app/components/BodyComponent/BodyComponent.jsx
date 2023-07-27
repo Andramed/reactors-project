@@ -11,7 +11,7 @@ import { CartNumProvider} from '@/app/context/NumberOfProductInCartContext'
 // import { CartNumProvider, useNumOfProductInCart } from './context/NumberOfProductInCartContext'
 
 export default function BodyComponent({children}) {
-
+	// console.log(props);
   return (
 	<div>
 		<CartNumProvider>
@@ -19,7 +19,7 @@ export default function BodyComponent({children}) {
 		<NavBar/>
 		<BlackLine/>
 			
-				{children}
+			{children}
 			
 		<Footer/>
 		</CartNumProvider>
