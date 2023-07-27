@@ -1,11 +1,14 @@
 'use client'
-import React, { useState, useRef } from 'react';
+import React, {useEffect, useRef, useState } from 'react';
 import useGetAllBrands from 'src/app/hooks/useGetAllBrands.js';
 import Products from './Products';
-import styles  from 'src/app/products/range.module.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import axios from 'axios';
+import useSWR from 'swr';
+import { useNumOfProductInCart } from '../context/NumberOfProductInCartContext';
 
-
-// const data_sort =
+// const da	ta_sort =
 // data.sort((a, b) => (a.price > b.price) ? 1 : (a.price === b.price) ? ((a.first_name > b.first_name) ? 1 : -1) : -1 );
 
 const Page = () => {
@@ -52,8 +55,6 @@ const Page = () => {
 
    
   const brands = useGetAllBrands();
-    
-
     return (
         <div className='pb-8 w-full flex justify-center items-center flex-col bg-white'>
             {/* <div className='w-full pl-36 py-3 bg-gray-500 text-white font-bold text-xs'>
@@ -92,13 +93,13 @@ const Page = () => {
                       /> Classic</label>
                   </div>
 
-                  <div className={styles.slidecontainer}>
+                  {/* <div className={styles.slidecontainer}>
                     <input onInput={onInputHandle} type="range" min="1" max="50000" value={priceRange} className={styles.slider} id='myRange' />
                     <p>Value: <span id="demo">{priceRange}</span></p>
-                  </div>                  
+                  </div>                   */}
                 </div>
 
-                <div className='w-full flex-col w-3/4'>
+                <div className=' flex-col w-3/4'>
                   {/* <div className='flex justify-between'>
                     <div>{(list != undefined) ? '' : 'loading '}items...</div>
                     <div className=''>
@@ -126,6 +127,20 @@ const Page = () => {
                   </footer>
                 </div>
 		    </div>
+			
+			
+			<ToastContainer
+				position="top-right"
+				autoClose={900}
+				hideProgressBar={true}
+				newestOnTop={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover='false'
+				theme="light"
+			/>
         </div>
     )
 }
