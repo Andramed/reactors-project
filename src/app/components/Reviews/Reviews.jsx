@@ -4,8 +4,8 @@ import Star from "./components/Star"
 
 export default function Reviews (){
     return (
-        <div className=" flex flex-col justify-center sm:justify-start items-center text-center sm:text-left px-10 pt-5"> 
-            <h1 className=" text-xl xs:text-2xl md:text-3xl lg:text-6xl font-bold py-4">What clients say about us </h1>
+        <div className=" flex flex-col justify-center sm:justify-start items-center text-center sm:text-left gap-6 px-10 py-10"> 
+            <h1 className=" text-xl xs:text-2xl md:text-3xl lg:text-5xl font-bold py-4">What clients say about us </h1>
             <div className=" sm:flex  gap-4 xxs:gap-4 xs:gap-6  ">
                 <div className=" lg:flex drop-shadow-2xl gap-4 sm:pt-6 lg:pt-0">
                 <div className=" flex flex-col">

@@ -7,7 +7,7 @@ export default function Fact() {
    <>
          {Object.entries(facts).map((fact, index) => {
             return (
-                <div className=' flex justify-around flex-col rounded-md w-80 h-60 text-justify p-6 gap- 4 shadow-xl bg-white ' key={index}>
+                <div className=' flex justify-around flex-col rounded-md w-80 h-60 text-justify p-6 gap- 4 shadow-xl overlay-white bg-white opacity-80 ' key={index}>
                    <div className=' font-bold text-xl'>
                         {fact[1][0]} 
                    </div>

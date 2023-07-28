@@ -1,9 +1,9 @@
 export default function PayWith () {
     return(
        <div className=" flex flex-col gap-2 "> 
-            <h5>Pay With</h5>
-            < div className=" xs:flex gap-2 ">
-                <div className=" flex gap-2 ">
+            <h5 className=" text-sm sm:text-lg lg:text-xl">Pay With</h5>
+            < div className=" sm:flex gap-2 ">
+                <div className=" flex justify-center items-center gap-2 pt-2 xs:pt-0 ">
                     <img src="/imgFooter/PayPal.svg" alt="paypal" />
                     <img src="/imgFooter/GooglePay.svg" alt="gpay" />
                     <img src="/imgFooter/Amex.svg" alt="amex" />

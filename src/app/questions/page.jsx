@@ -1,10 +1,7 @@
 'use client'
-import SendBtn from './components/SendBtn';
 import { useState } from 'react';
 import questions from '../questions/components/questions.json';
-console.log(Object.entries(questions));
-
-
+import FormData from './components/FormData';
 
 const Page = () => {
 	const [isAnswerSet, setSelectedAnswer] = useState(false);
@@ -59,25 +56,7 @@ const Page = () => {
 				</div>
 			</div>
 			<div>
-				
-				<div className=' flex flex-col gap-12'>
-					<h3 className=' font-semibold text-xl'>Do you have any questions?</h3>
-					<form type="reset">
-						<div className=' flex flex-col text-lg gap-2 bg-slate-50'>
-							<label> Name</label>
-							<input className='border-solid border-2 rounded' type="text" />
-							<label>Last Name</label>
-							<input className='border-solid border-2 rounded' type="text" />
-							<label> Email</label>
-							<input className='border-solid border-2 rounded' type="text" />
-							<label> Object</label>
-							<input className='border-solid border-2 rounded' type="text" />
-							<label> Message</label>
-							<input className='border-solid border-2 rounded mb-10' type="text" />
-							<SendBtn/>
-						</div>
-					</form>
-				</div>
+					<FormData/>
 			</div>
 		</div>
 

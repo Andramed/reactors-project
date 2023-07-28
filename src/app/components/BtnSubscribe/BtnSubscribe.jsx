@@ -1,5 +1,7 @@
 export default function Subscribe (){
     return(
-        <button className=" flex text-center items-center bg-btn-color w-9.5 h-3.2 px-8 py-2 my-2 text-sm rounded ">Subscribe</button>
-    )
+    <div className="  text-center pt-2 sm:pt-0" >
+        <button className="  bg-btn-color w-20 md:w-40 h-10 md:h-12 p-2  text-sm rounded ">Subscribe</button>
+    </div>     
+   )
 }
