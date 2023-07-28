@@ -1,17 +1,11 @@
 'use client'
-import React, {useEffect, useRef, useState } from 'react';
+import React, { useState, useRef } from 'react';
 import MultiRangeSlider from "multi-range-slider-react";
-import useGetAllBrands from 'src/app/hooks/useGetAllBrands.js';
 import useGetAllColors from 'src/app/hooks/useGetAllColors.js';
-import Products from './Products';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import Products from 'src/app/products/Products.jsx';
+
 import axios from 'axios';
 import useSWR from 'swr';
-import { useNumOfProductInCart } from '../context/NumberOfProductInCartContext';
-
-// const da	ta_sort =
-// data.sort((a, b) => (a.price > b.price) ? 1 : (a.price === b.price) ? ((a.first_name > b.first_name) ? 1 : -1) : -1 );
 
 const Page = () => {
   const [minPrice, setMinPrice] = useState(0);
@@ -19,12 +13,10 @@ const Page = () => {
   const [count, setCount ] = useState(8);
   const [brandsArray, setBrandsArray] = useState([]);
   const [colorsArray, setColorsArray] = useState([]);
-  const [typesArray, setTypesArray] = useState([]);
   const [sortPrice, setSortPrice] = useState('');
   
   const brandsCheck = useRef([]);
   const colorsCheck = useRef([]);
-  const typesCheck = useRef([]);
 
 
   const handleInput = (e) => {
@@ -63,32 +55,35 @@ const Page = () => {
     }
   };  
 
-  const handleChangeType = (e) => {
-    if (e.target.checked === true){
-      typesCheck.current.push(e.target.id);
-      setTypesArray([...typesCheck.current]);
-    } else {
+  let brands = [];
+  {
+    const fetcher = async (url) => await axios.get(url).then((res) => res.data);
+    const { data, error } = useSWR(`/api/getAllBrands?type=classic`, fetcher);     
+    
+    (data)? data.forEach((item)=>{brands.push(item)}): null;
+  }
+  
+  let colors = [];
+  {
+  const fetcher = async (url) => await axios.get(url).then((res) => res.data);
+  const { data, errorColors } = useSWR(`/api/getAllColors?type=classic`, fetcher);       
+  
+  (data)? data.forEach((item)=>{colors.push(item)}): null;
+  }
+  
 
-      const index = typesCheck.current.indexOf(e.target.id);      
-      const newArray = typesCheck.current.splice(index, 1);
-      setTypesArray([...typesCheck.current]);
-    }
-  };  
-
-   
-  const brands = useGetAllBrands();
-  const colors = useGetAllColors();
+  // console.log(window.location.href); // get last value after / 
     
 
     return (
         <div className='pb-8 w-full flex justify-center items-center flex-col bg-white'>
-            <div className='w-full h-12 pl-36 pt-2 bg-[#F9F6F2]'>Products</div>
+            <div className='w-full h-8 font-bold bg-gray-100'></div>
             <div className='w-full lg:pl-36 lg:pr-24 md:pl-36 md:pr-24 sm:px-16 pt-12 flex item-start text-base '>
                 <div className='min-w-max xxs:pl-2 pr-2 w-1/4 font-small flex flex-col gap-3'>
                   <p>Filters: </p>
                   <div className='border rounded px-2 py-2 flex flex-col text-xs gap-1'>
                     <p>Brands</p>
-                    {
+                    { (brands)?
                       brands.map((brand,index) => (
                       <label key={index}><input
                         type="checkbox"
@@ -96,24 +91,10 @@ const Page = () => {
                         label={brand}
                         onChange={handleChangeBrand}
                       /> {brand}</label>
-                    ))}
+                    )) : null
+                  }
                   </div>
-                  <div className='border rounded px-2 py-2 flex flex-col text-xs gap-1'>
-                    <p>Type</p>
-                      <label><input
-                        type="checkbox"
-                        id="smart"
-                        label="smart"
-                        onChange={handleChangeType}
-                      /> Smart</label>
-                      <label><input
-                        type="checkbox"
-                        id="classic"
-                        label="classic"
-                        onChange={handleChangeType}
-                      /> Classic</label>
-                  </div>
-
+                  
                   <div className='border rounded px-2 py-2 text-xs gap-1'>
                     <MultiRangeSlider
                       min={0}
@@ -141,14 +122,15 @@ const Page = () => {
                   </div>
                   <div className='border rounded px-2 py-2 flex flex-col text-xs gap-1'>
                     <p>Colors</p>
-                    {colors.map((color,index) => (
+                    { (colors)? 
+                      colors.map((color,index) => (
                       <label key={index}><input
                         type="checkbox"
-                        id={color}
-                        label={color}
+                        id={color["_id"]}
+                        label={color["_id"]}
                         onChange={handleChangeColor}
-                      /> {color}</label>
-                    ))}                    
+                      /> {color["_id"]}</label>
+                    )) : null}                    
                   </div>    
                 </div>
 
@@ -164,9 +146,9 @@ const Page = () => {
                     </div>
                   </div>  
                   <div className='flex justify-center last-of-type:justify-start flex-wrap gap-8 pl-4'>
-                    <Products limit={count} brands={brandsArray} colors={colorsArray} types={typesArray} minPrice={minPrice} maxPrice={maxPrice} sortPrice={sortPrice}/>
+                    <Products limit={count} brands={brandsArray} colors={colorsArray} types='classic' minPrice={minPrice} maxPrice={maxPrice} sortPrice={sortPrice}/>
                     <div style={{ display: 'none' }}>
-                      <Products limit={count + 4} brands={brandsArray} colors={colorsArray} types={typesArray} minPrice={minPrice} maxPrice={maxPrice} sortPrice={sortPrice}/>
+                      <Products limit={count + 4} brands={brandsArray} colors={colorsArray} types='classic' minPrice={minPrice} maxPrice={maxPrice} sortPrice={sortPrice}/>
                     </div>
                   </div>
                   <footer>
@@ -180,20 +162,6 @@ const Page = () => {
                   </footer>
                 </div>
 		    </div>
-			
-			
-			<ToastContainer
-				position="top-right"
-				autoClose={900}
-				hideProgressBar={true}
-				newestOnTop={false}
-				closeOnClick
-				rtl={false}
-				pauseOnFocusLoss
-				draggable
-				pauseOnHover='false'
-				theme="light"
-			/>
         </div>
     )
 }

@@ -25,7 +25,7 @@ export default function Swiper(props) {
                     </div>
                   </div> */}
                   
-                  <Product item={item} />
+                  <Product item={item} showElements={0} />
 
                 </swiper-slide> ;}) : [] ;
 

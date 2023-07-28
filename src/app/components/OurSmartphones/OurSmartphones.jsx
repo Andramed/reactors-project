@@ -1,4 +1,5 @@
-import BtnDiscover from "../Discover"
+import BtnDiscover from "../Discover";
+import Link from "next/link";
 
 export default function OurSmartphones (){
     return(
@@ -8,7 +9,9 @@ export default function OurSmartphones (){
 					<div className=" flex flex-col  bg-[#F9F6F2]  gap-2 xxs:gap-4 xs:gap-6 ">
 						<h1 className='text-base xs:text-xl md:text-3xl lg:text-5xl font-bold '>Our Smartphones</h1>
 						<h5 className=' text-xs xxs:text-sm  md:text-xl'> Designed by Charles and Ray Eames, the plastic <br /> Eames chairs are true design icons of the 1950s.</h5>
-						<BtnDiscover/>
+						<Link href={"/smartPhones"}>
+							<BtnDiscover/>
+						</Link>
 					</div>
 				</div>
 				<div className=" py-2 xs:py-4 ">

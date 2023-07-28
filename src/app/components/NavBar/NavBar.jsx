@@ -1,7 +1,13 @@
 'use client'
+import { Dropdown } from "rsuite";
+import "rsuite/dist/rsuite-no-reset.min.css";
+
 
 import Link from "next/link";
 import { useState } from 'react';
+
+// import "rsuite/dist/rsuite.min.css";
+
 
 export const NavBar = () => {
 	
@@ -34,11 +40,26 @@ export const NavBar = () => {
                 <Link className='hidden lg:flex link-navbar' href={"/questions"}>FAQ</Link>
                 <Link  className='hidden lg:flex link-navbar' href={"/contact"}>Contact</Link>
             </div>
-			<select  className=' link-navbar text-sm hidden xs:flex lg:text-base '> 
+			{/* <select  className=' link-navbar text-sm hidden xs:flex lg:text-base '> 
                     <option value="phone">All Categories</option>
                     <option value="smartphone">Smart Phone</option>
-                    <option value="classicphone">Classic Phone</option>
-            </select>
+                    <option value="classicphone">
+						Classic Phone
+					</option>
+            </select> */}
+			<div className=' link-navbar text-sm hidden xs:flex lg:text-base '>
+			<Dropdown title="All Categories"> 
+				<Dropdown.Item>
+                    Phone Types:
+                </Dropdown.Item>
+                <Dropdown.Item as="a" href="/classicPhones">
+                    Classic Phones
+                </Dropdown.Item>
+                <Dropdown.Item as="a" href="/smartPhones">
+                    Smart Phones
+                </Dropdown.Item>
+            </Dropdown>
+			</div>
 			<div className=' md:hidden  '>
 				<button>
 				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 17" strokeWidth={1.5} stroke="currentColor" className="w-6 h-10">
