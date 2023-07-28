@@ -1,18 +1,19 @@
-import Benefit from "./Benefit";
-
+import Benefit from "./Benefit"
 export default function OurBenefits () {
 
     return (
-       <div className="  bg-header-bg items-center text-white">
-         <h1 className=" flex justify-center text-5xl ">Our benefits !</h1>
-        <div className=''>
-            <div className=' flex justify-around '>
-                <Benefit img ={'/imgBenefits/hour.svg'} />
-                <Benefit img={'/imgBenefits/check.svg'} />
-                <Benefit img={'/imgBenefits/manufacturer.svg'}  />
-                <Benefit img={'/imgBenefits/star.svg'}  />
+        <div className=" flex flex-col bg-header-bg items-center text-center text-white py-8 my-2 px-10 gap-4">
+            <h1 className=" text-2xl xs:text-3xl md:text-4xl lg:text-5xl  py-4 sm:py-8">Our benefits !</h1>
+            <div className=' sm:flex gap-6'>
+                <div className="lg:flex ">
+                    <Benefit img ={'/imgBenefits/hour.svg'} />
+                    <Benefit img={'/imgBenefits/check.svg'} />
+                </div>
+                <div className=" lg:flex ">
+                    <Benefit img={'/imgBenefits/manufacturer.svg'}  />
+                    <Benefit img={'/imgBenefits/star.svg'}  />
+                </div>
             </div>
         </div>
-       </div>
     )
 }

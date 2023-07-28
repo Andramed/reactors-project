@@ -40,4 +40,3 @@ export const useAddItemToCart = () => {
 	return { getProductToCart, deleteProductFromCart, product, numOfProductInCart}
 }
 
-
