@@ -1,8 +1,6 @@
 import sgMail from '@sendgrid/mail';
 
-import { NextResponse, NextRequest } from "next/server";
-
-require("dotenv").config();
+import { NextResponse } from "next/server";
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 
@@ -28,17 +26,12 @@ export async function POST(req, res) {
 
     try {
         await sgMail.send(msg);
-        // res.status(200).send('Email sent successfully');
-        return NextResponse.json({ "success": "successfully" });
+        return NextResponse.json({ "success": "successfully sent email" });
     } catch (error) {
         console.error(error);
-        // res.status(500).send('Error sending email');
-        
-
         if (error.response) {
             console.log(error.response.body);
           }
-        //   res.status(400).json();    
-          return NextResponse.status(400).json({ status: "ERROR", message: error.message });
+          return NextResponse.json({ status: "ERROR", message: error.message });
     }
 };
