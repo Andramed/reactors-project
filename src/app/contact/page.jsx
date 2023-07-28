@@ -1,14 +1,9 @@
 'use client'
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import 'react-phone-number-input/style.css';
-import { useState } from "react";
 
 
 const Page = () => {
-
-    const [value, setValue] = useState();
-
     const {
             register,
             handleSubmit,
