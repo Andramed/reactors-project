@@ -2,12 +2,13 @@
 import { useAddItemToCart } from '@/app/hooks/useAddItemToCart';
 // import Cart from "./components/Cart";
 import WishList from "./components/WishList";
-import Language from "./components/SignIn";
 import { useEffect, useState } from 'react';
 import { CartItemProvider, useCart } from '@/app/hooks/useCartItemContext';
 import useSWR from 'swr'
 import { useNumOfProductInCart } from '@/app/context/NumberOfProductInCartContext';
 import axios from 'axios';
+import SignIn from '../SignIn';
+
 
 
 export const Header = () => {
@@ -50,7 +51,7 @@ export const Header = () => {
 										</div>
 									
 									<div className=" hidden xs:flex ml-2 xs:ml-4">
-										<Language/>
+										<SignIn/>
 									</div>
 								</div>
 							</div>
