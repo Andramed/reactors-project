@@ -1,6 +1,8 @@
 'use client'
 import { useAddItemToCart } from '@/app/hooks/useAddItemToCart';
-import Language from "../SignIn";
+// import Cart from "./components/Cart";
+import WishList from "./components/WishList";
+import Language from "./components/SignIn";
 import { useEffect, useState } from 'react';
 import { CartItemProvider, useCart } from '@/app/hooks/useCartItemContext';
 import useSWR from 'swr'

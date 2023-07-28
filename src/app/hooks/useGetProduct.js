@@ -9,14 +9,14 @@ const useGetProduct =  () => {
 		setItem(product)
 	}
 	useEffect(() => {	
-			
+			console.log('sa executat');	
 			sessionStorage.setItem('item', JSON.stringify(item))
 			
 	}, [item])
 
 	useEffect(() => {
 		if(item){
-			router.push('/productPage');
+			router.push('/product');
 		}
 	})
 	return {getProduct, item}
