@@ -14,20 +14,21 @@ export default function NewProducts() {
     console.log(data);
       
     return ( 
-        <div className='w-full py-14 px-16 flex justify-center items-center flex-col gap-2 bg-white'>
-            <h2 className='flex justify-center font-bold'>New in our Shop</h2>
-            <div className='flex text-xs gap-2 justify-center'>
-            {   
+        <div className='w-full py-20 px-16 flex justify-center items-center flex-col gap-2 bg-white'>
+                <h2 className='flex justify-center text-base xs:text-xl md:text-3xl lg:text-5xl font-bold'>New in our Shop</h2>
+                <div className='flex text-xs xxs:text-sm  md:text-xl gap-2 justify-center'>
+                {   
                 (data) ?
                 data.map((item,index)=>{
-                    return <Product key={index} item={item} showElements={1}/>
-                }) : null
+                        return <Product key={index} item={item} showElements={1}/>
+                    }) : null
             }            
-            </div>
-            <div>
-                <Link href={"/products"}>
-                    <button className='bg-btn-color px-8 py-2 text-sm rounded w-9.5 h-3.2'>Shop</button>
+                </div>
+                <div className=" flex justify-center">
+                    <Link href={"/products"}>
+                    <button className= 'bg-btn-color w-9.5 font-semibold h-3.2 px-8 py-2 my-2 text-sm rounded'>Shop</button>
                 </Link>
-            </div>
-        </div>);
+                </div>
+    </div>
+        );
 }

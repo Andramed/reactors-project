@@ -3,6 +3,7 @@ import Swiper from 'src/app/components/Swiper';
 import useGetAllBrands from 'src/app/hooks/useGetAllBrands.js';
 import useGetByBrand from 'src/app/hooks/useGetByBrand';
 
+
 export default function OurBrands() {
 
     const brandsss = useGetAllBrands();
@@ -13,6 +14,7 @@ export default function OurBrands() {
     const [brand, setBrand] = useState('nokia'); //or the first from brandsss - but it is slow
 
     const onClickHandle = (event) => {
+        handleClickBrand(event.target.innerHTML);
         handleClickBrand(event.target.innerHTML);
         setBrand(event.target.innerHTML);
     }
@@ -25,13 +27,23 @@ export default function OurBrands() {
       setTabel(products.collectionData);
     }, [products, brand]);
      
+
+    useEffect(() => {
+      handleClickBrand(brand);
+    }, []);
+
+    useEffect(() => {
+      setTabel(products.collectionData);
+    }, [products, brand]);
+     
     return ( 
-    <div className='w-full py-12 px-6 flex justify-center items-center flex-col gap-5 bg-white'>
-        <h2 className='flex justify-center text-lg font-bold'>Discover our Brands</h2>
-        <div className='flex text-xs gap-2 justify-center underline'>
+    <div className='w-full py-12 px-6 flex justify-center text-center items-center flex-col gap-5 bg-white'>
+        <h2 className='flex justify-center text-base xs:text-xl md:text-3xl lg:text-5xl font-bold'>Discover our Brands</h2>
+        <div className='flex text-xs xxs:text-sm  md:text-xl gap-2 py-4 justify-center underline'>
           {(brandsss) ? brandsss.map((brand)=>{
             return (<div key={brand} className='cursor-pointer' value={brand} onClick={onClickHandle}>{brand}</div>);
           }) : null}
+         
         </div>
 
         {(tabel)?   
@@ -39,7 +51,6 @@ export default function OurBrands() {
         key={brand}
         tabel={tabel}
         slidesPerView={3}
-        spaceBetween={10}
         breakpoints={{ 768: {slidesPerView: 3 },
                        640: {slidesPerView: 2 }, 
                        425: {slidesPerView: 2 },   
@@ -47,5 +58,6 @@ export default function OurBrands() {
                          0: {slidesPerView: 1 }}}>
         </Swiper> : null
         }
+        
     </div>);
 }

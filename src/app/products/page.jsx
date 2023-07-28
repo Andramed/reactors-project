@@ -1,13 +1,16 @@
 'use client'
-import React, { useState, useRef } from 'react';
+import React, {useEffect, useRef, useState } from 'react';
 import MultiRangeSlider from "multi-range-slider-react";
 import useGetAllBrands from 'src/app/hooks/useGetAllBrands.js';
 import useGetAllColors from 'src/app/hooks/useGetAllColors.js';
 import Products from './Products';
-// import styles  from 'src/app/products/range.module.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import axios from 'axios';
+import useSWR from 'swr';
+import { useNumOfProductInCart } from '../context/NumberOfProductInCartContext';
 
-
-// const data_sort =
+// const da	ta_sort =
 // data.sort((a, b) => (a.price > b.price) ? 1 : (a.price === b.price) ? ((a.first_name > b.first_name) ? 1 : -1) : -1 );
 
 const Page = () => {
@@ -177,6 +180,20 @@ const Page = () => {
                   </footer>
                 </div>
 		    </div>
+			
+			
+			<ToastContainer
+				position="top-right"
+				autoClose={900}
+				hideProgressBar={true}
+				newestOnTop={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover='false'
+				theme="light"
+			/>
         </div>
     )
 }

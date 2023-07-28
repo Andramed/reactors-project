@@ -36,12 +36,9 @@ export const NavBar = () => {
                 <Link className=' selected link-navbar' href={"/"}>Home</Link>
                 <Link className=' link-navbar' href={"/products"}>Products</Link>
                 <Link className=' link-navbar' href={"/brands"}>Brands</Link>
-                <Link  className=' link-navbar'href={"/promotions"}>Promotions</Link>
                 <Link className='hidden w-max lg:flex link-navbar ' href={"/about"}>About Us</Link>
-                <Link className='hidden lg:flex link-navbar' href={"/blog"}>Blog</Link>
-                <Link className='hidden lg:flex link-navbar' href={"/FAQ"}>FAQ</Link>
+                <Link className='hidden lg:flex link-navbar' href={"/questions"}>FAQ</Link>
                 <Link  className='hidden lg:flex link-navbar' href={"/contact"}>Contact</Link>
-                
             </div>
 			{/* <select  className=' link-navbar text-sm hidden xs:flex lg:text-base '> 
                     <option value="phone">All Categories</option>
