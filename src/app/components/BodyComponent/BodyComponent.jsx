@@ -1,17 +1,40 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import Header from '../Header'
 import NavBar from '../NavBar'
 import Footer from '../Footer'
 import BlackLine from '../BlackLine'
 import { CartNumProvider} from '@/app/context/NumberOfProductInCartContext'
+import useDeleteCart from '@/app/hooks/useDeleteCart'
 
 
-// import { CartNumProvider, useNumOfProductInCart } from './context/NumberOfProductInCartContext'
+
 
 export default function BodyComponent({children}) {
-	// console.log(props);
+	
+	const logLocation = () => {
+		console.log("locatia", window.location.href);
+		const fetcher = (url) => axios.delete(url);
+		const {data, error} = useSWR(fetcher)
+	
+	}
+	
+	
+		
+		window.addEventListener('beforeunload', (e) => {
+			console.log('set');
+			const fetcher = (url) => axios.delete(url, {
+				param: {
+					param: 'delete pina la inchidere'
+				}
+			});
+			const {data, error} = useSWR('api/delete_cart',fetcher)
+			e.returnValue = 'ferestra va fi inchisa'
+		});
+		
+	
+	
   return (
 	<div>
 		<CartNumProvider>
@@ -19,10 +42,12 @@ export default function BodyComponent({children}) {
 		<NavBar/>
 		<BlackLine/>
 			
-			{children}
-			
+		{children}
+	
+		 
 		<Footer/>
 		</CartNumProvider>
 	</div>
   )
 }
+ 

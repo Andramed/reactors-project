@@ -7,7 +7,7 @@ import { useState,  } from 'react';
 import {  toast } from 'react-toastify';
 import { useSWRConfig } from 'swr';
 import { useNumOfProductInCart } from '../context/NumberOfProductInCartContext';
-
+import useSWR from 'swr'
 
 export const useAddItemToCart = () => {
 	
@@ -28,13 +28,16 @@ export const useAddItemToCart = () => {
 		mutate('api/cart_user_guest', fetcher('api/cart_user_guest'))
 	}
 	
-	const deleteProductFromCart = (idItem) => {
-		const fetcher = async (url) => await axios.delete(url, idItem, {
-			headers: {
-				"Content-type": "application/json"
+	const deleteProductFromCart = (idItem, e) => {
+		console.log(e.target);
+		e.preventDefault()
+		const fetcher = async (url) => await axios.delete(url, {
+			params: {
+				param: idItem
 			}
-		}).then((res) => res.data);
+		}).then((res) => console.log(res.data));
 		mutate('api/cart_user_guest', fetcher('api/cart_user_guest'))
+		
 	}
 
 	return { getProductToCart, deleteProductFromCart, product, numOfProductInCart}
