@@ -17,7 +17,7 @@ export default function Home() {
 	
 	return (
 	<>
-		<main className=" w-5/6 flex justify-center m-auto min-h-screen flex-col items-center  p-4 bg-grey">
+		<main className=" w-5/6 flex justify-center m-auto min-h-screen flex-col items-center bg-grey py-2">
 			<OurSmartphones/>
 			<OurBrands />
 			<ClassicPhones />

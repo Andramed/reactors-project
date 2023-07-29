@@ -1,6 +1,8 @@
 'use client'
 import React, {useEffect, useRef, useState } from 'react';
+import MultiRangeSlider from "multi-range-slider-react";
 import useGetAllBrands from 'src/app/hooks/useGetAllBrands.js';
+import useGetAllColors from 'src/app/hooks/useGetAllColors.js';
 import Products from './Products';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -12,15 +14,30 @@ import { useNumOfProductInCart } from '../context/NumberOfProductInCartContext';
 // data.sort((a, b) => (a.price > b.price) ? 1 : (a.price === b.price) ? ((a.first_name > b.first_name) ? 1 : -1) : -1 );
 
 const Page = () => {
+  const [minPrice, setMinPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(50000);
   const [count, setCount ] = useState(8);
   const [brandsArray, setBrandsArray] = useState([]);
+  const [colorsArray, setColorsArray] = useState([]);
   const [typesArray, setTypesArray] = useState([]);
+  const [sortPrice, setSortPrice] = useState('');
   
-  const [priceRange, setPriceRange] = useState(2000);
   const brandsCheck = useRef([]);
+  const colorsCheck = useRef([]);
   const typesCheck = useRef([]);
-  const range = useRef(0);
-  
+
+
+  const handleInput = (e) => {
+    setMinPrice(e.minValue);
+    setMaxPrice(e.maxValue);
+};
+
+  const handleOnChangeSort = (e) => {
+    console.log(e.target.value);
+    if (e.target.value == 'low') {setSortPrice(1)}
+    else if (e.target.value == 'high') {setSortPrice(-1)}
+    else {setSortPrice('')}
+  }
 
   const handleChangeBrand = (e) => {
     if (e.target.checked === true){
@@ -30,10 +47,21 @@ const Page = () => {
 
       const index = brandsCheck.current.indexOf(e.target.id);      
       const newArray = brandsCheck.current.splice(index, 1);
-      console.log(newArray);
       setBrandsArray([...brandsCheck.current]);
     }
   };
+
+  const handleChangeColor = (e) => {
+    if (e.target.checked === true){
+      colorsCheck.current.push(e.target.id);
+      setColorsArray([...colorsCheck.current]);
+    } else {
+
+      const index = colorsCheck.current.indexOf(e.target.id);      
+      const newArray = colorsCheck.current.splice(index, 1);
+      setColorsArray([...colorsCheck.current]);
+    }
+  };  
 
   const handleChangeType = (e) => {
     if (e.target.checked === true){
@@ -43,39 +71,32 @@ const Page = () => {
 
       const index = typesCheck.current.indexOf(e.target.id);      
       const newArray = typesCheck.current.splice(index, 1);
-      console.log(newArray);
       setTypesArray([...typesCheck.current]);
     }
   };  
 
-  const onInputHandle = (e) => {
-    range.current = e.target.value;
-    setPriceRange(range.current);
-  }
-
    
   const brands = useGetAllBrands();
+  const colors = useGetAllColors();
+    
+
     return (
         <div className='pb-8 w-full flex justify-center items-center flex-col bg-white'>
-            {/* <div className='w-full pl-36 py-3 bg-gray-500 text-white font-bold text-xs'>
-              BreadCrumbs - if possible
-            </div> */}
-            <div className='w-full xxs:pl-4 lg:pl-36 md:pl-36 sm:pl-16 pt-12 pb-6 font-bold bg-gray-100'>
-              Products
-            </div>
+            <div className='w-full h-12 pl-36 pt-2 bg-[#F9F6F2]'>Products</div>
             <div className='w-full lg:pl-36 lg:pr-24 md:pl-36 md:pr-24 sm:px-16 pt-12 flex item-start text-base '>
-                <div className='min-w-max border rounded xxs:pl-2 pr-2 w-1/4 font-small flex flex-col gap-3'>
+                <div className='min-w-max xxs:pl-2 pr-2 w-1/4 font-small flex flex-col gap-3'>
                   <p>Filters: </p>
                   <div className='border rounded px-2 py-2 flex flex-col text-xs gap-1'>
                     <p>Brands</p>
-                    {brands.map((brand,index) => (
+                    {
+                      brands.map((brand,index) => (
                       <label key={index}><input
                         type="checkbox"
                         id={brand}
                         label={brand}
                         onChange={handleChangeBrand}
                       /> {brand}</label>
-                    ))}                    
+                    ))}
                   </div>
                   <div className='border rounded px-2 py-2 flex flex-col text-xs gap-1'>
                     <p>Type</p>
@@ -93,37 +114,69 @@ const Page = () => {
                       /> Classic</label>
                   </div>
 
-                  {/* <div className={styles.slidecontainer}>
-                    <input onInput={onInputHandle} type="range" min="1" max="50000" value={priceRange} className={styles.slider} id='myRange' />
-                    <p>Value: <span id="demo">{priceRange}</span></p>
-                  </div>                   */}
+                  <div className='border rounded px-2 py-2 text-xs gap-1'>
+                    <MultiRangeSlider
+                      min={0}
+                      max={50000}
+                      step={1}
+                      minValue={minPrice}
+                      maxValue={maxPrice}
+                      onInput={(e) => {
+                        handleInput(e);
+                      }}
+                      // onChange={()=>{console.log(maxPrice)}}
+                      label={false}
+                      ruler={false}
+                      style={{ border: "none", boxShadow: "none", padding: "15px 10px" }}
+                      // barLeftColor="red"
+                      barInnerColor="white"
+                      // barRightColor="green"
+                      thumbLeftColor="yellow"
+                      thumbRightColor="yellow"
+                    / >
+                      <div>
+                        <label> from <input className='w-12 border text-sm' type="text" id="minP" value={minPrice} readOnly/></label>
+                        <label> to <input className='w-12 border text-sm' type="text" id="maxP" value={maxPrice} readOnly/></label>
+                      </div>
+                  </div>
+                  <div className='border rounded px-2 py-2 flex flex-col text-xs gap-1'>
+                    <p>Colors</p>
+                    {colors.map((color,index) => (
+                      <label key={index}><input
+                        type="checkbox"
+                        id={color}
+                        label={color}
+                        onChange={handleChangeColor}
+                      /> {color}</label>
+                    ))}                    
+                  </div>    
                 </div>
 
-                <div className=' flex-col w-3/4'>
-                  {/* <div className='flex justify-between'>
-                    <div>{(list != undefined) ? '' : 'loading '}items...</div>
+                <div className='w-full flex-col w-3/4'>
+                  <div className='flex justify-end pb-3'>
                     <div className=''>
                       <div className='inline mr-2'>sort by Price: </div>
-                      <select name="price_sort" id="price_sort">
+                      <select name="price_sort" id="price_sort" onChange={handleOnChangeSort}>
                         <option value="">--choose an option--</option>
                         <option value="low">from the Lowest</option>
                         <option value="high">from the Highest</option>
                       </select>    
                     </div>
-                  </div>   */}
-                  <div className='flex justify-start flex-wrap gap-3'>
-                    <Products limit={count} brands={brandsArray} types={typesArray} priceRange={priceRange}/>
+                  </div>  
+                  <div className='flex justify-center last-of-type:justify-start flex-wrap gap-8 pl-4'>
+                    <Products limit={count} brands={brandsArray} colors={colorsArray} types={typesArray} minPrice={minPrice} maxPrice={maxPrice} sortPrice={sortPrice}/>
                     <div style={{ display: 'none' }}>
-                      <Products limit={count + 4} brands={brandsArray} types={typesArray} priceRange={priceRange}/>
+                      <Products limit={count + 4} brands={brandsArray} colors={colorsArray} types={typesArray} minPrice={minPrice} maxPrice={maxPrice} sortPrice={sortPrice}/>
                     </div>
                   </div>
                   <footer>
-
-                    <div className='pt-8'>
+                       {/*  this button has to appear only when necessary  */}
+                    <div className='pt-8 flex justify-center'>
                       <button className='bg-btn-color w-9.5 h-3.2 px-8 py-2 text-sm rounded ' onClick={() => setCount(count + 4)}>
                         more products...
                       </button>
                     </div>
+                    
                   </footer>
                 </div>
 		    </div>
