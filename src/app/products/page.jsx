@@ -10,8 +10,6 @@ import axios from 'axios';
 import useSWR from 'swr';
 import { useNumOfProductInCart } from '../context/NumberOfProductInCartContext';
 
-// const da	ta_sort =
-// data.sort((a, b) => (a.price > b.price) ? 1 : (a.price === b.price) ? ((a.first_name > b.first_name) ? 1 : -1) : -1 );
 
 const Page = () => {
   const [minPrice, setMinPrice] = useState(0);
@@ -164,20 +162,12 @@ const Page = () => {
                     </div>
                   </div>  
                   <div className='flex justify-center last-of-type:justify-start flex-wrap gap-8 pl-4'>
-                    <Products limit={count} brands={brandsArray} colors={colorsArray} types={typesArray} minPrice={minPrice} maxPrice={maxPrice} sortPrice={sortPrice}/>
+                    <Products setCount={setCount} limit={count} brands={brandsArray} colors={colorsArray} types={typesArray} minPrice={minPrice} maxPrice={maxPrice} sortPrice={sortPrice}/>
                     <div style={{ display: 'none' }}>
-                      <Products limit={count + 4} brands={brandsArray} colors={colorsArray} types={typesArray} minPrice={minPrice} maxPrice={maxPrice} sortPrice={sortPrice}/>
+                      <Products setCount={setCount} limit={count + 4} brands={brandsArray} colors={colorsArray} types={typesArray} minPrice={minPrice} maxPrice={maxPrice} sortPrice={sortPrice}/>
                     </div>
                   </div>
-                  <footer>
-                       {/*  this button has to appear only when necessary  */}
-                    <div className='pt-8 flex justify-center'>
-                      <button className='bg-btn-color w-9.5 h-3.2 px-8 py-2 text-sm rounded ' onClick={() => setCount(count + 4)}>
-                        more products...
-                      </button>
-                    </div>
-                    
-                  </footer>
+                  
                 </div>
 		    </div>
 			

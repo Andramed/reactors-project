@@ -1,7 +1,6 @@
 'use client'
 import React, { useState, useRef } from 'react';
 import MultiRangeSlider from "multi-range-slider-react";
-import useGetAllColors from 'src/app/hooks/useGetAllColors.js';
 import Products from 'src/app/products/Products.jsx';
 
 import axios from 'axios';
@@ -70,10 +69,7 @@ const Page = () => {
   
   (data)? data.forEach((item)=>{colors.push(item)}): null;
   }
-  
-
-  // console.log(window.location.href); // get last value after / 
-    
+      
 
     return (
         <div className='pb-8 w-full flex justify-center items-center flex-col bg-white'>
@@ -146,20 +142,11 @@ const Page = () => {
                     </div>
                   </div>  
                   <div className='flex justify-center last-of-type:justify-start flex-wrap gap-8 pl-4'>
-                    <Products limit={count} brands={brandsArray} colors={colorsArray} types='classic' minPrice={minPrice} maxPrice={maxPrice} sortPrice={sortPrice}/>
+                    <Products setCount={setCount} limit={count} brands={brandsArray} colors={colorsArray} types='classic' minPrice={minPrice} maxPrice={maxPrice} sortPrice={sortPrice}/>
                     <div style={{ display: 'none' }}>
-                      <Products limit={count + 4} brands={brandsArray} colors={colorsArray} types='classic' minPrice={minPrice} maxPrice={maxPrice} sortPrice={sortPrice}/>
+                      <Products setCount={setCount} limit={count + 4} brands={brandsArray} colors={colorsArray} types='classic' minPrice={minPrice} maxPrice={maxPrice} sortPrice={sortPrice}/>
                     </div>
                   </div>
-                  <footer>
-                       {/*  this button has to appear only when necessary  */}
-                    <div className='pt-8 flex justify-center'>
-                      <button className='bg-btn-color w-9.5 h-3.2 px-8 py-2 text-sm rounded ' onClick={() => setCount(count + 4)}>
-                        more products...
-                      </button>
-                    </div>
-                    
-                  </footer>
                 </div>
 		    </div>
         </div>

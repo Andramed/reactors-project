@@ -1,16 +1,41 @@
 'use client'
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import { useEffect, useState } from "react";
+import { toast,  ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const Page = () => {
+    const[responseServer, setResponseServer] = useState(null);
+
+
     const {
             register,
             handleSubmit,
-            formState: { isSubmitted },
+            reset,
+            formState,
+            formState: { isSubmitted},
         } = useForm({
             shouldUseNativeValidation: true,
-        });   
+        });  
+        
+        useEffect(() => {
+            console.log(isSubmitted);
+
+            if (formState.isSubmitted) {
+                reset({ name: '',
+                        email: '',
+                        message: '' });
+              }
+          }, [isSubmitted])
+          
+          useEffect(() => {
+            if (responseServer) {
+                toast.success(responseServer.success);
+                console.log(responseServer.success);
+            }
+           }, [responseServer])
 
     const onSubmit = (data) => {
 
@@ -23,7 +48,10 @@ const Page = () => {
         const url = "/api/sendEmail?" + params;
         
 
-        axios.post(url,{},{}).then((res) => console.log(res));
+        axios.post(url,{},{}).then((res) => {
+            console.log(res , "+responce");
+            console.log(res.data);
+            setResponseServer(res.data);});
 
     };
 
@@ -63,6 +91,17 @@ const Page = () => {
                 </button>
             </form>
         </div>
+        <ToastContainer
+            position="top-right"
+            autoClose={900}
+            hideProgressBar={true}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover='false'
+            theme="light"/>
     </div>);
 }
 export default Page;
