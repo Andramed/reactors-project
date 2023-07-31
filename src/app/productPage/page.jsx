@@ -1,6 +1,5 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
-
 import { HeartIcon, ShoppingBagIcon } from "@heroicons/react/solid";
 import { useAddItemToCart } from "../hooks/useAddItemToCart";
 import RelatedProducts from "./RelatedProducts";
@@ -13,27 +12,25 @@ function ProductPage() {
   const parentRef = useRef(0);
   const [product, setProduct] = useState();
   const { getIdItem } = useAddItemToCart();
-  const [memory, setMemory] = useState('');
-  const [ram, setRam] = useState ('');
+  const [memory, setMemory] = useState("");
+  const [ram, setRam] = useState("");
   const [memoryPriceDiff, setMemoryPriceDiff] = useState(0);
 
-
   const handleOnChangeMemory = (e) => {
-    setMemory(e.target.value)
+    setMemory(e.target.value);
     const selectedMemoryOption = e.target.value;
-    const priceDiff = selectedMemoryOption === '' ? 0 : 500;
+    const priceDiff = selectedMemoryOption === "" ? 0 : 500;
     setMemoryPriceDiff(priceDiff);
-  
-  }
+  };
 
   const updateProductPrice = () => {
     const updatedPrice = product.price + memoryPriceDiff;
     return updatedPrice;
   };
-  
+
   const handleOnChangeRAM = (e) => {
-    setRam(e.target.value)
-  }
+    setRam(e.target.value);
+  };
   const [mainPicture, setMainPicture] = useState(0);
 
   useEffect(() => {
@@ -51,9 +48,7 @@ function ProductPage() {
   if (!product) {
     return <h1>Loading</h1>;
   } else {
-    
     return (
-      
       <div className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8 product">
         <span className="self-start ml-10">
           <button className="text-gray-300 hover:text-red-500">
@@ -109,7 +104,7 @@ function ProductPage() {
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-yellow-600" />
                   <span className="text-sm font-semibold">
-                    Memory RAM: {ram ||product.ram[0]}
+                    Memory RAM: {ram || product.ram[0]}
                   </span>
                 </li>
               </ul>
@@ -167,7 +162,8 @@ function ProductPage() {
                   <label htmlFor="size" className="text-sm">
                     Memory RAM:
                   </label>
-                  <select onChange={handleOnChangeRAM}
+                  <select
+                    onChange={handleOnChangeRAM}
                     name="size"
                     id="size"
                     className="form-select py-1 pl-2 w-full max-w-xs rounded border-2 border-gray-300 bg-gray-100 text-gray-500 focus:border-yellow-600 focus:ring-0"
@@ -183,7 +179,8 @@ function ProductPage() {
                   <label htmlFor="size" className="text-sm">
                     Memory:
                   </label>
-                  <select onChange={handleOnChangeMemory}
+                  <select
+                    onChange={handleOnChangeMemory}
                     name="size"
                     id="size"
                     className="form-select py-1 pl-2 w-full max-w-xs rounded border-2 border-gray-300 bg-gray-100 text-gray-500 focus:border-yellow-600 focus:ring-0"
@@ -195,20 +192,24 @@ function ProductPage() {
                     ))}
                   </select>
                 </div>
-               
+
                 <div ref={parentRef} id={product._id} className="flex-1">
                   <button
                     type="button"
                     className="w-full py-2 px-4 inline-flex items-center justify-center rounded-md bg-yellow-500 text-base text-white font-semibold uppercase whitespace-nowrap hover:bg-yellow-600"
-                    onClick={() => getIdItem(parentRef.current, updateProductPrice())}
+                    onClick={() =>
+                      getIdItem(parentRef.current, updateProductPrice())
+                    }
                   >
                     <ShoppingBagIcon className="w-6 h-6 mr-2" />
                     Add to Cart
                   </button>
                 </div>
               </div>
-             
-              <span className="text-3xl font-bold">{ updateProductPrice()} lei</span>
+
+              <span className="text-3xl font-bold">
+                {updateProductPrice()} lei
+              </span>
             </div>
           </div>
         </div>
