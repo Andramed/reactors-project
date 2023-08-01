@@ -2,11 +2,12 @@ import { useRef } from "react"
 import { ShoppingBagIcon } from "@heroicons/react/solid";
 import useSetPrice from "../hooks/useSetPrice";
 
-export const Details = ({product}) => {
+export const Details = ({product, setColor}) => {
     const parentRef = useRef();
-    const { state, handleMemory, handleRam, handleCounter } = useSetPrice(product);
-   const {price, selectedMemory, selectedRam, counter} = state   
-   
+    const { state, handleMemory, handleRam } = useSetPrice(product);
+   const {price, selectedMemory, selectedRam} = state   
+  
+
     return (
 
     <div className="md:w-1/2 lg:w-2/3 md:pl-6 lg:pl-8">

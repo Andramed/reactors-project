@@ -3,7 +3,6 @@ import React, { useState, useEffect, useRef } from "react";
 import { HeartIcon } from "@heroicons/react/solid";
 import { useAddItemToCart } from "../hooks/useAddItemToCart";
 import RelatedProducts from "./RelatedProducts";
-import useSetPrice from "../hooks/useSetPrice";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -13,34 +12,20 @@ function ProductPage() {
   const parentRef = useRef(0);
   const [product, setProduct] = useState();
   const { getIdItem } = useAddItemToCart();
-  // const [memory, setMemory] = useState("");
-  // const [ram, setRam] = useState("");
-  // const [memoryPriceDiff, setMemoryPriceDiff] =  useState(0);
 
-  // const handleOnChangeMemory = (e) => {
-  //   setMemory(e.target.value);
-  //   const selectedMemoryOption = e.target.value;
-  //   const priceDiff = selectedMemoryOption === "" ? 0 : 500;
-  //   setMemoryPriceDiff(priceDiff);
-  // };
-
-  // const updateProductPrice = () => {
-  //   const updatedPrice = product.price + memoryPriceDiff;
-  //   return updatedPrice;
-  // };
-
-  // const handleOnChangeRAM = (e) => {
-  //   setRam(e.target.value);
-  // };
   const [mainPicture, setMainPicture] = useState(0);
+  
+
 
   useEffect(() => {
     const itemLocal = sessionStorage.getItem("item");
     setProduct(JSON.parse(itemLocal));
   }, []);
+ 
 
+  console.log(product);
   
-
+  
   if (!product) {
     return <h1>Loading</h1>;
   } else {
@@ -61,10 +46,9 @@ function ProductPage() {
               />
             </div>
             <div className="mt-6 flex space-x-2">
-              {Object.entries(product.color_image)[0][1]
-                .slice(
-                  Object.entries(product.color_image)[0][1],
-                  Object.entries(product.color_image)[0][1].length
+              {Object.entries(product.color_image)[0][1].slice(
+                 Object.entries(product.color_image)[0][1],
+                 Object.entries(product.color_image)[0][1].length
                 )
 
                 .map((color_image, index) => (
@@ -88,7 +72,7 @@ function ProductPage() {
             </div>
           </div>
 
-           <Details  product = {product}/>         
+          <Details product={product}  />
         </div>
         <RelatedProducts product={product} />
       </div>
