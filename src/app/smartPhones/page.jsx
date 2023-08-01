@@ -73,7 +73,7 @@ const Page = () => {
 
     return (
         <div className='pb-8 w-full flex justify-center items-center flex-col bg-white'>
-            <div className='w-full h-8 font-bold bg-gray-100'></div>
+            <div className='w-full h-12 pl-36 pt-2 bg-[#F9F6F2]'>Smart Phones</div>
             <div className='w-full lg:pl-36 lg:pr-24 md:pl-36 md:pr-24 sm:px-16 pt-12 flex item-start text-base '>
                 <div className='min-w-max xxs:pl-2 pr-2 w-1/4 font-small flex flex-col gap-3'>
                   <p>Filters: </p>
