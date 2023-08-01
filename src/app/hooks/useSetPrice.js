@@ -1,8 +1,8 @@
 import {  useEffect, useReducer, useRef, useState } from 'react';
 
 const useSetPrice = (product) => {
-    
-  
+     
+  console.log(product)
     const previousSelectedRefMemory = useRef(null);
     const previousSelectedRefRam = useRef(null)
 
@@ -19,18 +19,21 @@ const useSetPrice = (product) => {
             dispatch({
                     type: 'setValueMemory',
                     id:e.target.id,
-                    value:e.target.value
+                    value:e.target.value,
+                    idOption: e.target.options[e.target.selectedIndex].id
            });
            dispatch({
             type: 'setSelectedMemory',
             value: e.target.value
         })
        }
-    const handleRam = (e) => { //trebuie returnata
+    const handleRam = (e) => {
+        console.log(e.target.options[e.target.selectedIndex].id); //trebuie returnata
         dispatch({
             type: 'setValueRam',
             id: e.target.id,
-            value: e.target.value
+            value: e.target.value,
+            idOption: e.target.options[e.target.selectedIndex].id
         })
         dispatch({
             type: 'setSelectedRam',
@@ -42,7 +45,8 @@ const useSetPrice = (product) => {
     
         dispatch({
             type: 'count',
-            value: e.currentTarget.dataset.value
+            value: e.currentTarget.dataset.value,
+            onchange: e.target.value
         })
     }
 
@@ -54,6 +58,8 @@ const useSetPrice = (product) => {
         switch (action.type) {
 			
             case 'count': 
+            console.log('case count');
+            // console.log(typeof action.onchange);
                 switch (action.value) {
                     case '-':
                         if (counter>1) {
@@ -72,6 +78,19 @@ const useSetPrice = (product) => {
                         }
                     default:
                         break;
+                }
+                switch (action.onchange){
+                    
+                    case typeof action.onchange == 'string':
+                        console.log('action.onchange');
+                        if (counter > 1) {
+                            return {
+
+                                ...state,
+                                counter: Number(action.onchange) ,
+                                price: product.price * (Number(action.onchange))
+                            }
+                        }
                 }
             case 'setSelectedMemory':
                 const value = action.value;
@@ -99,17 +118,38 @@ const useSetPrice = (product) => {
                     newPrice = (price - (price - product.price * counter)) + dif ; 
                     console.log(newPrice);
                     newPrice = newPrice + Number(action.id) * 500 * counter
-                }                    
+                }              
+                if (action.id == 'size') {
+                    if (previousSelectedRefMemory.current != updatedSelectedMemory) {
+                        console.log('pret', price, typeof product.price);
+                         newPrice = (price - (price - product.price * counter))  ; 
+                        console.log(action.id);
+                        newPrice = newPrice + Number(action.idOption) * 500 * counter
+                        console.log(newPrice);
+                    } else {
+                        let dif = price - product.price * counter ; console.log(dif);
+                        newPrice = (price - (price - product.price * counter)) + dif ; 
+                        console.log(newPrice);
+                        newPrice = newPrice + Number(action.idOption) * 500 * counter
+                    }      
+                }                         
 				
                 return {
                 ...state,
                 price: newPrice
               };
             } else if (action.value === updatedSelectedMemory) {
-                console.log('action == selectedMemory');
+                let newPrice = 0;
+                        if (action.id == 'size') {
+                            newPrice = Number(action.idOption) * 500 + price * counter
+                        } else {
+                            newPrice = Number(action.id) * 500 + price * counter
+                        }
+            
+                
               return {
                 ...state,
-                price: Number(action.id) * 500 + price * counter,
+                price: newPrice
               };
             } else if (!updatedSelectedMemory) {
                 console.log('nui selcted memory');
@@ -127,33 +167,54 @@ const useSetPrice = (product) => {
                     selectedRam: selectedRam === valueRam ? null : valueRam
                 };
             case 'setValueRam': 
-			console.log(action.value);
+			
                 const updatedSelectedRam = state.selectedRam === action.value ? null : action.value;
                 if (action.value === updatedSelectedRam && updatedSelectedRam !== previousSelectedRefRam.current) { // de inlaturat bag cu calculare
-                    console.log('primul if ram');
+                    console.log('primul if');
                     let newPrice
                         if (previousSelectedRefRam.current != updatedSelectedRam) {
+                            console.log(action.id);
                              newPrice = (price - (price - product.price * counter))  ;  // aflu diferenta
                             console.log(newPrice);
                             newPrice = newPrice + Number(action.id)  * 500 * counter
+
                         } else {
                             let dif = price - product.price * counter ; console.log(dif);
                             newPrice = (price - (price - product.price * counter)) + dif ; 
                             console.log(newPrice);
                             newPrice = newPrice + Number(action.id) * 500 * counter
-                        }                    
+                        } 
+                        if (action.id == 'size') {
+                            if (previousSelectedRefRam.current != updatedSelectedRam) {
+                                console.log('pret', price, typeof product.price);
+                                 newPrice = (price - (price - product.price * counter))  ; 
+                                console.log(action.id);
+                                newPrice = newPrice + Number(action.idOption) * 500 * counter
+                                console.log(newPrice);
+                            } else {
+                                let dif = price - product.price * counter ; console.log(dif);
+                                newPrice = (price - (price - product.price * counter)) + dif ; 
+                                console.log(newPrice);
+                                newPrice = newPrice + Number(action.idOption) * 500 * counter
+                            }      
+                        }                   
                         return {
                         ...state,
                         price: newPrice
                         };
                     } else if (action.value === updatedSelectedRam) {
-                        console.log(selectedRam, updatedSelectedRam );
-                        console.log('action == selectedMemory ram');
+                        let newPrice = 0;
+                        if (action.id == 'size') {
+                            newPrice = Number(action.idOption) * 500 + price * counter
+                        } else {
+                            newPrice = Number(action.id) * 500 + price * counter
+                        }
                     return {
                         ...state,
-                        price: Number(action.id) * 500 + price * counter,
+                        price: newPrice
                     };
                     } else if (!updatedSelectedRam) {
+                        console.log('3lea if');
                         console.log('nui selcted ram');
                     return {
                         ...state,
