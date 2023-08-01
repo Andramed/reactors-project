@@ -2,18 +2,19 @@ import React from "react";
 import axios from "axios";
 import useSWR from "swr";
 import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, { Navigation, Pagination } from "swiper/core";
-SwiperCore.use([Navigation, Pagination]);
+import SwiperCore, {Scrollbar, Navigation, Pagination } from "swiper/modules";
+
 
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import "swiper/css/scrollbar"
 
 function RelatedProducts({ product }) {
   const fetcher = async (url) => await axios.get(url).then((res) => res.data);
-  const MAXProducts = 8;
+  const MAXProducts = 6;
   const { data, error } = useSWR(
-    `/api/getRandomProducts?brandName=${product.brand}&price=${product.price}&limit=${MAXProducts}`,
+    `/api/getRandomProducts?price=${product.price}&limit=${MAXProducts}`,
     fetcher
   );
 
@@ -30,11 +31,14 @@ function RelatedProducts({ product }) {
           slidesPerView={2}
           breakpoints={{
             768: {
-              slidesPerView: 4,
+              slidesPerView: 3,
             },
           }}
           navigation = {true}
-          pagination
+          modules={[Navigation]}
+          pagination = {{clickable : true}}
+          scrollbar={{ draggable: true }}
+          loop = {true}
         >
           {data.map((relatedProduct, index) => (
             <SwiperSlide key={index}>
