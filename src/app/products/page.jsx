@@ -24,9 +24,6 @@ const Page = () => {
 
   if (selectedData && (selectedData.length > 0)) {
 
-    console.log(selectedData); 
-    console.log(selectedData.length);
-
     disableButton.current = 0;
   
     if (selectedData.length === countRecords.current) { disableButton.current = 1 } 
@@ -209,7 +206,7 @@ const Page = () => {
                   </footer>  : null
                 }   
 
-                {(selectedData && selectedData.length == 0)? "No Phones found for this criteria": null}                  
+                {(selectedData && selectedData.length == 0)? "No Phones found for this criteria": null}
 
                 </div>
 		    </div>
