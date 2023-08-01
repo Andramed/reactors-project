@@ -3,7 +3,7 @@ import axios from "axios";
 import useSWR from "swr";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, {Scrollbar, Navigation, Pagination } from "swiper/modules";
-// SwiperCore.use([Navigation, Pagination]);
+
 
 import "swiper/css";
 import "swiper/css/navigation";
