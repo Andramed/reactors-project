@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import useSWR from "swr";
 import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, {Scrollbar, Navigation, Pagination } from "swiper/modules";
+import  { Navigation } from "swiper/modules";
 
 
 import "swiper/css";
@@ -13,10 +13,12 @@ import "swiper/css/scrollbar"
 function RelatedProducts({ product }) {
   const fetcher = async (url) => await axios.get(url).then((res) => res.data);
   const MAXProducts = 6;
+  
   const { data, error } = useSWR(
     `/api/getRandomProducts?price=${product.price}&limit=${MAXProducts}`,
     fetcher
   );
+  
 
   if (!data) {
     return <h1>Loading...</h1>;
@@ -41,7 +43,8 @@ function RelatedProducts({ product }) {
           loop = {true}
         >
           {data.map((relatedProduct, index) => (
-            <SwiperSlide key={index}>
+            <SwiperSlide key={index} >
+              
               <div key={index} className="bg-gray-100 p-4 rounded-md">
                 <img
                   src={Object.entries(relatedProduct.color_image)[0][1][0]}
@@ -56,6 +59,7 @@ function RelatedProducts({ product }) {
                   {relatedProduct.price} lei
                 </span>
               </div>
+              
             </SwiperSlide>
           ))}
         </Swiper>
