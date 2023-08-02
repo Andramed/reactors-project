@@ -3,6 +3,9 @@ import React, { useState, useRef } from 'react';
 import MultiRangeSlider from "multi-range-slider-react";
 import Products from 'src/app/products/Products.jsx';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import axios from 'axios';
 import useSWR from 'swr';
 
@@ -94,7 +97,7 @@ const Page = () => {
 
     if (data) {
       countRecords.current = data.length; 
-      console.log(data.length);
+      // console.log(data.length);
     }  
   }    
 
@@ -196,6 +199,19 @@ const Page = () => {
                 {(selectedData && selectedData.length == 0)? "No Phones found for this criteria": null}
                 </div>
 		      </div>
+
+          <ToastContainer
+				position="top-right"
+				autoClose={900}
+				hideProgressBar={true}
+				newestOnTop={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover='false'
+				theme="light"
+			/>          
         </div>
     )
 }

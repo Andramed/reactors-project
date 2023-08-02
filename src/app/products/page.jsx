@@ -101,7 +101,7 @@ const Page = () => {
 
     if (data) {
       countRecords.current = data.length; 
-      console.log(data.length);
+      // console.log(data.length);
     }
 
     return (
