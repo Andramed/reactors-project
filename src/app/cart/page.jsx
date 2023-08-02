@@ -1,29 +1,40 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-
+import { toast,  ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { ItemCart } from './components/ItemCart';
+
 
 import useSWR from 'swr'
 import axios from 'axios';
 import { useNumOfProductInCart } from '../context/NumberOfProductInCartContext';
 import { useAddItemToCart } from '../hooks/useAddItemToCart';
+import PaymentFormModal from './components/PaymentFormModal';
+
+import useAddToSessionStorage from '../hooks/useAddToSessionStorage';
+
+import EmptyCart from './components/EmptyCart';
+
 const fetcher = async (url) => await axios.get(url).then((res)=> res.data)
 
 export default function Page() {
-	const [product, setProduct] = useState();
-	// const [numOfProductInCart, setNumOfProductInCart] = useState(0)
-	const {data, error} = useSWR('api/cart_user_guest', fetcher);
-	const {numOfProductInCart, setNumOfProductInCart} = useNumOfProductInCart()
- 	useEffect(() => {
-		if (data) {
-			setNumOfProductInCart(data.numberOfDocuments);
-			setProduct(data.product)
-		}
-	}, [data])
-	const {deleteProductFromCart} = useAddItemToCart()
-		
+	const data = sessionStorage.getItem('cartItems')
+	const [showPayForm, setShowPayForm] = useState(false);
+	let product = JSON.parse(data)
 
-	
+	const openPayForm = () => {
+		setShowPayForm(true)
+		console.log('am facut click');
+	}
+	const paymentProcess = () => {
+		toast.success('Payment went through successfully ')
+	}
+		
+	const {numOfProductInCart, setNumOfProductInCart} = useNumOfProductInCart() 
+		useEffect(() => {
+			product ? setNumOfProductInCart(product.length) : product = []
+			
+		}, [data])
 	const [promocod, setPromocod] = useState(false);
 	const addPromocod = () => {
 		if (!promocod) {
@@ -32,10 +43,21 @@ export default function Page() {
 			setPromocod(false);
 		}
 	}
-
-	return(
-		<>
-			{data ? (
+	   const  {removeItemFromCart} = useAddToSessionStorage();
+	 useEffect(() => {
+		console.log(product);
+	 }, [])
+		return(
+		<>  
+		<div className='w-full h-12 pl-36 pt-2 mb-5 bg-[#F9F6F2]'>Cart</div>
+		
+		{
+			
+			numOfProductInCart === 0 ? ( 
+				<div className=' flex justify-center p-10'>
+					<EmptyCart/>
+				</div>	
+			):data ? (
 				<div className='flex justify-between px-20 gap-4 '>
 				<div className=' w-[70%] flex flex-col'>
 					<div className='flex'>
@@ -59,7 +81,8 @@ export default function Page() {
 						return <ItemCart 
 							key={product._id}  
 							product= {product}
-							deleteProductFromCart={deleteProductFromCart}						
+							removeItemFromCart={removeItemFromCart}
+							// deleteProductFromCart={deleteProductFromCart}						
 							/>
 					}): <h1>loading</h1>}
 				</div>
@@ -91,12 +114,17 @@ export default function Page() {
 											<div className=' w-full flex flex-col justify-center gap-2'>
 												<input className='border rounded-lg w-full p-2'  type="text" />
 												<button  className=' m-auto bg-btn-color p-1 text-xs'>check promo</button>
-											</div>
-											
+											</div>	
 									)}
 									
 							</ul>
-							<button className=' bg-btn-color w-full p-2 my-3'>Continue to payment</button>
+								<button onClick={openPayForm} className="bg-btn-color w-full p-2 my-3">Continue to payment</button>
+								<PaymentFormModal
+									isOpen={showPayForm}
+									onClose={() => setShowPayForm(false)}
+									onSubmit={paymentProcess}
+								/>
+								<ToastContainer />
 						</div>
 	
 					
@@ -108,13 +136,13 @@ export default function Page() {
 					<div className=" flex flex-col gap-2 bg-white rounded-md p-5 "> 
 						<h5>Pay With: </h5>
 						< div className=" flex gap-2 flex-wrap justify-center">
-							<div className=' hover:bg-slate-400 p-4 flex justify-center items-center'><img className='h-10 ' src="/imgFooter/PayPal.svg" alt="paypal" /></div>
-							<div className='hover:bg-slate-400 p-4 flex justify-center items-center'> <img className='h-10' src="/imgFooter/GooglePay.svg" alt="gpay" /></div>
-							<div className='hover:bg-slate-400 p-4 flex justify-center items-center'><img className='h-10' src="/imgFooter/Amex.svg" alt="amex" /></div>
-							<div className='hover:bg-slate-400 p-4 flex justify-center items-center'><img  className='h-10' src="/imgFooter/Bancontact.svg" alt="bnc" /></div>
-							<div className='hover:bg-slate-400 p-4 flex justify-center items-center'><img className='h-10' src="/imgFooter/Maestro.svg" alt="maestro" /></div>
-							<div className='hover:bg-slate-400 p-4 flex justify-center items-center'><img className='h-10'  src="/imgFooter/Visa.svg" alt="visa" /></div>
-							<div className='hover:bg-slate-400 p-4 flex justify-center items-center'><img className='h-10' src="/imgFooter/Mastercard.svg" alt="masterCars" /></div>
+							<div className=' hover:bg-slate-200 p-3 flex justify-center items-center'><img className='h-10 ' src="/imgFooter/PayPal.svg" alt="paypal" /></div>
+							<div className='hover:bg-slate-200 p-3 flex justify-center items-center'> <img className='h-10' src="/imgFooter/GooglePay.svg" alt="gpay" /></div>
+							<div className='hover:bg-slate-200 p-3 flex justify-center items-center'><img className='h-10' src="/imgFooter/Amex.svg" alt="amex" /></div>
+							<div className='hover:bg-slate-200 p-3 flex justify-center items-center'><img  className='h-10' src="/imgFooter/Bancontact.svg" alt="bnc" /></div>
+							<div className='hover:bg-slate-200 p-3 flex justify-center items-center'><img className='h-10' src="/imgFooter/Maestro.svg" alt="maestro" /></div>
+							<div className='hover:bg-slate-200 p-3 flex justify-center items-center'><img className='h-10'  src="/imgFooter/Visa.svg" alt="visa" /></div>
+							<div className='hover:bg-slate-200 p-3 flex justify-center items-center'><img className='h-10' src="/imgFooter/Mastercard.svg" alt="masterCars" /></div>
 						</div>
 					   </div>
 				</div>
@@ -122,7 +150,7 @@ export default function Page() {
 			): (<h1>loading</h1>)}
 			
 			
-			
+			<ToastContainer/>
 		</>
 	)
 

@@ -4,6 +4,8 @@ import Product from '../components/Product';
 import { useAddItemToCart } from '../hooks/useAddItemToCart';
 import useGetProduct from '../hooks/useGetProduct';
 import { useEffect, useRef } from 'react';
+import useAddToSessionStorage from '../hooks/useAddToSessionStorage';
+import useAddItemToWishlist from '../hooks/useAddItemToWishlist';
 
 
 export default function Products ({setSelectedData, limit ,colors , brands, types, minPrice, maxPrice, sortPrice}) {
@@ -18,9 +20,13 @@ export default function Products ({setSelectedData, limit ,colors , brands, type
     ()=>{ setSelectedData(data); console.log(data);}
   ,[data]);  
 
+  const {addItemToSessionStorage}  = useAddToSessionStorage();
+	const {handleHeart} = useAddItemToWishlist()
+
     return ( <>
+	 
     { (data)? data.map((item,index) => {
-              return ( <Product getProduct={getProduct} getProductToCart = {getProductToCart}    key={index} item={item} showElements={1}/>)}) 
+              return ( <Product handleHeart={handleHeart} addItemToSessionStorage={addItemToSessionStorage} getProduct={getProduct} getProductToCart = {getProductToCart}    key={index} item={item} showElements={1}/>)}) 
             :"Loading products..."
       }       
       </> )

@@ -176,7 +176,7 @@ const Page = () => {
                   </div>    
                 </div>
 
-                <div className='w-full flex-col w-3/4'>
+                <div className=' flex flex-col w-3/4'>
                   <div className='flex justify-end pb-3'>
                     <div className=''>
                       <div className='inline mr-2'>sort by Price: </div>
@@ -227,4 +227,5 @@ const Page = () => {
         </div>
     )
 }
+
 export default Page;

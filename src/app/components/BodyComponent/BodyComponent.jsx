@@ -1,28 +1,37 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import Header from '../Header'
 import NavBar from '../NavBar'
 import Footer from '../Footer'
 import BlackLine from '../BlackLine'
 import { CartNumProvider} from '@/app/context/NumberOfProductInCartContext'
+import useDeleteCart from '@/app/hooks/useDeleteCart'
+import Providers from '../Providers'
+import { WishNumProvider } from '@/app/context/NumberOfItemInWishList'
 
 
-// import { CartNumProvider, useNumOfProductInCart } from './context/NumberOfProductInCartContext'
+
 
 export default function BodyComponent({children}) {
-	// console.log(props);
+	
   return (
 	<div>
-		<CartNumProvider>
-		<Header  />
-		<NavBar/>
-		<BlackLine/>
+		<Providers>
+			<CartNumProvider>
+			<WishNumProvider>
+				<Header  />
+				<NavBar/>
+				<BlackLine/>
+					
+				{children}
 			
-			{children}
-			
-		<Footer/>
-		</CartNumProvider>
+				
+				<Footer/>
+			</WishNumProvider>
+			</CartNumProvider>
+		</Providers>
 	</div>
   )
 }
+ 
