@@ -16,6 +16,9 @@ export default function FormData() {
       [name]: value,
     }));
   };
+  const handleTest = ()=>{
+    console.log("testez daca pot adauga inca o functie");
+  }
 
   const handleForm = (e) => {
     e.preventDefault();

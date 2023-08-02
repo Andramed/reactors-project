@@ -1,12 +1,16 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-
+import { toast,  ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { ItemCart } from './components/ItemCart';
 import 'react-toastify/dist/ReactToastify.css';
 
 import useSWR from 'swr'
 import axios from 'axios';
 import { useNumOfProductInCart } from '../context/NumberOfProductInCartContext';
+import { useAddItemToCart } from '../hooks/useAddItemToCart';
+import PaymentFormModal from './components/PaymentFormModal';
+
 import useAddToSessionStorage from '../hooks/useAddToSessionStorage';
 import { ToastContainer } from 'react-toastify';
 import EmptyCart from './components/EmptyCart';
@@ -103,12 +107,17 @@ export default function Page() {
 											<div className=' w-full flex flex-col justify-center gap-2'>
 												<input className='border rounded-lg w-full p-2'  type="text" />
 												<button  className=' m-auto bg-btn-color p-1 text-xs'>check promo</button>
-											</div>
-											
+											</div>	
 									)}
 									
 							</ul>
-							<button className=' bg-btn-color w-full p-2 my-3'>Continue to payment</button>
+								<button onClick={openPayForm} className="bg-btn-color w-full p-2 my-3">Continue to payment</button>
+								<PaymentFormModal
+									isOpen={showPayForm}
+									onClose={() => setShowPayForm(false)}
+									onSubmit={paymentProcess}
+								/>
+								<ToastContainer />
 						</div>
 	
 					
@@ -120,13 +129,13 @@ export default function Page() {
 					<div className=" flex flex-col gap-2 bg-white rounded-md p-5 "> 
 						<h5>Pay With: </h5>
 						< div className=" flex gap-2 flex-wrap justify-center">
-							<div className=' hover:bg-slate-400 p-4 flex justify-center items-center'><img className='h-10 ' src="/imgFooter/PayPal.svg" alt="paypal" /></div>
-							<div className='hover:bg-slate-400 p-4 flex justify-center items-center'> <img className='h-10' src="/imgFooter/GooglePay.svg" alt="gpay" /></div>
-							<div className='hover:bg-slate-400 p-4 flex justify-center items-center'><img className='h-10' src="/imgFooter/Amex.svg" alt="amex" /></div>
-							<div className='hover:bg-slate-400 p-4 flex justify-center items-center'><img  className='h-10' src="/imgFooter/Bancontact.svg" alt="bnc" /></div>
-							<div className='hover:bg-slate-400 p-4 flex justify-center items-center'><img className='h-10' src="/imgFooter/Maestro.svg" alt="maestro" /></div>
-							<div className='hover:bg-slate-400 p-4 flex justify-center items-center'><img className='h-10'  src="/imgFooter/Visa.svg" alt="visa" /></div>
-							<div className='hover:bg-slate-400 p-4 flex justify-center items-center'><img className='h-10' src="/imgFooter/Mastercard.svg" alt="masterCars" /></div>
+							<div className=' hover:bg-slate-200 p-3 flex justify-center items-center'><img className='h-10 ' src="/imgFooter/PayPal.svg" alt="paypal" /></div>
+							<div className='hover:bg-slate-200 p-3 flex justify-center items-center'> <img className='h-10' src="/imgFooter/GooglePay.svg" alt="gpay" /></div>
+							<div className='hover:bg-slate-200 p-3 flex justify-center items-center'><img className='h-10' src="/imgFooter/Amex.svg" alt="amex" /></div>
+							<div className='hover:bg-slate-200 p-3 flex justify-center items-center'><img  className='h-10' src="/imgFooter/Bancontact.svg" alt="bnc" /></div>
+							<div className='hover:bg-slate-200 p-3 flex justify-center items-center'><img className='h-10' src="/imgFooter/Maestro.svg" alt="maestro" /></div>
+							<div className='hover:bg-slate-200 p-3 flex justify-center items-center'><img className='h-10'  src="/imgFooter/Visa.svg" alt="visa" /></div>
+							<div className='hover:bg-slate-200 p-3 flex justify-center items-center'><img className='h-10' src="/imgFooter/Mastercard.svg" alt="masterCars" /></div>
 						</div>
 					   </div>
 				</div>
