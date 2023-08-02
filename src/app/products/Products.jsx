@@ -17,9 +17,7 @@ export default function Products ({ limit ,colors , brands, types, minPrice, max
 	const {addItemToSessionStorage}  = useAddToSessionStorage();
 	const {handleHeart} = useAddItemToWishlist()
      return ( <>
-	 	<button onClick={() => {
-			sessionStorage.clear();
-		}}>reset sesion  </button>
+	 
      { (data)? data.map((item,index) => {
                 return ( <Product handleHeart={handleHeart} addItemToSessionStorage={addItemToSessionStorage} getProduct={getProduct} getProductToCart = {getProductToCart}    key={index} item={item} showElements={1}/>)}) 
               :"Loading products..."

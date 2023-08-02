@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { toast,  ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ItemCart } from './components/ItemCart';
-import 'react-toastify/dist/ReactToastify.css';
+
 
 import useSWR from 'swr'
 import axios from 'axios';
@@ -12,16 +12,23 @@ import { useAddItemToCart } from '../hooks/useAddItemToCart';
 import PaymentFormModal from './components/PaymentFormModal';
 
 import useAddToSessionStorage from '../hooks/useAddToSessionStorage';
-import { ToastContainer } from 'react-toastify';
+
 import EmptyCart from './components/EmptyCart';
 
 const fetcher = async (url) => await axios.get(url).then((res)=> res.data)
 
 export default function Page() {
 	const data = sessionStorage.getItem('cartItems')
-
+	const [showPayForm, setShowPayForm] = useState(false);
 	let product = JSON.parse(data)
 
+	const openPayForm = () => {
+		setShowPayForm(true)
+		console.log('am facut click');
+	}
+	const paymentProcess = () => {
+		toast.success('Payment went through successfully ')
+	}
 		
 	const {numOfProductInCart, setNumOfProductInCart} = useNumOfProductInCart() 
 		useEffect(() => {
