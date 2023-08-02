@@ -1,24 +1,24 @@
-// 'use client'
-// import { useContext, createContext, useState } from 'react';
+'use client'
+import { useContext, createContext, useState } from 'react';
 
-// const CartItemContext = createContext();
+const CartItemContext = createContext();
 
-// export function useCart() {
-// 	return useContext(CartItemContext);
-// }
+export function useCart() {
+	return useContext(CartItemContext);
+}
 
-// export const CartItemProvider = ({children}) => {
-// 	const [numCartItem, setNumCartItem] = useState(0);
+export const CartItemProvider = ({children}) => {
+	const [numCartItem, setNumCartItem] = useState(0);
 	
 	
 
-// 	return(
-// 		<CartItemContext.Provider value={{
-// 			numCartItem,
-// 			setNumCartItem
-// 		}}  > {children} </CartItemContext.Provider>
-// 	)
+	return(
+		<CartItemContext.Provider value={{
+			numCartItem,
+			setNumCartItem
+		}}  > {children} </CartItemContext.Provider>
+	)
 	
-// }
+}
 
 
