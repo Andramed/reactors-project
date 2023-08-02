@@ -61,12 +61,9 @@ function ProductPage() {
               />
             </div>
             <div className="mt-6 flex space-x-2">
-              {Object.entries(product.color_image)[0][1]
-                .slice(
-                  Object.entries(product.color_image)[0][1],
-                  Object.entries(product.color_image)[0][1].length
-                )
-
+              {Object.entries(product.color_image)[0][1] // prima care o gaseste color_iamge  key, value
+                .slice(Object.entries(product.color_image)[0][1], Object.entries(product.color_image)[0][1].length) // slice(0, 4) > 4 || <4 
+				// prima vlaoare la slice arr[0]
                 .map((color_image, index) => (
                   <button
                     key={index}
