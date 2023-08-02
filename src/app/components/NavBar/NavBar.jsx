@@ -49,9 +49,9 @@ export const NavBar = () => {
             </select> */}
 			<div className=' link-navbar text-sm hidden xs:flex lg:text-base '>
 			<Dropdown title="All Categories"> 
-				<Dropdown.Item>
+				{/* <Dropdown.Item>
                     Phone Types:
-                </Dropdown.Item>
+                </Dropdown.Item> */}
                 <Dropdown.Item as="a" href="/classicPhones">
                     Classic Phones
                 </Dropdown.Item>
