@@ -36,6 +36,19 @@ export async function GET (req, res) {
 }
 
 export async function DELETE(req, res) {
-	const body = await req.json();
-	console.log(body);
+	
+	const  {query}  =  parse(req.url, true);
+	const idItemToDelete = Object.entries(query)[0][1];
+	console.log(Object.entries(query)[0][1], 'delete', idItemToDelete);
+	try {
+		await connectToDatabase();
+		const collection =  client.db('cart_user_guest').collection('cart');
+		const result = await collection.deleteOne({_id: idItemToDelete});
+		console.log(result.deletedCount);
+		return NextResponse.json({message: result.deletedCount ===1 ? 'item deleted from cart' : null})
+	
+	} catch (error) {
+		console.log(error);
+		return NextResponse.json({message: 'item note deleted try again, error'});
+	}
 }
