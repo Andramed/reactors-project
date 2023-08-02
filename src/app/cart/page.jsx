@@ -2,28 +2,28 @@
 import React, { useEffect, useState } from 'react'
 
 import { ItemCart } from './components/ItemCart';
+import 'react-toastify/dist/ReactToastify.css';
 
 import useSWR from 'swr'
 import axios from 'axios';
 import { useNumOfProductInCart } from '../context/NumberOfProductInCartContext';
-import { useAddItemToCart } from '../hooks/useAddItemToCart';
+import useAddToSessionStorage from '../hooks/useAddToSessionStorage';
+import { ToastContainer } from 'react-toastify';
+import EmptyCart from './components/EmptyCart';
+
 const fetcher = async (url) => await axios.get(url).then((res)=> res.data)
 
 export default function Page() {
-	const [product, setProduct] = useState();
-	// const [numOfProductInCart, setNumOfProductInCart] = useState(0)
-	const {data, error} = useSWR('api/cart_user_guest', fetcher);
-	const {numOfProductInCart, setNumOfProductInCart} = useNumOfProductInCart()
- 	useEffect(() => {
-		if (data) {
-			setNumOfProductInCart(data.numberOfDocuments);
-			setProduct(data.product)
-		}
-	}, [data])
-	const {deleteProductFromCart} = useAddItemToCart()
-		
+	const data = sessionStorage.getItem('cartItems')
 
-	
+	let product = JSON.parse(data)
+
+		
+	const {numOfProductInCart, setNumOfProductInCart} = useNumOfProductInCart() 
+		useEffect(() => {
+			product ? setNumOfProductInCart(product.length) : product = []
+			
+		}, [data])
 	const [promocod, setPromocod] = useState(false);
 	const addPromocod = () => {
 		if (!promocod) {
@@ -32,10 +32,21 @@ export default function Page() {
 			setPromocod(false);
 		}
 	}
-
-	return(
-		<>
-			{data ? (
+	   const  {removeItemFromCart} = useAddToSessionStorage();
+	 useEffect(() => {
+		console.log(product);
+	 }, [])
+		return(
+		<>  
+		<div className='w-full h-12 pl-36 pt-2 mb-5 bg-[#F9F6F2]'>Cart</div>
+		
+		{
+			
+			numOfProductInCart === 0 ? ( 
+				<div className=' flex justify-center p-10'>
+					<EmptyCart/>
+				</div>	
+			):data ? (
 				<div className='flex justify-between px-20 gap-4 '>
 				<div className=' w-[70%] flex flex-col'>
 					<div className='flex'>
@@ -59,7 +70,8 @@ export default function Page() {
 						return <ItemCart 
 							key={product._id}  
 							product= {product}
-							deleteProductFromCart={deleteProductFromCart}						
+							removeItemFromCart={removeItemFromCart}
+							// deleteProductFromCart={deleteProductFromCart}						
 							/>
 					}): <h1>loading</h1>}
 				</div>
@@ -122,7 +134,7 @@ export default function Page() {
 			): (<h1>loading</h1>)}
 			
 			
-			
+			<ToastContainer/>
 		</>
 	)
 

@@ -7,46 +7,30 @@ import Footer from '../Footer'
 import BlackLine from '../BlackLine'
 import { CartNumProvider} from '@/app/context/NumberOfProductInCartContext'
 import useDeleteCart from '@/app/hooks/useDeleteCart'
+import Providers from '../Providers'
+import { WishNumProvider } from '@/app/context/NumberOfItemInWishList'
 
 
 
 
 export default function BodyComponent({children}) {
 	
-	const logLocation = () => {
-		console.log("locatia", window.location.href);
-		const fetcher = (url) => axios.delete(url);
-		const {data, error} = useSWR(fetcher)
-	
-	}
-	
-	
-		
-		window.addEventListener('beforeunload', (e) => {
-			console.log('set');
-			const fetcher = (url) => axios.delete(url, {
-				param: {
-					param: 'delete pina la inchidere'
-				}
-			});
-			const {data, error} = useSWR('api/delete_cart',fetcher)
-			e.returnValue = 'ferestra va fi inchisa'
-		});
-		
-	
-	
   return (
 	<div>
-		<CartNumProvider>
-		<Header  />
-		<NavBar/>
-		<BlackLine/>
+		<Providers>
+			<CartNumProvider>
+			<WishNumProvider>
+				<Header  />
+				<NavBar/>
+				<BlackLine/>
+					
+				{children}
 			
-		{children}
-	
-		 
-		<Footer/>
-		</CartNumProvider>
+				
+				<Footer/>
+			</WishNumProvider>
+			</CartNumProvider>
+		</Providers>
 	</div>
   )
 }

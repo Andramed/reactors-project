@@ -8,6 +8,12 @@ import useSWR from 'swr'
 import { useNumOfProductInCart } from '@/app/context/NumberOfProductInCartContext';
 import axios from 'axios';
 import SignIn from '../SignIn';
+import useAddToSessionStorage from '@/app/hooks/useAddToSessionStorage';
+import {useSession, signIn, signOut} from 'next-auth/react'
+import Link from 'next/link';
+import SignUp from '../SignUp';
+
+
 
 
 
@@ -16,7 +22,8 @@ export const Header = () => {
 	
 	const {numOfProductInCart} = useNumOfProductInCart()
  	console.log(numOfProductInCart);
-	console.log('redeseneaza');
+	const session = useSession()
+	// console.log(session);
 
     return (
 		
@@ -41,7 +48,7 @@ export const Header = () => {
 								<div className="flex w-full justify-between xs:w-auto  gap-2">
 									<div className="  gap-1 xxs:gap-2 flex ml-auto  items-center">
 										<img src="/imgHeader/heart.svg" alt="heart" />
-										<p>Wishlist</p>
+										<a href="/wishlist">wishlist</a>
 									</div>
 									
 										<div className=" gap-1 xxs:gap-2 flex ml-2 xxs:ml-4 items-center ">
@@ -51,7 +58,14 @@ export const Header = () => {
 										</div>
 									
 									<div className=" hidden xs:flex ml-2 xs:ml-4">
-										<SignIn/>
+										{session.data ? (
+											<div className=' flex gap-3 items-center justify-around'>
+												<Link href='/profile'>Profile</Link>
+												<button onClick={() => signOut({
+													redirect: '/'
+												})} href='/' className='bg-[#0f6161] px-5 py-1 rounded-lg text-white' >Sign Out</button>
+											</div>
+										): <SignUp/> }
 									</div>
 								</div>
 							</div>
