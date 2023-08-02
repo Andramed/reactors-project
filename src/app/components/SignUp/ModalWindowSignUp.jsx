@@ -1,12 +1,13 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import ToolTip from '../ToolTip';
-import { signIn } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 
 import { useSearchParams } from 'next/navigation';
 import InputComponent from '../SignIn/Input';
 import SignIn from '../SignIn';
 import useSignIn from '@/app/hooks/useSignIn';
+import useSignUpUser from '@/app/hooks/useSignUpUser';
 
 
 export const  ModalWindowSignUp = ({showModalSignUp, handleSignUp, handleForm, setShowModalSignUp}) => {
@@ -14,10 +15,13 @@ export const  ModalWindowSignUp = ({showModalSignUp, handleSignUp, handleForm, s
 	
 	const [showPassword, setShowPassword] = useState(false);
 	const searchParams = useSearchParams();
-	const callbackUrl = searchParams.get('callback') || '/profile'
+	const callbackUrl = searchParams.get('callback') || '/'
 	const setVisiblePassword = () => {
 		showPassword ? setShowPassword(false) : setShowPassword(true)
 	}
+	const session = useSession()
+	const {handleUserSignUp} = useSignUpUser();
+	
 	
   return (
 	<div className={`${showModalSignUp? ' fixed flex items-center justify-center top-0 left-0 w-full h-full bg-slate-200  bg-opacity-50  z-20': 'hidden'}`}>
@@ -53,7 +57,7 @@ export const  ModalWindowSignUp = ({showModalSignUp, handleSignUp, handleForm, s
 				<button type='submit' className=' bg-btn-color px-5 py-2 w-[70%] m-auto flex justify-center mb-2 hover:text-lg'>Sign Up</button>
 			</form>
 			<div className=' flex justify-center '> 
-				<button className=' w-[70%] justify-center hover:w-[75%] hover:text-lg flex items-center bg-slate-100 px-4 py-2 rounded-lg' onClick={()=> signIn('google', {callbackUrl})}>Sign Up with google
+				<button id='signupGoogle' className=' w-[70%] justify-center hover:w-[75%] hover:text-lg flex items-center bg-slate-100 px-4 py-2 rounded-lg' onClick={(e)=> {signIn('google', {callbackUrl})} }>Sign Up with google
 					<img className='h-10 w-10 hover:w-12' src="/logo/google.png" alt="google logo" />
 				</button>
 			</div>

@@ -70,18 +70,18 @@ export const ItemCart = (props) => {
 							</div>
 							<h4>Select color</h4>
 							<div className='flex w-full gap-4 px-10'>
+				
+							
 								
-											
-												
-												{
-													colorArray.current.map((color,index)=>{ 
-														return(	
-														<ToolTip  descriptions='select color'>
-														<button key={index} id={color} onClick={handleClickImage} style={{height: "1rem", width: "1rem", backgroundColor: color, borderRadius: "5rem", border: "1px solid grey"}}></button> 
-														</ToolTip>
-														)})
-												}
-											
+								{
+									colorArray.current.map((color,index)=>{ 
+										return(	
+										<ToolTip  descriptions='select color'>
+										<button key={index} id={color} onClick={handleClickImage} style={{height: "1rem", width: "1rem", backgroundColor: color, borderRadius: "5rem", border: "1px solid grey"}}></button> 
+										</ToolTip>
+										)})
+								}
+							
 										
 							</div>
 						</div>

@@ -12,7 +12,7 @@ export const  ModalWindow = ({showModal, handleSigniIn, handleForm}) => {
 
 	const [showPassword, setShowPassword] = useState(false);
 	const searchParams = useSearchParams();
-	const callbackUrl = searchParams.get('callback') || '/profile'
+	const callbackUrl = searchParams.get('callback') || '/products'
 	const setVisiblePassword = () => {
 		showPassword ? setShowPassword(false) : setShowPassword(true)
 	}
