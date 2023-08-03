@@ -10,10 +10,26 @@ import axios from 'axios';
 import useSWR from 'swr';
 import { useNumOfProductInCart } from '../context/NumberOfProductInCartContext';
 
-// const da	ta_sort =
-// data.sort((a, b) => (a.price > b.price) ? 1 : (a.price === b.price) ? ((a.first_name > b.first_name) ? 1 : -1) : -1 );
 
 const Page = () => {
+
+  const [selectedData, setSelectedData] = useState();
+  const disableButton = useRef(0);
+  const countRecords = useRef(0);
+
+
+  if (selectedData && (selectedData.length === 0)) {
+    disableButton.current = 1;
+  }
+
+  if (selectedData && (selectedData.length > 0)) {
+
+    disableButton.current = 0;
+  
+    if (selectedData.length === countRecords.current) { disableButton.current = 1 } 
+
+  }  
+
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(50000);
   const [count, setCount ] = useState(8);
@@ -79,6 +95,14 @@ const Page = () => {
   const brands = useGetAllBrands();
   const colors = useGetAllColors();
     
+
+  const fetcher = async (url) => await axios.get(url).then((res) => res.data);
+  const { data, error } = useSWR(`/api/getAllProdPag?colors=${colorsArray}&brands=${brandsArray}&types=${typesArray}&minPrice=${minPrice}&maxPrice=${maxPrice}&sortPrice=${sortPrice}`, fetcher);     
+
+    if (data) {
+      countRecords.current = data.length; 
+      // console.log(data.length);
+    }
 
     return (
         <div className='pb-8 w-full flex justify-center items-center flex-col bg-white'>
@@ -152,7 +176,7 @@ const Page = () => {
                   </div>    
                 </div>
 
-                <div className='w-full flex-col w-3/4'>
+                <div className=' flex flex-col w-3/4'>
                   <div className='flex justify-end pb-3'>
                     <div className=''>
                       <div className='inline mr-2'>sort by Price: </div>
@@ -164,20 +188,26 @@ const Page = () => {
                     </div>
                   </div>  
                   <div className='flex justify-center last-of-type:justify-start flex-wrap gap-8 pl-4'>
-                    <Products limit={count} brands={brandsArray} colors={colorsArray} types={typesArray} minPrice={minPrice} maxPrice={maxPrice} sortPrice={sortPrice}/>
+                    <Products setSelectedData={setSelectedData} limit={count} brands={brandsArray} colors={colorsArray} types={typesArray} minPrice={minPrice} maxPrice={maxPrice} sortPrice={sortPrice}/>
                     <div style={{ display: 'none' }}>
-                      <Products limit={count + 4} brands={brandsArray} colors={colorsArray} types={typesArray} minPrice={minPrice} maxPrice={maxPrice} sortPrice={sortPrice}/>
+                      <Products setSelectedData={setSelectedData} limit={count + 4} brands={brandsArray} colors={colorsArray} types={typesArray} minPrice={minPrice} maxPrice={maxPrice} sortPrice={sortPrice}/>
                     </div>
                   </div>
+                  
+
+                  { (!disableButton.current && selectedData )?
                   <footer>
-                       {/*  this button has to appear only when necessary  */}
                     <div className='pt-8 flex justify-center'>
-                      <button className='bg-btn-color w-9.5 h-3.2 px-8 py-2 text-sm rounded ' onClick={() => setCount(count + 4)}>
+                      <button className='bg-btn-color w-9.5 h-3.2 px-8 py-2 text-sm rounded ' onClick={() => {setCount(count + 4);}}>
                         more products...
                       </button>
                     </div>
                     
-                  </footer>
+                  </footer>  : null
+                }   
+
+                {(selectedData && selectedData.length == 0)? "No Phones found for this criteria": null}
+
                 </div>
 		    </div>
 			

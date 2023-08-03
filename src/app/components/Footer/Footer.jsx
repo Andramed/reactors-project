@@ -16,7 +16,7 @@ export default function Footer (){
                         <PayWith/>
                         <div className=" hidden md:flex text-sm xxs:text-base  md:text-xl"> © Company - All rights reserved </div>
                     </div>
-                    <div className=" -ml-44 flex flex-col gap-15 ">
+                    <div className=" flex flex-col gap-15 ">
                             <SubscriebNewsletter/>
                             <div className="flex justify-center text-center md:text-left gap-4">
                                 <div className=" flex  gap-4">

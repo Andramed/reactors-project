@@ -7,10 +7,16 @@ const useGetProduct =  () => {
 	const [item, setItem] = useState();
 	const getProduct = (product) => {
 		setItem(product)
+		console.log('se executa 111');
 	}
 	useEffect(() => {	
+		
+		if (item ){
 			console.log('sa executat');	
 			sessionStorage.setItem('item', JSON.stringify(item))
+		
+		}
+			
 			
 	}, [item])
 
