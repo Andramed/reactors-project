@@ -25,7 +25,7 @@ export const ItemCart = (props) => {
     setImageUrl(newUrl);
     
   }
-
+ 
   useEffect(()=>{
     colorArray.current = [];  
 
@@ -54,7 +54,7 @@ export const ItemCart = (props) => {
 								{product.memory.map((memory, index) => {
 									return (
 										<ToolTip key={index} descriptions='select memory'>
-											<button id= {index} value={memory} onClick={(e) => handleMemory(e)}  className={`${selectedMemory === memory ? 'bg-cyan-300' : 'bg-slate-200'} bg-slate-200 px-3 py-1 text-xs rounded-2xl hover:bg-yellow-100 transition duration-500`} key={memory}>{memory}</button>
+											<button id= {index} value={memory} onClick={(e) => handleMemory(e)}  className={`${selectedMemory === memory ? 'bg-cyan-300' : 'bg-slate-200'}  px-3 py-1 text-xs rounded-2xl hover:bg-yellow-100 transition duration-500`} key={memory}>{memory}</button>
 										</ToolTip>
 									)
 								})}
@@ -64,7 +64,7 @@ export const ItemCart = (props) => {
 								{product.ram.map((ram, index) => {
 									return (
 										<ToolTip key={ram} descriptions='select ram'>
-												<button value={ram} id={index} onClick={(e) => handleRam(e)} className={`${selectedRam === ram ? 'bg-cyan-300': 'bg-slate-200'} bg-slate-200 px-3 py-1 text-xs rounded-2xl hover:bg-yellow-100 transition duration-500`} key={ram}>{ram}</button>
+												<button value={ram} id={index} onClick={(e) => handleRam(e)} className={`${selectedRam === ram ? 'bg-cyan-300': 'bg-slate-200'}  px-3 py-1 text-xs rounded-2xl hover:bg-yellow-100 transition duration-500`} key={ram}>{ram}</button>
 										</ToolTip>
 									)
 								})}
