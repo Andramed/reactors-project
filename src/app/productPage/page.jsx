@@ -7,7 +7,9 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Details } from "./Details";
-
+import { ToastContainer } from 'react-toastify';
+import useAddItemToWishlist from '../hooks/useAddItemToWishlist';
+import 'react-toastify/dist/ReactToastify.css';
 function ProductPage() {
   const parentRef = useRef(0);
   const [product, setProduct] = useState();
@@ -15,7 +17,7 @@ function ProductPage() {
 
   const [mainPicture, setMainPicture] = useState(0);
   
-
+	const {handleHeart} = useAddItemToWishlist();
 
   useEffect(() => {
     const itemLocal = sessionStorage.getItem("item");
@@ -32,7 +34,7 @@ function ProductPage() {
     return (
       <div className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8 product">
         <span className="self-start ml-10">
-          <button className="text-gray-300 hover:text-red-500">
+          <button  onClick={(e) => handleHeart(e, product)} className="text-gray-300 hover:text-red-500">
             <HeartIcon className="w-8 h-8" />
           </button>
         </span>
@@ -73,7 +75,9 @@ function ProductPage() {
           <Details product={product}  />
         </div>
         <RelatedProducts product={product} />
+		<ToastContainer/>
       </div>
+	  
     );
   }
 }

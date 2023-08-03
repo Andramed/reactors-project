@@ -23,6 +23,7 @@ export default function FormData() {
   const handleForm = (e) => {
     e.preventDefault();
     console.log('Form Data:', formData);
+	console.log(formData);
       const senDataToApi = async () => {
          try {
           const res = await axios({
@@ -36,8 +37,21 @@ export default function FormData() {
          }
       }
       senDataToApi()
-
+	  const sendEmail = async () => {
+		try {
+			const res = await axios({
+				url:'api/nodemailer',
+				data: formData,
+				method: 'POST'
+			})
+			console.log(res.data);
+		} catch (error) {
+			console.log(error);
+		}
+	  }
+	  sendEmail();
     };
+
    useEffect(() => {
     console.log('sa exutata');
     if (responseServer) {
@@ -61,7 +75,7 @@ export default function FormData() {
             <label> Object</label>
             <input name='object' onChange={(e) => handleInput(e)} className='border-solid border-2 rounded' type="text" />
             <label> Message</label>
-            <input name='message' onChange={(e) => handleInput(e)} className='border-solid border-2 rounded w-80 h-24' type="text" />
+            <textarea name='message' onChange={(e) => handleInput(e)} className='border-solid border-2 rounded w-80 h-24 p-2' type="text" />
             <button className='bg-btn-color w-9.5 h-3.2 px-8 py-2 text-sm rounded'>Send</button>
           </div>
         </form>

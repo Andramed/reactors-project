@@ -11,6 +11,9 @@ import Reviews from './components/Reviews'
 import Newsletter from './components/Newsletter'
 import Articles from './components/Articles'
 import { useEffect } from 'react'
+import { useSession } from 'next-auth/react'
+import useSignUp from './hooks/useSignUp'
+import useSignUpUser from './hooks/useSignUpUser'
 
 
 export default function Home() {
@@ -21,6 +24,24 @@ export default function Home() {
 			console.log('unmounted');
 		}
 	}, [])
+	
+	const session = useSession();
+	useEffect(() => {
+
+		const checkUser = () => {
+			const data = {
+				name: session.data.user.name,
+				email: session.data.user.email,
+				method: 'google'
+			}
+		}
+		
+		if (session.status === 'authenticated') {
+			console.log(session.data.user.provider );
+		}
+	}, [session])
+	
+	
 	return (
 	<>
 		<main className=" w-5/6 flex justify-center m-auto min-h-screen flex-col items-center bg-grey py-2">
@@ -29,7 +50,7 @@ export default function Home() {
 			<ClassicPhones />
 			<NewProducts />
 			<Cases/>
-			{/* <CaseDesigner /> */}
+			
 			<Reviews/>
 			<OurBenefits />
 			<Articles/>
