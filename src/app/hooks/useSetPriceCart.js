@@ -1,6 +1,6 @@
 import {  useEffect, useReducer, useRef, useState } from 'react';
 
-const useSetPrice = (product) => {
+const useSetPriceCart = (product) => {
      
   console.log(product)
     const previousSelectedRefMemory = useRef(null);
@@ -20,7 +20,7 @@ const useSetPrice = (product) => {
                     type: 'setValueMemory',
                     id:e.target.id,
                     value:e.target.value,
-                    idOption: e.target.options[e.target.selectedIndex].id
+                    
            });
            dispatch({
             type: 'setSelectedMemory',
@@ -33,7 +33,7 @@ const useSetPrice = (product) => {
             type: 'setValueRam',
             id: e.target.id,
             value: e.target.value,
-            idOption: e.target.options[e.target.selectedIndex].id
+            
         })
         dispatch({
             type: 'setSelectedRam',
@@ -119,21 +119,6 @@ const useSetPrice = (product) => {
                     console.log(newPrice);
                     newPrice = newPrice + Number(action.id) * 500 * counter
                 }              
-                if (action.id == 'size') {
-                    if (previousSelectedRefMemory.current != updatedSelectedMemory) {
-                        console.log('pret', price, typeof product.price);
-                         newPrice = (price - (price - product.price * counter))  ; 
-                        console.log(action.id);
-                        newPrice = newPrice + Number(action.idOption) * 500 * counter
-                        console.log(newPrice);
-                    } else {
-                        let dif = price - product.price * counter ; console.log(dif);
-                        newPrice = (price - (price - product.price * counter)) + dif ; 
-                        console.log(newPrice);
-                        newPrice = newPrice + Number(action.idOption) * 500 * counter
-                    }      
-                }                         
-				
                 return {
                 ...state,
                 price: newPrice
@@ -245,4 +230,4 @@ useEffect(() => {
 
 }
 
-export default useSetPrice
+export default useSetPriceCart

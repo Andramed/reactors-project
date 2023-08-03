@@ -1,14 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useAddItemToCart } from '../../hooks/useAddItemToCart';
 import Image from 'next/image';
-import useSetPrice from '@/app/hooks/useSetPrice';
+
 import ToolTip from '@/app/components/ToolTip';
+import useSetPriceCart from '@/app/hooks/useSetPriceCart';
 
 
 export const ItemCart = (props) => {
  
 	const {product, removeItemFromCart} = props;
-	const {state, handleCounter, handleMemory, handleRam, dispatch} = useSetPrice(product)
+	const {state, handleCounter, handleMemory, handleRam, dispatch} = useSetPriceCart(product)
 	useEffect(() => {
 		dispatch({type:'price', value:product.price})
 	}, [product])

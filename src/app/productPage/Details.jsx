@@ -1,13 +1,15 @@
 import { useRef } from "react"
 import { ShoppingBagIcon } from "@heroicons/react/solid";
 import useSetPrice from "../hooks/useSetPrice";
+import useAddToSessionStorage from '../hooks/useAddToSessionStorage';
+import useAddItemToWishlist from '../hooks/useAddItemToWishlist';
 
 export const Details = ({product, setColor}) => {
     const parentRef = useRef();
     const { state, handleMemory, handleRam } = useSetPrice(product);
    const {price, selectedMemory, selectedRam} = state   
-  
-
+  const {addItemToSessionStorage} = useAddToSessionStorage()
+	
     return (
 
     <div className="md:w-1/2 lg:w-2/3 md:pl-6 lg:pl-8">
@@ -102,10 +104,11 @@ export const Details = ({product, setColor}) => {
 
         <div ref={parentRef} id={product._id} className="flex-1">
           <button
+
             type="button"
             className="w-full py-2 px-4 inline-flex items-center justify-center rounded-md bg-yellow-500 text-base text-white font-semibold uppercase whitespace-nowrap hover:bg-yellow-600"
             onClick={() =>
-              getIdItem(parentRef.current)
+				addItemToSessionStorage(product)
             }
           >
             <ShoppingBagIcon className="w-6 h-6 mr-2" />
