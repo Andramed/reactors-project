@@ -1,34 +1,35 @@
-import useSWR from 'swr'
-import { useState } from 'react'
-import axios from 'axios';
-import { signIn } from 'next-auth/react';
-import { useSearchParams } from 'next/navigation';
+// import useSWR from 'swr'
+// import { useState } from 'react'
+// import axios from 'axios';
+// import { signIn, useSession } from 'next-auth/react';
+// import { useSearchParams } from 'next/navigation';
 
-const useSignUpUser = () => {
-	const [dataGoogle, setDataGoogle] = useState({});
-	const [dataCredentials, setDataCredentials] = useState({})
+// const useSignUpUser = () => {
+// 	const [dataGoogle, setDataGoogle] = useState({});
+// 	const [dataCredentials, setDataCredentials] = useState({})
 
-	const searchParams = useSearchParams();
-	const callbackUrl = searchParams.get('callback') || '/'
+// 	const searchParams = useSearchParams();
+// 	const callbackUrl = searchParams.get('callback') || '/'
 
-	const handleUserSignUp = async (e, data) => {
-
-		switch (e) {
-			case 'google':
-				console.log('google');
-				signIn('google', )
-				const res = axios.post('api/signUp', data)
-				console.log(error);
-				break;
-			default:
-				break;
-		}
+// 	const handleUserSignUp = async (e) => {
+// 		console.log(e);
 		
-	}
-	if (Object.entries(dataGoogle)>0) {
-		console.log(dataGoogle);
-	}
-	return {handleUserSignUp, dataGoogle}
-}
+// 		switch (e) {
+// 			case 'google':
+// 				console.log('google');
+				
+				
+				
+// 				break;
+// 			default:
+// 				break;
+// 		}
+		
+// 	}
+// 	if (Object.entries(dataGoogle)>0) {
+// 		console.log(dataGoogle);
+// 	}
+// 	return {handleUserSignUp, dataGoogle}
+// }
 
-export default useSignUpUser
+// export default useSignUpUser

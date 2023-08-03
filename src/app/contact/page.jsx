@@ -21,8 +21,6 @@ const Page = () => {
         }).toString();
 
         const url = "/api/sendEmail?" + params;
-        
-
         axios.post(url,{},{}).then((res) => console.log(res));
 
     };

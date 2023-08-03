@@ -24,17 +24,24 @@ export default function Home() {
 			console.log('unmounted');
 		}
 	}, [])
+	
 	const session = useSession();
-	// const {handleUserSignUp} = useSignUpUser();
-	// useEffect(() => {
-	// 	if (session) {
-	// 		handleUserSignUp('google', {
-	// 			name: session.data?.user.name,
-	// 			email: session.data?.user.email,
-	// 			method: 'google'
-	// 		})
-	// 	}
-	// }, [session])
+	useEffect(() => {
+
+		const checkUser = () => {
+			const data = {
+				name: session.data.user.name,
+				email: session.data.user.email,
+				method: 'google'
+			}
+		}
+		
+		if (session.status === 'authenticated') {
+			console.log(session.data.user.provider );
+		}
+	}, [session])
+	
+	
 	return (
 	<>
 		<main className=" w-5/6 flex justify-center m-auto min-h-screen flex-col items-center bg-grey py-2">
